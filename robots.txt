@@ -31,4 +31,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://cineplanner.fr/sitemap.xml
+Sitemap: https://www.cineplanner.fr/sitemap.xml

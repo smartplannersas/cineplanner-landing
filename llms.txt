@@ -44,16 +44,16 @@ Essai gratuit de 14 jours, sans carte bancaire, avec paramétrage réalisé par 
 
 ## Pages
 
-- [Accueil](https://cineplanner.fr/) : présentation générale du logiciel
-- [Tarifs](https://cineplanner.fr/tarifs) : les trois formules, comparatif ligne par ligne, FAQ
-- [Planification](https://cineplanner.fr/planification) : plannings conformes à la CCN
-- [Suivi des temps](https://cineplanner.fr/suivi-des-temps) : heures réelles et présence signée
-- [Contrats](https://cineplanner.fr/contrats) : CDD, CDI et avenants signés en ligne
-- [Export paie](https://cineplanner.fr/export-paie) : éléments de paie sans ressaisie
-- [Espace équipe](https://cineplanner.fr/appli-equipe) : l'espace en ligne des salariés
-- [Coffre-fort RH](https://cineplanner.fr/coffre-fort-documents) : documents salariés
-- [Blog](https://cineplanner.fr/blog) : conformité, paie et gestion d'équipe en cinéma
-- [Essai gratuit](https://cineplanner.fr/essai-gratuit) : ouverture d'un compte d'essai
+- [Accueil](https://www.cineplanner.fr/) : présentation générale du logiciel
+- [Tarifs](https://www.cineplanner.fr/tarifs) : les trois formules, comparatif ligne par ligne, FAQ
+- [Planification](https://www.cineplanner.fr/planification) : plannings conformes à la CCN
+- [Suivi des temps](https://www.cineplanner.fr/suivi-des-temps) : heures réelles et présence signée
+- [Contrats](https://www.cineplanner.fr/contrats) : CDD, CDI et avenants signés en ligne
+- [Export paie](https://www.cineplanner.fr/export-paie) : éléments de paie sans ressaisie
+- [Espace équipe](https://www.cineplanner.fr/appli-equipe) : l'espace en ligne des salariés
+- [Coffre-fort RH](https://www.cineplanner.fr/coffre-fort-documents) : documents salariés
+- [Blog](https://www.cineplanner.fr/blog) : conformité, paie et gestion d'équipe en cinéma
+- [Essai gratuit](https://www.cineplanner.fr/essai-gratuit) : ouverture d'un compte d'essai
 
 ## Références clientes publiques
 
