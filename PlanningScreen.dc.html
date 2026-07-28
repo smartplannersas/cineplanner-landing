@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .ps * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+  .ps-scale::-webkit-scrollbar { display: none; }
+</style>
+</helmet>
+<div class="ps" style="width:100%; height:100%; overflow:hidden; background:#fff;">
+ <div class="ps-scale" ref="{{ scaleRef }}" style="position:relative; width:1360px; height:820px; transform-origin:top left; display:flex; flex-direction:column;">
+
+  <!-- TOP BAR -->
+  <div style="flex:none; height:58px; background:#232637; display:flex; align-items:center; justify-content:space-between; padding:0 22px;">
+    <div style="display:flex; align-items:center; gap:36px;">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <img src="assets/logo-full-white.png" alt="CinéPlanner" style="height:26px; width:auto; display:block;">
+      </div>
+      <div style="display:flex; align-items:center; gap:6px; font:600 13px/1 'Inter';">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="7">
+          <span style="{{ t.style }}">{{ t.label }}</span>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <span style="font:700 13px/1 'Inter'; letter-spacing:.03em; color:#eceef6;">MEGARAMA · DIEPPE</span>
+      <div style="display:flex; align-items:center; gap:12px; color:#b9bcce;">
+        <span style="position:relative; font-size:15px;">🔔<span style="position:absolute; top:-3px; right:-3px; width:7px; height:7px; border-radius:50%; background:#ff5f57;"></span></span>
+        <div style="width:31px; height:31px; border-radius:50%; background:linear-gradient(150deg,#6f63ff,#4536c9); display:flex; align-items:center; justify-content:center; color:#fff; font:700 12px/1 'Inter';">RH</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div style="flex:1; min-height:0; display:flex;">
+
+    <!-- SIDEBAR -->
+    <div style="width:238px; flex:none; background:#fff; border-right:1px solid #e7e9f2; display:flex; flex-direction:column;">
+      <div style="flex:none; display:flex; align-items:center; gap:14px; padding:13px 16px; border-bottom:1px solid #eef0f6;">
+        <span style="font:700 11px/1 'Inter'; letter-spacing:.09em; text-transform:uppercase; color:#8a8da2;">Équipe</span>
+        <span style="font:600 11px/1 'Inter'; color:#9a9db2;">Mois 1108 h</span>
+        <span style="font:600 11px/1 'Inter'; color:#5B4FE8;">Sem 276 h</span>
+      </div>
+      <div style="flex:1; min-height:0; overflow:hidden; padding:12px; display:flex; flex-direction:column; gap:9px;">
+        <sc-for list="{{ staff }}" as="p" hint-placeholder-count="10">
+          <div style="{{ p.card }}">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <span style="font:800 12.5px/1.2 'Inter'; letter-spacing:.01em; color:#1c1f2e;">{{ p.name }}</span>
+              <span style="{{ p.pill }}">{{ p.balance }}</span>
+            </div>
+            <div style="font:500 11px/1 'Inter'; color:#8a8da2; margin-top:6px;">{{ p.contract }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- PLANNING -->
+    <div style="flex:1; min-width:0; display:flex; flex-direction:column; background:#fbfbfe;">
+      <!-- toolbar -->
+      <div style="flex:none; display:flex; align-items:flex-start; justify-content:space-between; padding:15px 22px 10px; background:#fff;">
+        <div>
+          <div style="font:800 16px/1.1 'Inter'; color:#1c1f2e;">15 au 21 juin 2026</div>
+          <div style="font:500 12px/1 'Inter'; color:#9a9db2; margin-top:5px;">Semaine 25</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:9px;">
+          <span style="display:flex; align-items:center; gap:9px; border:1px solid #e2e4ef; border-radius:9px; padding:8px 12px; font:600 12px/1 'Inter'; color:#4a4d61;">‹ &nbsp;Aujourd'hui&nbsp; 📅&nbsp; ›</span>
+          <span style="border:1px solid #e2e4ef; border-radius:9px; padding:8px 14px; font:700 12px/1 'Inter'; color:#1c1f2e;">Vue jour</span>
+          <span style="width:34px; height:34px; border:1px solid #e2e4ef; border-radius:9px; display:flex; align-items:center; justify-content:center; color:#9a9db2;">⚙</span>
+        </div>
+      </div>
+      <div style="flex:none; padding:0 22px 8px; background:#fff;"><span style="font:500 12px/1 'Inter'; color:#8a8da2;">🖨 Imprimer</span></div>
+
+      <!-- days header -->
+      <div style="flex:none; display:grid; grid-template-columns:128px repeat(7,1fr); background:#fff; border-bottom:1px solid #e7e9f2;">
+        <div></div>
+        <sc-for list="{{ days }}" as="d" hint-placeholder-count="7">
+          <div style="text-align:center; padding:11px 0; font:600 13px/1 'Inter'; border-left:1px solid #f0f1f7;"><span style="color:#9a9db2;">{{ d.dow }}</span> <span style="color:#1c1f2e; font-weight:800;">{{ d.num }}</span></div>
+        </sc-for>
+      </div>
+
+      <!-- grid body fills remaining height -->
+      <div style="flex:1; min-height:0; display:flex; flex-direction:column;">
+        <!-- Absences -->
+        <div style="flex:none; display:grid; grid-template-columns:128px repeat(7,1fr); border-bottom:1px solid #eef0f6;">
+          <div style="display:flex; align-items:center; padding:0 16px; font:600 11.5px/1.2 'Inter'; font-style:italic; color:#8a8da2;">Absences</div>
+          <sc-for list="{{ absences }}" as="a" hint-placeholder-count="7">
+            <div style="display:flex; align-items:center; gap:4px; padding:9px 10px; border-left:1px solid #f0f1f7;">
+              <sc-for list="{{ a.avatars }}" as="av" hint-placeholder-count="2">
+                <span style="{{ av.style }}">{{ av.i }}</span>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <!-- Événements -->
+        <div style="flex:none; display:grid; grid-template-columns:128px repeat(7,1fr); border-bottom:1px solid #eef0f6; min-height:38px;">
+          <div style="display:flex; align-items:center; padding:0 16px; font:600 11.5px/1.2 'Inter'; font-style:italic; color:#8a8da2;">Événements</div>
+        </div>
+        <!-- role rows -->
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
+          <div style="{{ r.rowStyle }}">
+            <div style="display:flex; align-items:center; padding:0 16px; font:700 12.5px/1.25 'Inter'; color:#3a3d51; border-right:1px solid #eef0f6;">{{ r.role }}</div>
+            <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="7">
+              <div style="padding:6px; display:flex; flex-direction:column; gap:5px; overflow:hidden; border-left:1px solid #f0f1f7; background:{{ c.bg }};">
+                <sc-if value="{{ c.repos }}" hint-placeholder-val="{{ false }}">
+                  <div style="flex:1; display:flex; align-items:center; justify-content:center; font:600 10.5px/1 'Inter'; letter-spacing:.16em; color:#c2c5d6;">REPOS</div>
+                </sc-if>
+                <sc-for list="{{ c.shifts }}" as="s" hint-placeholder-count="1">
+                  <div style="{{ s.style }}">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:6px;">
+                      <span style="font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ s.name }}</span>
+                      <span style="font-weight:700; opacity:.7; flex:none;">{{ s.dur }}</span>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-top:3px;">
+                      <span style="font-weight:500; opacity:.82;">{{ s.time }}</span>
+                      <span style="{{ s.badgeStyle }}">{{ s.badge }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ showAffect }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute; inset:0; background:rgba(20,22,42,.5); display:flex; align-items:center; justify-content:center;">
+    <div style="width:760px; max-width:90%; background:#fff; border-radius:16px; box-shadow:0 50px 100px -24px rgba(0,0,0,.5); padding:30px 34px; font-family:'Inter';">
+      <div style="font:800 21px/1 'Inter'; color:#1c1f2e;">Modifier une affectation</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:24px;">
+        <div><div style="font:700 12px/1 'Inter'; color:#4a4d61; margin-bottom:8px;">Employé</div><div style="display:flex; align-items:center; justify-content:space-between; border:1px solid #dfe1ec; border-radius:9px; padding:11px 13px; font:600 13px/1 'Inter'; color:#1c1f2e;">Léna Marchal <span style="color:#9a9db2;">▾</span></div></div>
+        <div><div style="font:700 12px/1 'Inter'; color:#4a4d61; margin-bottom:8px;">Poste</div><div style="display:flex; align-items:center; justify-content:space-between; border:1px solid #dfe1ec; border-radius:9px; padding:11px 13px; font:600 13px/1 'Inter'; color:#1c1f2e;">Ouverture <span style="color:#9a9db2;">▾</span></div></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:20px;">
+        <div><div style="font:700 12px/1 'Inter'; color:#4a4d61; margin-bottom:8px;">Date de début <span style="color:#c0522a;">*</span></div><div style="display:flex; align-items:center; justify-content:space-between; border:1px solid #dfe1ec; border-radius:9px; padding:11px 13px; font:600 13px/1 'Inter'; color:#1c1f2e;">17/06/2026 &nbsp;10:15 <span style="color:#9a9db2;">📅</span></div></div>
+        <div><div style="font:700 12px/1 'Inter'; color:#4a4d61; margin-bottom:8px;">Date de fin</div><div style="display:flex; align-items:center; justify-content:space-between; border:1px solid #dfe1ec; border-radius:9px; padding:11px 13px; font:600 13px/1 'Inter'; color:#1c1f2e;">17/06/2026 &nbsp;15:15 <span style="color:#9a9db2;">📅</span></div></div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-top:24px;"><span style="font:700 13px/1 'Inter'; color:#1c1f2e;">Pauses</span><span style="font:500 12px/1 'Inter'; color:#8a8da2;">Total : 30 min</span></div>
+      <div style="display:flex; align-items:flex-end; gap:14px; background:#f7f8fc; border-radius:11px; padding:16px; margin-top:12px;">
+        <div><div style="font:600 11px/1 'Inter'; color:#8a8da2; margin-bottom:6px;">Durée</div><div style="width:74px; border:1px solid #dfe1ec; border-radius:8px; padding:9px 11px; font:600 13px/1 'Inter'; color:#1c1f2e; background:#fff;">30</div><div style="font:500 10px/1 'Inter'; color:#9a9db2; margin-top:5px;">minutes</div></div>
+        <div><div style="font:600 11px/1 'Inter'; color:#8a8da2; margin-bottom:6px;">Début</div><div style="width:110px; border:1px solid #dfe1ec; border-radius:8px; padding:9px 11px; font:600 13px/1 'Inter'; color:#1c1f2e; background:#fff;">11:45 &nbsp;🕐</div><div style="font:500 10px/1 'Inter'; color:#9a9db2; margin-top:5px;">optionnel</div></div>
+        <div><div style="font:600 11px/1 'Inter'; color:#8a8da2; margin-bottom:6px;">Fin</div><div style="width:110px; border:1px solid #dfe1ec; border-radius:8px; padding:9px 11px; font:600 13px/1 'Inter'; color:#1c1f2e; background:#fff;">12:15 &nbsp;🕐</div><div style="font:500 10px/1 'Inter'; color:#9a9db2; margin-top:5px;">optionnel</div></div>
+        <div style="display:flex; align-items:center; gap:7px; padding-bottom:22px;"><span style="width:16px; height:16px; border:1.5px solid #c7cad6; border-radius:4px; display:inline-block;"></span><span style="font:500 13px/1 'Inter'; color:#4a4d61;">Payée</span></div>
+        <div style="padding-bottom:20px; color:#d0453a; font-size:15px;">🗑</div>
+      </div>
+      <div style="font:700 13px/1 'Inter'; color:#5B4FE8; margin-top:12px;">+ Ajouter une pause</div>
+      <div style="margin-top:18px; background:#fdf0e9; border:1px solid #f7d9c9; border-radius:11px; padding:15px 17px;">
+        <div style="font:700 13px/1 'Inter'; color:#a95a1e;">📋 Convention collective</div>
+        <div style="font:500 12.5px/1.5 'Inter'; color:#8a5a2e; margin-top:8px;"><span style="font-weight:800; color:#7a3f12;">Prime de panier repas :</span> Prime de panier repas due — shift traversant 12.0 h–12.75 h ou amplitude ≥ 8.0 h avec pause &lt; 1 h15.</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:9px; margin-top:20px;"><span style="width:16px; height:16px; border:1.5px solid #c7cad6; border-radius:4px; display:inline-block;"></span><span style="font:500 13px/1 'Inter'; color:#4a4d61;">Notifier l'agent par email</span></div>
+      <div style="height:1px; background:#eef0f6; margin:18px 0;"></div>
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <span style="border:1px solid #efc9c1; color:#d0453a; font:700 13px/1 'Inter'; padding:11px 16px; border-radius:9px;">Supprimer</span>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="display:flex; align-items:center; gap:7px; border:1px solid #dfe1ec; color:#1c1f2e; font:700 13px/1 'Inter'; padding:11px 15px; border-radius:9px;">🕐 Retard</span>
+          <span style="font:600 13px/1 'Inter'; color:#8a8da2;">Annuler</span>
+          <span style="background:#4536c9; color:#fff; font:700 13px/1 'Inter'; padding:12px 20px; border-radius:9px;">Enregistrer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ showPaie }}" hint-placeholder-val="{{ false }}">
+  <div style="position:absolute; inset:0; background:rgba(20,22,42,.5); display:flex; align-items:center; justify-content:center;">
+    <div style="width:1180px; max-width:94%; background:#fff; border-radius:16px; box-shadow:0 50px 100px -24px rgba(0,0,0,.5); padding:26px 30px;">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+        <div style="font:800 20px/1 'Inter'; color:#1c1f2e;">Récap et export</div>
+        <span style="color:#9a9db2; font-size:18px;">✕</span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-top:18px;">
+        <div style="font:500 13px/1 'Inter'; color:#4a4d61;">Période : 01/07/2026 → 31/07/2026 &nbsp;<span style="color:#5B4FE8; font-weight:700;">Modifier</span></div>
+        <span style="display:flex; align-items:center; gap:8px; background:#4536c9; color:#fff; font:700 13px/1 'Inter'; padding:11px 17px; border-radius:9px;">⬇ Télécharger en CSV</span>
+      </div>
+      <div style="margin-top:18px; border:1px solid #eceef6; border-radius:12px; overflow:hidden;">
+        <div style="display:grid; grid-template-columns:1.1fr 1fr 1fr repeat(5,1fr); background:#f7f8fc; border-bottom:1px solid #eceef6;">
+          <sc-for list="{{ paieCols }}" as="c" hint-placeholder-count="8"><div style="padding:13px 14px; font:700 11px/1.2 'Inter'; color:#8a8da2;">{{ c }}</div></sc-for>
+        </div>
+        <sc-for list="{{ paieRows }}" as="r" hint-placeholder-count="8">
+          <div style="{{ r.rowStyle }}">
+            <div style="padding:13px 14px; font:800 13px/1 'Inter'; color:#1c1f2e;">{{ r.nom }}</div>
+            <div style="padding:13px 14px; font:600 13px/1 'Inter'; color:#1c1f2e;">{{ r.prenom }}</div>
+            <div style="padding:13px 14px; font:500 13px/1 'Inter'; color:#4a4d61;">{{ r.type }}</div>
+            <div style="padding:13px 14px; font:500 13px/1 'Inter'; color:#4a4d61;">{{ r.hebdo }}</div>
+            <div style="padding:13px 14px; font:500 13px/1 'Inter'; color:#4a4d61;">{{ r.jours }}</div>
+            <div style="padding:13px 14px; font:700 13px/1 'Inter'; color:#1c1f2e;">{{ r.heures }}</div>
+            <div style="padding:13px 14px; font:500 13px/1 'Inter'; color:#4a4d61;">{{ r.pausesR }}</div>
+            <div style="padding:13px 14px; font:500 13px/1 'Inter'; color:#4a4d61;">{{ r.nuit }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+ </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1040,&quot;height&quot;:600},&quot;modal&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  _fit() {
+    const inner = this._scaleEl;
+    const box = inner && inner.parentElement; // le .ps propre à CETTE instance
+    if (!inner || !box) return;
+    const w = box.clientWidth, h = box.clientHeight;
+    if (!w || !h) return;
+    const base = +this.props.base || 1360;
+    inner.style.width = base + 'px';
+    const s = w / base;
+    inner.style.transform = 'scale(' + s + ')';
+    inner.style.height = (h / s) + 'px'; // remplit exactement la hauteur
+  }
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+  }
+  renderVals() {
+    const tabLabels = ['Dashboard','Employés','Planning','Présences','Retards','Contrats','Exports','Administration ▾'];
+    const tabs = tabLabels.map(l => ({
+      label: l,
+      style: l === 'Planning'
+        ? "background:#5B4FE8; color:#fff; padding:8px 13px; border-radius:8px;"
+        : l === 'Employés'
+        ? "background:rgba(255,255,255,.10); color:#fff; padding:8px 11px; border-radius:8px;"
+        : "color:#c7c9d8; padding:8px 6px;"
+    }));
+
+    // sidebar : quelques cartes en fond pastel plein (comme la vraie app)
+    const staffRaw = [
+      ['Camille Merville','25h00 / 25h00 · CDI','0 h',0,'amber-fill'],
+      ['Lina Aloyan','30h00 / 25h00 · CDI','+5 h',1,'plain'],
+      ['Stéphanie Heudebourg','25h00 / 25h00 · CDI','0 h',0,'pink-fill'],
+      ['Océane Berton','25h20 / 25h00 · CDI','+0 h',0,'purple-fill'],
+      ['Pierrick Boitout','25h00 / 25h00 · CDI','0 h',0,'plain'],
+      ['Florentine Bonnard','0h00 / 25h00 · CDI','−25 h',-1,'lime-fill'],
+      ['Simon Verdier','37h00 / 35h00 · CDI','+2 h',1,'plain'],
+      ['Benoit Pisaroni','25h00 / 25h00 · CDD','0 h',0,'plain'],
+      ['Lusine Bulur','0h00 / 20h00 · CDI','−20 h',-1,'blue-fill'],
+      ['Juliette Lepain','19h04 / 25h00 · CDI','−6 h',-1,'teal-fill'],
+      ['Léa Chevalier','25h00 / 25h00 · CDI','0 h',0,'plain']
+    ];
+    const fills = {
+      'amber-fill': '#ffedd6', 'pink-fill': '#ffdfe8', 'purple-fill': '#e9e0ff',
+      'lime-fill': '#e8f6cc', 'blue-fill': '#d9e8ff', 'teal-fill': '#cdeee7'
+    };
+    const staff = staffRaw.map(p => {
+      const bal = p[3];
+      const pc = bal > 0 ? ['#1a8a5c','rgba(26,138,92,.14)'] : bal < 0 ? ['#c0522a','rgba(192,82,42,.14)'] : ['#7a7d92','rgba(122,125,146,.14)'];
+      const fill = fills[p[4]];
+      const card = fill
+        ? `background:${fill}; border-radius:11px; padding:11px 12px;`
+        : `background:#fff; border:1px solid #edeff6; border-radius:11px; padding:11px 12px;`;
+      return { name: p[0], contract: p[1], balance: p[2],
+        card, pill: `flex:none; font:700 10px/1 'Inter'; color:${pc[0]}; background:${pc[1]}; padding:4px 8px; border-radius:999px;` };
+    });
+
+    const dayDefs = [['Lun.',15],['Mar.',16],['Mer.',17],['Jeu.',18],['Ven.',19],['Sam.',20],['Dim.',21]];
+    const days = dayDefs.map(d => ({ dow: d[0], num: d[1] }));
+
+    // avatars d'absence
+    const avc = { FB:['#9be36b','#2c5a12'], LB:['#7fb2ff','#1e3f7a'], SH:['#ff9db8','#7a1e3d'], JL:['#4bd0b8','#0d5548'] };
+    const AV = (i) => ({ i, style: `width:22px; height:22px; border-radius:50%; background:${avc[i][0]}; color:${avc[i][1]}; display:flex; align-items:center; justify-content:center; font:800 9px/1 'Inter';` });
+    const absSets = [['FB','LB'],['FB','LB'],['FB','LB'],['FB','LB'],['SH','FB','LB'],['SH','FB','LB'],['SH','FB','LB','JL']];
+    const absences = absSets.map(set => ({ avatars: set.map(AV) }));
+
+    const C = {
+      green:  ['#c7ec9e','#345c12'], blue:['#bcd6ff','#1f3f77'], amber:['#ffe0b0','#7a4a10'],
+      purple: ['#dccaff','#432f82'], teal:['#a9e5da','#0d5548'], lime:['#dcefac','#405812']
+    };
+    const chip = (c) => `border-radius:7px; padding:7px 9px; font:600 11px/1.25 'Inter'; background:${c[0]}; color:${c[1]};`;
+    const badge = (kind, c) => {
+      if (!kind) return { badge:'', badgeStyle:'display:none;' };
+      const map = { warn:['!','#8a5a12','#ffd98a'], lock:['🔒','#4a4d61','rgba(255,255,255,.55)'] };
+      const m = map[kind];
+      return { badge: m[0], badgeStyle: `flex:none; width:15px; height:15px; border-radius:4px; display:flex; align-items:center; justify-content:center; font:800 9px/1 'Inter'; color:${m[1]}; background:${m[2]};` };
+    };
+    const S = (name,time,dur,col,bk) => Object.assign({ name, time, dur, style: chip(C[col]) }, badge(bk, C[col]));
+    const cell = (...shifts) => ({ repos:false, shifts, bg:'transparent' });
+    const REPOS = { repos:true, shifts:[], bg:'#f3f5fb' };
+
+    const rowsRaw = [
+      ['Direction', [
+        cell(S('Simon V.','10:30 – 18:30','8h','lime','warn')),
+        cell(S('Simon V.','11:30 – 18:30','7h','lime','warn')),
+        REPOS,
+        cell(S('Simon V.','12:45 – 18:30','5h45','lime')),
+        cell(S('Simon V.','12:45 – 21:15','8h30','lime','warn')),
+        REPOS,
+        cell(S('Simon V.','10:00 – 17:45','7h45','lime','warn'))
+      ]],
+      ['Caisse', [
+        cell(S('Romane D.','13:00 – 18:30','5h30','blue'), S('Pierrick B.','15:30 – 21:15','5h45','amber')),
+        cell(S('Lina N.','18:15 – 21:15','3h','green')),
+        cell(S('Pierrick B.','13:00 – 16:45','3h45','amber'), S('Romane D.','13:15 – 18:45','5h30','blue')),
+        cell(S('Benoit P.','13:15 – 18:30','5h15','blue'), S('Romane D.','17:30 – 21:15','3h45','blue'), S('Océane B.','17:15 – 21:15','4h','purple')),
+        cell(S('Romane D.','13:15 – 17:15','4h','blue','warn'), S('Lina N.','16:45 – 21:00','4h15','green'), S('Christa M.','17:45 – 21:00','3h15','amber')),
+        cell(S('Benoit P.','13:00 – 17:00','4h','amber'), S('Pierrick B.','13:15 – 21:00','7h45','amber','warn'), S('Lina N.','16:15 – 21:15','5h','green')),
+        cell(S('Christa M.','10:15 – 16:45','6h30','amber','warn'), S('Romane D.','13:15 – 19:30','6h15','blue','warn'))
+      ]],
+      ['Agent de fermeture', [
+        cell(S('Lina N.','18:45 – 23:30','4h45','green')),
+        cell(S('Pierrick B.','15:45 – 23:30','7h45','amber','warn')),
+        cell(S('Christa M.','15:30 – 23:30','8h','amber','warn')),
+        cell(S('Christa M.','16:15 – 23:30','7h15','amber','warn')),
+        REPOS,
+        cell(S('Océane B.','18:15 – 23:30','5h15','purple')),
+        cell(S('Lina N.','15:30 – 23:30','8h','green','warn'))
+      ]],
+      ['Coffee', [
+        cell(S('Juliette L.','10:30 – 19:30','9h','teal','lock'), S('Benoit P.','15:30 – 19:30','4h','blue')),
+        cell(S('Léa C.','10:30 – 19:30','9h','lime','warn')),
+        cell(S('Léa C.','10:30 – 19:30','9h','lime','warn')),
+        cell(S('Océane B.','10:30 – 19:50','9h20','lime','warn')),
+        cell(S('Juliette L.','10:30 – 17:00','6h30','teal','lock')),
+        cell(S('Léa C.','12:30 – 19:30','7h','lime','warn')),
+        cell(S('Juliette L.','10:00 – 19:30','9h30','teal'))
+      ]],
+      ['Coffee + Cinéma', [
+        REPOS, REPOS, REPOS, REPOS,
+        cell(S('Océane B.','16:45 – 23:30','6h45','purple','warn')),
+        REPOS,
+        cell(S('Benoit P.','15:30 – 21:15','5h45','blue'))
+      ]],
+      ['Agent d\u2019entretien', [
+        cell(S('Lina A.','08:30 – 14:30','6h','amber','lock')),
+        cell(S('Lina A.','08:30 – 14:30','6h','amber','lock')),
+        cell(S('Benoit P.','09:30 – 11:30','2h','blue')),
+        cell(S('Lina A.','08:30 – 14:30','6h','amber')),
+        cell(S('Lina A.','08:30 – 14:30','6h','amber','lock')),
+        cell(S('Benoit P.','09:00 – 13:00','4h','blue','lock')),
+        cell(S('Lina A.','07:00 – 13:00','6h','amber','warn'))
+      ]]
+    ];
+    const rows = rowsRaw.map((r,i) => {
+      const maxShifts = Math.max(1, ...r[1].map(c => (c.shifts ? c.shifts.length : 0)));
+      const grow = maxShifts >= 3 ? 1.6 : maxShifts === 2 ? 1.15 : 1;
+      return {
+        role: r[0], cells: r[1],
+        rowStyle: `flex:${grow}; min-height:0; display:grid; grid-template-columns:128px repeat(7,1fr); border-bottom:1px solid #eef0f6; background:${i % 2 ? '#f8f9fd' : '#fff'};`
+      };
+    });
+
+    const scaleRef = (el) => {
+      if (!el || el === this._scaleEl) return;
+      this._scaleEl = el;
+      const run = () => this._fit();
+      run(); requestAnimationFrame(run); setTimeout(run, 80);
+      if (window.ResizeObserver) {
+        if (this._ro) this._ro.disconnect();
+        this._ro = new ResizeObserver(run);
+        if (el.parentElement) this._ro.observe(el.parentElement);
+      }
+      if (!this._onResize) { this._onResize = run; window.addEventListener('resize', run); }
+    };
+    const mk = this.props.modal;
+    const paieCols = ['Nom','Prénom','Type de contrat','Volume hebdo (h)','Jours (j)','Heures trav. (h)','Pauses rém. (h)','Heures de nuit (h)'];
+    const paieRaw = [
+      ['Renard','Camille','CDI','35,00','27','165,00','7,50','3,50'],
+      ['Mercier','Léo','CDI','35,00','24','158,00','6,00','2,00'],
+      ['Bonnet','Lucie','CDI','35,00','22','125,50','9,00','9,00'],
+      ['Bollé','Adrien','CDI','35,00','21','146,00','7,00','3,00'],
+      ['Girard','Paul','CDI','12,50','0','0,00','0,00','0,00'],
+      ['Rey','Eliott','CDI','35,00','23','161,00','11,50','0,00'],
+      ['Marchal','Léna','CDI','35,00','21','151,00','7,00','0,00'],
+      ['Fabre','Sarah','CDD','14,00','12','74,00','4,00','0,00']
+    ];
+    const paieRows = paieRaw.map((r,i) => ({
+      nom: r[0], prenom: r[1], type: r[2], hebdo: r[3], jours: r[4], heures: r[5], pausesR: r[6], nuit: r[7],
+      rowStyle: `display:grid; grid-template-columns:1.1fr 1fr 1fr repeat(5,1fr); border-top:1px solid #f0f1f7; background:${i % 2 ? '#fbfbfe' : '#fff'};`
+    }));
+    return { tabs, staff, days, absences, rows, scaleRef,
+      showAffect: !!mk && mk !== 'paie', showPaie: mk === 'paie', paieCols, paieRows };
+  }
+}
+</script>
+</body>
+</html>

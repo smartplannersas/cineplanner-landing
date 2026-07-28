@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Ressources et blog — Ciné Planner</title>
+<meta name="description" content="Conformité, paie, planning et management : nos guides pour les exploitants de cinéma.">
+<link rel="canonical" href="https://cineplanner.fr/blog">
+<link rel="icon" type="image/png" href="./assets/logo-mark.png">
+<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ciné Planner">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Ressources et blog — Ciné Planner">
+<meta property="og:description" content="Conformité, paie, planning et management : nos guides pour les exploitants de cinéma.">
+<meta property="og:url" content="https://cineplanner.fr/blog">
+<meta property="og:image" content="https://cineplanner.fr/assets/og-cineplanner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ressources et blog — Ciné Planner">
+<meta name="twitter:description" content="Conformité, paie, planning et management : nos guides pour les exploitants de cinéma.">
+<meta name="twitter:image" content="https://cineplanner.fr/assets/og-cineplanner.png">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#5B4FE8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #f5f6fc; --accent:#5B4FE8; --accent-dark:#3d2fc4; --accent-soft:#ecebfd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-dark); }
+  .cpl-burger { display: none; }
+  @media (max-width: 960px) {
+    [style*="grid-template-columns: repeat(3, 1fr)"],
+    [style*="grid-template-columns: 1.1fr 1fr"],
+    [style*="grid-template-columns: 1.2fr 1fr"],
+    [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="padding: 20px 48px"] { padding: 14px 20px !important; }
+    [style*="padding: 72px 48px"] { padding: 48px 22px !important; }
+    [style*="padding: 44px 48px"], [style*="padding: 40px 48px"], [style*="padding: 28px 48px"] { padding-left: 22px !important; padding-right: 22px !important; }
+    [style*="padding: 52px"] { padding: 32px 24px !important; }
+    .cpl-navlinks { display: none !important; }
+    .cpl-burger { display: flex !important; }
+    h1 { font-size: clamp(28px,7vw,40px) !important; }
+    h2 { font-size: clamp(24px,5.5vw,32px) !important; }
+  }
+
+  @media (min-width: 641px) and (max-width: 1024px) {
+    [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+    [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+</style>
+</helmet>
+
+<div>
+  <!-- NAV -->
+  <dc-import name="SiteNav" active="blog" hint-size="100%,86px"></dc-import>
+  </div>
+
+  <!-- HERO -->
+  <div style="text-align:center; padding:72px 48px 40px; background:linear-gradient(180deg,var(--accent-soft) 0%,#fbfbfe 70%,#fff 100%);">
+    <div style="font:700 13px/1 'Inter'; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">Le blog Ciné Planner</div>
+    <h1 style="font:800 clamp(32px,3.6vw,46px)/1.1 'Inter'; letter-spacing:-.02em; color:#16162a; margin:16px auto 0; max-width:720px;">Ressources RH & conformité pour l'exploitation cinématographique</h1>
+    <p style="font:400 18px/1.6 'Inter'; color:#5c5c72; margin:18px auto 0; max-width:560px;">Conseils pratiques sur la convention collective, la paie, les plannings et la gestion d'équipe en cinéma.</p>
+  </div>
+
+  <!-- ARTICLE À LA UNE -->
+  <div style="max-width:1120px; margin:0 auto; padding:44px 48px 0;">
+    <a href="Article.dc.html" style="display:grid; grid-template-columns:1.1fr 1fr; gap:0; background:#fff; border:1px solid #eceaf6; border-radius:22px; overflow:hidden; box-shadow:0 24px 54px -34px rgba(22,22,42,.35);">
+      <div style="position:relative; min-height:300px; background:linear-gradient(150deg,var(--accent),var(--accent-dark));">
+        <img src="https://images.pexels.com/photos/7234229/pexels-photo-7234229.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop" alt="Salle de cinéma" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <span style="position:absolute; left:24px; bottom:24px; z-index:1; background:rgba(22,21,47,.72); color:#fff; font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; padding:7px 12px; border-radius:999px;">À la une</span>
+      </div>
+      <div style="padding:44px; display:flex; flex-direction:column; justify-content:center;">
+        <span style="font:700 12px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">{{ feature.cat }}</span>
+        <h2 style="font:800 27px/1.22 'Inter'; letter-spacing:-.01em; color:#16162a; margin:14px 0 0;">{{ feature.title }}</h2>
+        <p style="font:400 16px/1.6 'Inter'; color:#5c5c72; margin:14px 0 0;">{{ feature.excerpt }}</p>
+        <div style="display:flex; align-items:center; gap:10px; margin-top:22px; font:500 13px/1 'Inter'; color:#8a8aa4;">{{ feature.date }} · {{ feature.read }}</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- FILTRES -->
+  <div style="max-width:1120px; margin:0 auto; padding:40px 48px 0;">
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
+        <button onClick="{{ c.select }}" style="{{ c.style }}">{{ c.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- GRILLE ARTICLES -->
+  <div style="max-width:1120px; margin:0 auto; padding:28px 48px 20px;">
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
+        <a href="Article.dc.html" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
+          <div style="position:relative; height:150px; background:{{ p.bgImg }};"></div>
+          <div style="padding:22px; display:flex; flex-direction:column; flex:1;">
+            <span style="font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">{{ p.cat }}</span>
+            <h3 style="font:800 18px/1.3 'Inter'; letter-spacing:-.01em; color:#16162a; margin:12px 0 0;">{{ p.title }}</h3>
+            <p style="font:400 14px/1.55 'Inter'; color:#5c5c72; margin:10px 0 0; flex:1;">{{ p.excerpt }}</p>
+            <div style="margin-top:18px; font:500 12px/1 'Inter'; color:#8a8aa4;">{{ p.date }} · {{ p.read }}</div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div style="max-width:1120px; margin:56px auto; padding:0 48px;">
+    <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); border-radius:24px; padding:52px; display:grid; grid-template-columns:1.2fr 1fr; gap:40px; align-items:center;">
+      <div>
+        <h2 style="font:800 28px/1.18 'Inter'; letter-spacing:-.015em; color:#fff; margin:0;">Recevez nos conseils RH cinéma</h2>
+        <p style="font:400 16px/1.6 'Inter'; color:#b6b6c8; margin:14px 0 0; max-width:420px;">Un email par mois : conformité, paie, gestion d'équipe. Pas de spam, désinscription en un clic.</p>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <input placeholder="Votre email professionnel" style="flex:1; border:none; border-radius:12px; padding:15px 16px; font:500 15px/1 'Inter'; color:#16162a; outline:none;">
+        <span style="background:var(--accent); color:#fff; font:700 15px/1 'Inter'; padding:15px 22px; border-radius:12px; white-space:nowrap;">S'abonner</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="Mentions%20legales.dc.html" style="color:#7a7a92;">Mentions légales</a><a href="Confidentialite.dc.html" style="color:#7a7a92;">Confidentialité</a><a href="CGU.dc.html" style="color:#7a7a92;">CGU</a></span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { cat: 'Tous', navOpen: false };
+  renderVals(){
+    const cats = ['Tous', 'Conformité', 'Paie', 'Planning', 'Management'];
+    const feature = {
+      cat:'Conformité', title:"Convention collective de l'exploitation cinématographique : les 6 points qui coûtent le plus cher",
+      excerpt:"Heures de nuit, durée maximale de shift, paniers repas… Passage en revue des règles les plus souvent mal appliquées, et comment les automatiser.",
+      date:'12 juin 2026', read:'7 min de lecture'
+    };
+    const postsRaw = [
+      ['Paie', "Zéro ressaisie : comment fiabiliser votre export paie en cinéma", "Du planning validé aux éléments variables de paie, sans erreur de prime.", '4 juin 2026', '5 min', '#e9e7fb'],
+      ['Planning', "Multiplex : construire des plannings conformes en moins d'une heure", "Semaines-types, alertes conventionnelles et autonomie par site.", '28 mai 2026', '6 min', '#e3eefe'],
+      ['Management', "Faire adopter le planning mobile par toute l'équipe", "Les leviers concrets pour dépasser 90 % d'adoption mobile.", '21 mai 2026', '4 min', '#e2f4ec'],
+      ['Conformité', "Feuilles de présence signées : ce que dit vraiment la loi", "Valeur juridique de la signature électronique et bonnes pratiques d'archivage.", '14 mai 2026', '5 min', '#fdeee3'],
+      ['Paie', "Primes de panier au cinéma : le guide de calcul", "Panier repas, panier soir : conditions d'attribution et automatisation.", '7 mai 2026', '6 min', '#f0e6fa'],
+      ['Management', "Recruter et onboarder vos saisonniers d'été", "Contrats, checklist d'intégration et planning : le kit de la rentrée estivale.", '30 avril 2026', '5 min', '#e9e7fb'],
+      ['Conformité', "Heures de nuit en cinéma : majorations et contreparties", "Comment qualifier les séances tardives et sécuriser les majorations dues.", '23 avril 2026', '6 min', '#e3eefe'],
+      ['Planning', "Modulation du temps de travail : bien la paramétrer", "Lisser l'activité sur l'année sans perdre le fil des compteurs d'heures.", '16 avril 2026', '7 min', '#e2f4ec'],
+      ['Paie', "Connecter Ciné Planner à votre logiciel de paie", "Silae, Sage, Cegid : ce que change une intégration native pour votre RH.", '9 avril 2026', '4 min', '#fdeee3'],
+      ['Management', "Gérer les demandes de congés sans tableur", "Un circuit clair de demande, validation et compteur, côté salarié et direction.", '2 avril 2026', '5 min', '#f0e6fa'],
+      ['Conformité', "Contrats CDD, CDI, avenants : les erreurs à éviter", "Mentions obligatoires, variables dynamiques et workflow d'approbation.", '26 mars 2026', '6 min', '#e9e7fb'],
+      ['Planning', "Piloter plusieurs cinémas depuis une seule vue", "Autonomie par site et consolidation groupe : trouver le bon équilibre.", '19 mars 2026', '5 min', '#e3eefe']
+    ];
+    const active = this.state.cat;
+    const px = id => 'url(https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=1100&h=620&fit=crop) center/cover no-repeat';
+    const photos = [6694492,7991303,5685765,7821913,209224,5439474,13936294,16282306,6814526,7433822,8470836,758976];
+    
+    const posts = postsRaw
+      .map((p, i) => ({ cat:p[0], title:p[1], excerpt:p[2], date:p[3], read:p[4] + ' de lecture', bg:p[5], slot:'blog-post-' + i, bgImg: px(photos[i]) + ', ' + p[5] }))
+      .filter(p => active === 'Tous' || p.cat === active);
+    const chipOn = "font:600 14px/1 'Inter'; border:none; cursor:pointer; padding:10px 16px; border-radius:999px; background:var(--accent); color:#fff;";
+    const chipOff = "font:600 14px/1 'Inter'; border:1px solid #e4e4ef; cursor:pointer; padding:10px 16px; border-radius:999px; background:#fff; color:#5c5c72;";
+    return {
+      feature,
+      navOpen: this.state.navOpen,
+      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen })),
+      cats: cats.map(c => ({ label:c, select:()=>this.setState({cat:c}), style: c===active ? chipOn : chipOff })),
+      posts
+    };
+  }
+}
+</script>
+</body>
+</html>

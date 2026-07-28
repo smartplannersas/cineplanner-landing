@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Article — Ciné Planner</title>
+<meta name="description" content="Guides et analyses RH pour les exploitants de cinéma.">
+<link rel="canonical" href="https://cineplanner.fr/article">
+<link rel="icon" type="image/png" href="./assets/logo-mark.png">
+<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ciné Planner">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Article — Ciné Planner">
+<meta property="og:description" content="Guides et analyses RH pour les exploitants de cinéma.">
+<meta property="og:url" content="https://cineplanner.fr/article">
+<meta property="og:image" content="https://cineplanner.fr/assets/og-cineplanner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Article — Ciné Planner">
+<meta name="twitter:description" content="Guides et analyses RH pour les exploitants de cinéma.">
+<meta name="twitter:image" content="https://cineplanner.fr/assets/og-cineplanner.png">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#5B4FE8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #fff; --accent:#5B4FE8; --accent-dark:#3d2fc4; --accent-soft:#ecebfd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-dark); }
+  .art h2 { font: 700 26px/1.3 'Inter'; letter-spacing: -.01em; color: #16162a; margin: 44px 0 0; }
+  .art h3 { font: 700 20px/1.35 'Inter'; color: #16162a; margin: 32px 0 0; }
+  .art p { font: 400 18px/1.75 'Inter'; color: #33334a; margin: 18px 0 0; }
+  .art ul { margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .art li { position: relative; padding-left: 30px; font: 400 18px/1.65 'Inter'; color: #33334a; }
+  .art li::before { content: ""; position: absolute; left: 0; top: 9px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent-soft); box-shadow: inset 0 0 0 3px var(--accent); }
+  .cpl-burger { display: none; }
+  @media (max-width: 960px) {
+    [style*="grid-template-columns: repeat(3, 1fr)"], [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="padding: 20px 48px"] { padding: 14px 20px !important; }
+    [style*="padding: 56px 48px"], [style*="padding: 64px 48px"] { padding-left: 22px !important; padding-right: 22px !important; }
+    .cpl-navlinks { display: none !important; }
+    .cpl-burger { display: flex !important; }
+  }
+
+  @media (min-width: 641px) and (max-width: 1024px) {
+    [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+    [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+</style>
+</helmet>
+
+<div>
+  <!-- NAV -->
+  <div style="position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; background:rgba(255,255,255,.97); border-bottom:1px solid #eef0f7;">
+    <a href="Cine%20Planner%20Landing.dc.html" style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-full.png" alt="Ciné Planner" style="height:56px; width:auto; display:block;"></a>
+    <div class="cpl-navlinks" style="display:flex; align-items:center; gap:30px; font:600 15px/1 'Inter'; color:#3a3a52;">
+      <a href="Cine%20Planner%20Landing.dc.html#feat" style="color:#3a3a52;">Fonctionnalités</a>
+      <a href="Tarifs.dc.html" style="color:#3a3a52;">Tarifs</a>
+      <a href="Blog.dc.html" style="color:var(--accent);">Ressources</a>
+      <a href="Essai%20gratuit.dc.html" style="background:var(--accent); color:#fff; padding:11px 18px; border-radius:12px;">Essai gratuit</a>
+    </div>
+    <button class="cpl-burger" onClick="{{ toggleNav }}" style="width:44px; height:44px; border:1px solid #e4e4ef; border-radius:12px; background:#fff; cursor:pointer; align-items:center; justify-content:center;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16162a" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+    </button>
+  </div>
+  <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#fff; border-bottom:1px solid #eef0f7; padding:12px 20px 18px; display:flex; flex-direction:column; gap:4px;">
+      <a href="Cine%20Planner%20Landing.dc.html#feat" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a;">Fonctionnalités</a>
+      <a href="Tarifs.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a;">Tarifs</a>
+      <a href="Blog.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:var(--accent);">Ressources</a>
+      <a href="Essai%20gratuit.dc.html" style="margin-top:6px; text-align:center; background:var(--accent); color:#fff; padding:14px; border-radius:12px; font:700 15px/1 'Inter';">Essai gratuit</a>
+    </div>
+  </sc-if>
+
+  <!-- EN-TÊTE ARTICLE -->
+  <div style="max-width:800px; margin:0 auto; padding:56px 48px 0;">
+    <div style="font:500 14px/1 'Inter'; color:#8a8aa4;"><a href="Blog.dc.html" style="color:#8a8aa4;">Blog</a> <span style="margin:0 8px;">/</span> <span style="color:var(--accent);">Conformité</span></div>
+    <h1 style="font:800 clamp(32px,4vw,46px)/1.14 'Inter'; letter-spacing:-.02em; color:#16162a; margin:20px 0 0;">Convention collective de l'exploitation cinématographique : les 6 points qui coûtent le plus cher</h1>
+    <div style="display:flex; align-items:center; gap:14px; margin-top:26px;">
+      <div style="width:46px; height:46px; border-radius:50%; background:linear-gradient(150deg,var(--accent),var(--accent-dark)); color:#fff; display:flex; align-items:center; justify-content:center; font:800 16px/1 'Inter';">CP</div>
+      <div>
+        <div style="font:700 15px/1.2 'Inter'; color:#16162a;">L'équipe Ciné Planner</div>
+        <div style="font:500 13px/1.3 'Inter'; color:#8a8aa4; margin-top:3px;">12 juin 2026 · 7 min de lecture</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNIÈRE -->
+  <div style="max-width:1000px; margin:36px auto 0; padding:0 48px;">
+    <div style="position:relative; height:340px; border-radius:24px; overflow:hidden; background:linear-gradient(150deg,var(--accent),var(--accent-dark)); box-shadow:0 40px 80px -44px rgba(61,47,196,.7);"><img src="{{ heroImg }}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></div>
+  </div>
+
+  <!-- CORPS -->
+  <div class="art" style="max-width:800px; margin:0 auto; padding:44px 48px 0;">
+    <p style="font-size:20px; color:#16162a; font-weight:500;">La convention collective de l'exploitation cinématographique (IDCC 1307) encadre précisément le temps de travail, les majorations et les primes. Voici les six règles les plus souvent mal appliquées — et le coût réel de chaque erreur.</p>
+
+    <h2>1. Les heures de nuit et leurs majorations</h2>
+    <p>Le travail de nuit ouvre droit à des majorations spécifiques et à des contreparties en repos. Une séance tardive mal qualifiée, et c'est une majoration oubliée sur chaque bulletin concerné — répétée mois après mois sur plusieurs salariés.</p>
+
+    <h2>2. La durée maximale de shift</h2>
+    <p>Les amplitudes de travail sont plafonnées. Sur les périodes de forte affluence, il est tentant d'allonger les journées : c'est précisément là que naissent les dépassements non conformes, difficiles à repérer manuellement.</p>
+
+    <h2>3. Les paniers repas et paniers soir</h2>
+    <p>Les conditions d'attribution des paniers dépendent des horaires effectivement réalisés. Les calculer à la main, poste par poste, expose à deux risques symétriques : sous-payer (litige) ou surpayer (perte sèche).</p>
+
+    <h3>Ce que ces erreurs coûtent vraiment</h3>
+    <ul>
+      <li>Rappels de salaire et régularisations rétroactives</li>
+      <li>Temps administratif passé à corriger les bulletins</li>
+      <li>Risque prud'homal en cas de contrôle ou de litige</li>
+    </ul>
+
+    <!-- CALLOUT -->
+    <div style="margin:36px 0 0; background:radial-gradient(90% 70% at 0% 0%, var(--accent-soft), #f7f7fd 60%); border:1px solid #ecebf7; border-left:4px solid var(--accent); border-radius:16px; padding:26px 28px;">
+      <div style="font:700 13px/1 'Inter'; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);">À retenir</div>
+      <p style="margin:12px 0 0; font:500 17px/1.6 'Inter'; color:#28283e;">Ciné Planner intègre nativement ces règles : chaque planning non conforme est bloqué avant validation, et les majorations comme les paniers sont calculés automatiquement dans l'export paie.</p>
+    </div>
+
+    <h2>4. Le suivi des heures hebdomadaires</h2>
+    <p>Au-delà d'un certain seuil hebdomadaire, les heures basculent en heures supplémentaires majorées. Sans suivi consolidé du réalisé vs le planifié, ces bascules passent facilement inaperçues.</p>
+
+    <h2>5. Les feuilles de présence signées</h2>
+    <p>La feuille de présence signée est votre preuve en cas de litige. Une signature manquante, et vous perdez la traçabilité des heures réellement effectuées.</p>
+
+    <h2>6. La cohérence multi-établissements</h2>
+    <p>Dès que vous pilotez plusieurs sites, la difficulté n'est plus la règle elle-même mais son application homogène. Des paramétrages divergents d'un cinéma à l'autre créent des écarts de traitement — et donc du risque.</p>
+  </div>
+
+  <!-- CTA -->
+  <div style="max-width:800px; margin:52px auto 0; padding:0 48px;">
+    <div style="background:linear-gradient(150deg,var(--accent),var(--accent-dark)); border-radius:22px; padding:40px 44px; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:24px; box-shadow:0 40px 80px -44px rgba(61,47,196,.7);">
+      <div>
+        <div style="font:800 22px/1.25 'Inter';">Automatisez votre conformité CCN</div>
+        <div style="font:400 15px/1.55 'Inter'; color:#e0dcff; margin-top:8px;">Testez Ciné Planner 14 jours, sans carte bancaire.</div>
+      </div>
+      <a href="Essai%20gratuit.dc.html" style="flex:none; background:#fff; color:var(--accent-dark); font:700 15px/1 'Inter'; padding:15px 24px; border-radius:12px;">Démarrer l'essai</a>
+    </div>
+  </div>
+
+  <!-- ARTICLES LIÉS -->
+  <div style="max-width:1120px; margin:64px auto 0; padding:0 48px;">
+    <h2 style="font:800 26px/1.2 'Inter'; letter-spacing:-.01em; color:#16162a; margin:0 0 24px;">À lire ensuite</h2>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+        <a href="Article.dc.html" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
+          <div style="position:relative; height:130px; background:{{ r.bgImg }};"></div>
+          <div style="padding:20px;">
+            <span style="font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">{{ r.cat }}</span>
+            <h3 style="font:800 17px/1.3 'Inter'; letter-spacing:-.01em; color:#16162a; margin:12px 0 0;">{{ r.title }}</h3>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:40px 48px; margin-top:64px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <span style="font:400 13px/1.5 'Inter'; color:#b7b4d6;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="Mentions%20legales.dc.html" style="color:#7a7a92;">Mentions légales</a><a href="Confidentialite.dc.html" style="color:#7a7a92;">Confidentialité</a><a href="CGU.dc.html" style="color:#7a7a92;">CGU</a></span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { navOpen: false };
+  renderVals(){
+    const uimg = id => 'https://images.unsplash.com/photo-' + id + '?fm=jpg&q=70&w=1100&auto=format&fit=crop';
+    return {
+      navOpen: this.state.navOpen,
+      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen })),
+      heroImg: uimg('1561722798-9a732d141027'),
+      related: [
+        { cat:'Paie', title:'Zéro ressaisie : fiabiliser votre export paie en cinéma', bg:'#e9e7fb', slot:'article-rel-0', bgImg:'url(https://images.pexels.com/photos/6694492/pexels-photo-6694492.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop) center/cover no-repeat' },
+        { cat:'Planning', title:"Multiplex : des plannings conformes en moins d'une heure", bg:'#e3eefe', slot:'article-rel-1', bgImg:'url(https://images.pexels.com/photos/7991303/pexels-photo-7991303.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop) center/cover no-repeat' },
+        { cat:'Conformité', title:'Feuilles de présence signées : ce que dit la loi', bg:'#fdeee3', slot:'article-rel-2', bgImg:'url(https://images.pexels.com/photos/7821913/pexels-photo-7821913.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop) center/cover no-repeat' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

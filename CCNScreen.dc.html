@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>.cc * { box-sizing:border-box; font-family:'Inter',system-ui,sans-serif; }</style>
+</helmet>
+<div class="cc" style="width:100%; height:100%; overflow:hidden; background:#fff;">
+ <div class="cc-scale" ref="{{ scaleRef }}" style="width:1180px; height:770px; transform-origin:top left; display:flex; flex-direction:column;">
+  <div style="flex:none; height:58px; background:#232637; display:flex; align-items:center; justify-content:space-between; padding:0 22px;">
+    <div style="display:flex; align-items:center; gap:36px;">
+      <img src="assets/logo-full-white.png" alt="CinéPlanner" style="height:26px; width:auto; display:block;">
+      <div style="display:flex; align-items:center; gap:6px; font:600 13px/1 'Inter';">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6"><span style="{{ t.style }}">{{ t.label }}</span></sc-for>
+      </div>
+    </div>
+    <span style="font:700 13px/1 'Inter'; color:#eceef6;">CINÉ HORIZON · BORDEAUX</span>
+  </div>
+  <div style="flex:1; min-height:0; display:flex;">
+    <div style="width:230px; flex:none; background:#fff; border-right:1px solid #eceef6; padding:14px; display:flex; flex-direction:column; gap:3px;">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="8"><div style="{{ n.style }}">{{ n.label }}</div></sc-for>
+    </div>
+    <div style="flex:1; min-width:0; background:#fbfbfe; padding:26px 30px; overflow:hidden;">
+      <div style="font:800 18px/1.2 'Inter'; color:#1c1f2e;">Règles de Convention Collective</div>
+      <div style="font:500 12.5px/1.4 'Inter'; color:#9a9db2; margin-top:5px;">Gérez l'activation et les paramètres des règles de convention collective pour CINÉ HORIZON · BORDEAUX</div>
+      <div style="margin-top:16px; background:#eef4ff; border:1px solid #d5e3fb; border-radius:10px; padding:12px 15px; font:500 12.5px/1.4 'Inter'; color:#2f5aa8;">ⓘ Les calculs (paniers, pauses) s'appliquent uniquement si la règle est activée. Les alertes ne sont générées que pour les règles activées.</div>
+      <div style="margin-top:22px; display:grid; grid-template-columns:1fr 1fr; gap:34px;">
+        <div>
+          <div style="font:800 14px/1 'Inter'; color:#1c1f2e;">Calculs</div>
+          <div style="font:500 12px/1.4 'Inter'; color:#9a9db2; margin:6px 0 14px;">Paramètres des calculs automatiques (paniers, pauses).</div>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <sc-for list="{{ calc }}" as="c" hint-placeholder-count="3">
+              <div style="background:#fff; border:1px solid #eceef6; border-radius:12px; padding:15px 16px;">
+                <div style="display:flex; align-items:flex-start; gap:12px;">
+                  <span style="{{ c.toggle }}"><span style="{{ c.knob }}"></span></span>
+                  <div><div style="font:700 13.5px/1.2 'Inter'; color:#1c1f2e;">{{ c.title }}</div><div style="font:500 12px/1.4 'Inter'; color:#8a8da2; margin-top:4px;">{{ c.desc }}</div><div style="font:600 11px/1 'Inter'; color:#5B4FE8; margin-top:8px;">groupe : {{ c.grp }}</div></div>
+                </div>
+                <sc-if value="{{ c.hasFields }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex; gap:14px; margin-top:14px; padding-top:12px; border-top:1px solid #f2f3f8;">
+                    <sc-for list="{{ c.fields }}" as="f" hint-placeholder-count="2">
+                      <div><div style="font:600 11px/1 'Inter'; color:#8a8da2; margin-bottom:6px;">{{ f.label }}</div><div style="width:96px; border:1px solid #dfe1ec; border-radius:8px; padding:9px 11px; font:600 13px/1 'Inter'; color:#1c1f2e;">{{ f.val }}</div></div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font:800 14px/1 'Inter'; color:#1c1f2e;">Alertes</div>
+          <div style="font:500 12px/1.4 'Inter'; color:#9a9db2; margin:6px 0 14px;">Activez les règles pour recevoir des notifications en cas de non-conformité.</div>
+          <div style="background:#fff; border:1px solid #eceef6; border-radius:12px; overflow:hidden;">
+            <sc-for list="{{ alerts }}" as="a" hint-placeholder-count="4">
+              <div style="display:flex; align-items:flex-start; gap:12px; padding:15px 16px; border-bottom:1px solid #f2f3f8;">
+                <span style="{{ a.toggle }}"><span style="{{ a.knob }}"></span></span>
+                <div><div style="font:700 13.5px/1.2 'Inter'; color:#1c1f2e;">{{ a.title }}</div><div style="font:500 12px/1.4 'Inter'; color:#8a8da2; margin-top:4px;">{{ a.desc }}</div><div style="font:600 11px/1 'Inter'; color:#5B4FE8; margin-top:8px;">groupe : activé</div></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1040,&quot;height&quot;:600}}">
+class Component extends DCLogic {
+  _fit() {
+    const inner = this._scaleEl, box = inner && inner.parentElement;
+    if (!inner || !box) return;
+    const w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+    const s = w / 1180;
+    inner.style.transform = 'scale(' + s + ')'; inner.style.height = (h / s) + 'px';
+  }
+  componentWillUnmount() { if (this._ro) this._ro.disconnect(); if (this._onResize) window.removeEventListener('resize', this._onResize); }
+  renderVals() {
+    const scaleRef = (el) => {
+      if (!el || el === this._scaleEl) return; this._scaleEl = el;
+      const run = () => this._fit(); run(); requestAnimationFrame(run); setTimeout(run, 80);
+      if (window.ResizeObserver) { if (this._ro) this._ro.disconnect(); this._ro = new ResizeObserver(run); if (el.parentElement) this._ro.observe(el.parentElement); }
+      if (!this._onResize) { this._onResize = run; window.addEventListener('resize', run); }
+    };
+    const tabs = ['Planning','Équipe','Demandes','Contrats','Paramètres'].map(l => ({ label: l, style: "color:#c7c9d8; padding:8px 6px;" }));
+    const navRaw = ['Événements','Postes de travail','Modèles','Historique des partages','Convention collective','Utilisateurs & rôles','Contrats','Préférences'];
+    const nav = navRaw.map(l => ({ label: l, style: l === 'Convention collective'
+      ? "background:#eef0fb; color:#4536c9; font:700 13px/1.2 'Inter'; border-radius:9px; padding:11px 12px;"
+      : "color:#4a4d61; font:600 13px/1.2 'Inter'; border-radius:9px; padding:11px 12px;" }));
+    const toggle = "flex:none; width:34px; height:20px; border-radius:999px; background:#5B4FE8; position:relative; display:inline-block;";
+    const knob = "position:absolute; top:2px; right:2px; width:16px; height:16px; border-radius:50%; background:#fff;";
+    const calc = [
+      { title: 'Pause obligatoire', desc: "Génération automatique d'une pause pour les shifts dépassant un seuil d'heures", grp: '06:00', toggle, knob, hasFields: true, fields: [{ label: 'Heures min. pour pause', val: '06:00' }, { label: 'Durée pause (min)', val: '30' }] },
+      { title: 'Prime de panier repas', desc: 'Calcul de la prime de panier repas (midi ou soir selon amplitude et pauses)', grp: 'activé', toggle, knob, hasFields: true, fields: [{ label: 'Heure de début', val: '12:00' }, { label: 'Heure de fin', val: '12:45' }] },
+      { title: 'Prime de panier nuit', desc: 'Prime de panier nuit pour les shifts se terminant tard dans la nuit', grp: 'activé', toggle, knob, hasFields: true, fields: [{ label: 'Heure fin min.', val: '00:45' }, { label: 'Heure fin max.', val: '04:00' }] }
+    ];
+    const alerts = [
+      { title: 'Jours consécutifs de travail', desc: 'Surveillance des jours consécutifs travaillés sans repos', toggle, knob },
+      { title: 'Pauses conventionnelles obligatoire', desc: 'Ce shift dépasse 6h de travail, une pause de 30 minutes rémunérée est requise (Convention Collective)', toggle, knob },
+      { title: 'Repos quotidien insuffisant', desc: 'Vérification du repos quotidien minimum entre deux journées de travail', toggle, knob },
+      { title: 'Contrôle du temps de travail journalier', desc: 'Vérification de la durée maximale autorisée des shifts sur une même journée', toggle, knob }
+    ];
+    return { scaleRef, tabs, nav, calc, alerts };
+  }
+}
+</script>
+</body>
+</html>

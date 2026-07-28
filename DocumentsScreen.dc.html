@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .dp * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+</style>
+</helmet>
+<div class="dp" style="width:100%; height:100%; overflow:hidden; background:#fff;">
+ <div class="dp-scale" ref="{{ scaleRef }}" style="width:1440px; height:940px; transform-origin:top left; display:flex; flex-direction:column;">
+
+  <!-- TOP BAR -->
+  <div style="flex:none; height:58px; background:#232637; display:flex; align-items:center; justify-content:space-between; padding:0 22px;">
+    <div style="display:flex; align-items:center; gap:36px;">
+      <img src="assets/logo-full-white.png" alt="CinéPlanner" style="height:26px; width:auto; display:block;">
+      <div style="display:flex; align-items:center; gap:6px; font:600 13px/1 'Inter';">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6"><span style="{{ t.style }}">{{ t.label }}</span></sc-for>
+      </div>
+    </div>
+    <span style="font:700 13px/1 'Inter'; color:#eceef6;">CINÉ HORIZON · BORDEAUX</span>
+  </div>
+
+  <!-- CONTENU -->
+  <div style="flex:1; min-height:0; background:#fbfbfe; padding:26px 30px; display:grid; grid-template-columns:1fr 1fr; gap:28px; overflow:hidden;">
+
+    <!-- COLONNE GAUCHE -->
+    <div style="display:flex; flex-direction:column; gap:26px;">
+      <div>
+        <div style="display:flex; align-items:flex-start; justify-content:space-between;"><div><div style="font:800 16px/1 'Inter'; color:#1c1f2e;">Contrats</div><div style="font:500 12px/1 'Inter'; color:#9a9db2; margin-top:5px;">Détails de l'employé</div></div><span style="border:1px solid #dfe1ec; border-radius:8px; padding:8px 13px; font:700 12px/1 'Inter'; color:#1c1f2e;">Ajouter</span></div>
+        <div style="margin-top:14px; background:#fff; border:1px solid #eceef6; border-radius:11px; padding:14px 16px; display:flex; align-items:center; gap:14px;">
+          <span style="font:800 13px/1 'Inter'; color:#1c1f2e;">CDI</span><span style="background:#e2f4ec; color:#1a8a5c; font:700 11px/1 'Inter'; padding:5px 9px; border-radius:999px;">Actif</span>
+          <span style="font:500 13px/1 'Inter'; color:#8a8da2; margin-left:auto;">depuis le</span><span style="font:600 13px/1 'Inter'; color:#1c1f2e;">20/08/2021</span>
+        </div>
+      </div>
+      <div>
+        <div style="font:800 16px/1 'Inter'; color:#1c1f2e;">Demandes</div><div style="font:500 12px/1 'Inter'; color:#9a9db2; margin-top:5px;">Absences et rectifications horaires</div>
+        <div style="margin-top:14px; border:1px solid #eceef6; border-radius:11px; overflow:hidden;">
+          <div style="display:grid; grid-template-columns:0.8fr 1.4fr 1.4fr 0.9fr 1fr; background:#f7f8fc; border-bottom:1px solid #eceef6;">
+            <sc-for list="{{ demCols }}" as="c" hint-placeholder-count="5"><div style="padding:11px 12px; font:700 10px/1.2 'Inter'; letter-spacing:.05em; color:#8a8da2;">{{ c }}</div></sc-for>
+          </div>
+          <sc-for list="{{ demRows }}" as="r" hint-placeholder-count="4">
+            <div style="{{ r.rowStyle }}">
+              <div style="padding:12px; font:600 12px/1.3 'Inter'; color:#4a4d61;">{{ r.type }}</div>
+              <div style="padding:12px; font:500 12px/1.4 'Inter'; color:#1c1f2e;">{{ r.detail }}</div>
+              <div style="padding:12px; font:500 12px/1.4 'Inter'; color:#4a4d61;">{{ r.motif }}</div>
+              <div style="padding:12px;"><span style="{{ r.badge }}">{{ r.statut }}</span></div>
+              <div style="padding:12px; font:500 12px/1.3 'Inter'; color:#8a8da2;">{{ r.date }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLONNE DROITE -->
+    <div style="display:flex; flex-direction:column; gap:26px;">
+      <div>
+        <div style="display:flex; align-items:flex-start; justify-content:space-between;"><div><div style="font:800 16px/1 'Inter'; color:#1c1f2e;">Périodes d'absences</div><div style="font:500 12px/1 'Inter'; color:#9a9db2; margin-top:5px;">Détails de l'employé</div></div><span style="border:1px solid #dfe1ec; border-radius:8px; padding:8px 13px; font:700 12px/1 'Inter'; color:#1c1f2e;">Ajouter</span></div>
+        <div style="margin-top:14px; display:flex; flex-direction:column; gap:8px;">
+          <sc-for list="{{ absRows }}" as="a" hint-placeholder-count="5">
+            <div style="display:grid; grid-template-columns:1fr 1.6fr 0.5fr; align-items:center; background:#fff; border:1px solid #eceef6; border-radius:10px; padding:12px 14px;">
+              <span style="font:700 13px/1 'Inter'; color:#1c1f2e;">{{ a.type }}</span>
+              <span style="font:500 12.5px/1 'Inter'; color:#4a4d61;">{{ a.range }}</span>
+              <span style="font:600 12px/1 'Inter'; color:#8a8da2; text-align:right;">{{ a.h }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex; align-items:center; justify-content:space-between;"><div><div style="font:800 16px/1 'Inter'; color:#1c1f2e;">Coffre-fort documents</div><div style="font:500 12px/1 'Inter'; color:#9a9db2; margin-top:5px;">Documents signés & archivés</div></div><span style="display:flex; align-items:center; gap:6px; font:600 12px/1 'Inter'; color:#1a8a5c;"><span style="width:8px; height:8px; border-radius:50%; background:#1a8a5c;"></span>Connecté</span></div>
+        <div style="margin-top:14px; background:#fff; border:1.5px solid #dcd8fb; border-radius:12px; padding:16px;">
+          <div style="font:700 12px/1 'Inter'; color:#1c1f2e;">Ajouter un document</div>
+          <div style="font:500 11px/1 'Inter'; color:#9a9db2; margin-top:6px;">CinéHorizon / Bordeaux / Renard Camille /</div>
+          <div style="display:flex; align-items:center; gap:10px; margin-top:12px;">
+            <span style="width:120px; display:flex; align-items:center; justify-content:space-between; border:1px solid #dfe1ec; border-radius:8px; padding:9px 11px; font:600 12px/1 'Inter'; color:#1c1f2e;">CNI ▾</span>
+            <span style="border:1px solid #dfe1ec; border-radius:8px; padding:9px 12px; font:600 12px/1 'Inter'; color:#4a4d61;">Choisir un fichier</span>
+            <span style="font:500 12px/1 'Inter'; color:#9a9db2;">Aucun fichier</span>
+            <span style="margin-left:auto; background:#4536c9; color:#fff; font:700 12px/1 'Inter'; padding:10px 16px; border-radius:8px;">Envoyer</span>
+          </div>
+        </div>
+        <div style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
+          <sc-for list="{{ docs }}" as="d" hint-placeholder-count="2">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <div><div style="font:700 12.5px/1.3 'Inter'; color:#1c1f2e;"><span style="color:#8a8da2; font-weight:600;">{{ d.kind }}</span> &nbsp;{{ d.name }}</div><div style="font:500 11px/1 'Inter'; color:#9a9db2; margin-top:4px;">{{ d.by }}</div></div>
+              <span style="font:500 11px/1 'Inter'; color:#b7bacb;">{{ d.date }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1040,&quot;height&quot;:600}}">
+class Component extends DCLogic {
+  _fit() {
+    const inner = this._scaleEl, box = inner && inner.parentElement;
+    if (!inner || !box) return;
+    const w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+    const s = w / 1440;
+    inner.style.transform = 'scale(' + s + ')';
+    inner.style.height = (h / s) + 'px';
+  }
+  componentWillUnmount() { if (this._ro) this._ro.disconnect(); if (this._onResize) window.removeEventListener('resize', this._onResize); }
+  renderVals() {
+    const scaleRef = (el) => {
+      if (!el || el === this._scaleEl) return;
+      this._scaleEl = el;
+      const run = () => this._fit();
+      run(); requestAnimationFrame(run); setTimeout(run, 80);
+      if (window.ResizeObserver) { if (this._ro) this._ro.disconnect(); this._ro = new ResizeObserver(run); if (el.parentElement) this._ro.observe(el.parentElement); }
+      if (!this._onResize) { this._onResize = run; window.addEventListener('resize', run); }
+    };
+    const tabs = ['Dashboard','Employés','Planning','Présences','Contrats','Paramètres'].map(l => ({
+      label: l, style: l === 'Employés' ? "background:#5B4FE8; color:#fff; padding:8px 13px; border-radius:8px;" : "color:#c7c9d8; padding:8px 6px;"
+    }));
+    const ok = "background:#e2f4ec; color:#1a8a5c; font:700 10px/1 'Inter'; padding:5px 9px; border-radius:999px;";
+    const ko = "background:#fde3e6; color:#c0324a; font:700 10px/1 'Inter'; padding:5px 9px; border-radius:999px;";
+    const demCols = ['TYPE','DÉTAILS','MOTIF / COMMENTAIRE','STATUT','DÉCISION'];
+    const demRaw = [
+      ['Absence','Congés payés — 12/08 au 01/09/2026','Congés payés d\u2019été','Accepté',1,'01/06/2026'],
+      ['Absence','Congés payés — 20/05 au 26/05/2026','Congés 2026','Accepté',1,'17/04/2026'],
+      ['Absence','Congés payés — 20/05 au 26/04/2026','Motif de refus : mauvaises dates','Refusé',0,'17/04/2026'],
+      ['Absence','Congés payés — 29/04 au 09/05/2026','Congés 2026','Accepté',1,'17/04/2026']
+    ];
+    const demRows = demRaw.map((r,i) => ({
+      type: r[0], detail: r[1], motif: r[2], statut: r[3], badge: r[4] ? ok : ko, date: r[5],
+      rowStyle: `display:grid; grid-template-columns:0.8fr 1.4fr 1.4fr 0.9fr 1fr; border-top:1px solid #f0f1f7; background:${i % 2 ? '#fbfbfe' : '#fff'};`
+    }));
+    const absRows = [
+      { type: 'Formation', range: 'du 10/09/2026 au 10/09/2026', h: '00:00' },
+      { type: 'Congés payés', range: 'du 12/08/2026 au 01/09/2026', h: '105:00' },
+      { type: 'Congés payés', range: 'du 20/05/2026 au 26/05/2026', h: '00:00' },
+      { type: 'Congés payés', range: 'du 29/04/2026 au 05/05/2026', h: '00:00' },
+      { type: 'Repos', range: 'du 06/10/2025 au 07/10/2025', h: '00:00' }
+    ];
+    const docs = [
+      { kind: 'Autre', name: 'Acompte Renard juillet 2026.pdf', by: 'Léo Mercier', date: '11/07/2026 08:45' },
+      { kind: 'Autre', name: 'Reçu Renard 05-07-2026.pdf', by: 'Léo Mercier', date: '08/07/2026 11:47' }
+    ];
+    return { scaleRef, tabs, demCols, demRows, absRows, docs };
+  }
+}
+</script>
+</body>
+</html>

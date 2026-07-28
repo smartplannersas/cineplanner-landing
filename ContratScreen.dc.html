@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .ct * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+</style>
+</helmet>
+<div class="ct" style="width:100%; height:100%; overflow:hidden; background:#fff;">
+ <div class="ct-scale" ref="{{ scaleRef }}" style="width:1440px; height:900px; transform-origin:top left; display:flex; flex-direction:column;">
+
+  <!-- BARRE ÉDITEUR -->
+  <div style="flex:none; height:64px; background:#fff; border-bottom:1px solid #eceef6; display:flex; align-items:center; justify-content:space-between; padding:0 24px;">
+    <div>
+      <div style="display:flex; align-items:center; gap:10px;"><span style="font:800 16px/1 'Inter'; color:#1c1f2e;">Modifier le contrat</span><span style="background:#fdf0e0; color:#a95a1e; font:700 11px/1 'Inter'; padding:5px 9px; border-radius:6px;">Brouillon</span></div>
+      <div style="font:500 11px/1 'Inter'; color:#9a9db2; margin-top:5px;">Dernière modification : mercredi 01 juillet 2026 17h16</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span style="display:flex; align-items:center; gap:7px; border:1px solid #dfe1ec; color:#1c1f2e; font:700 13px/1 'Inter'; padding:10px 15px; border-radius:9px;">← Retour</span>
+      <span style="background:#4536c9; color:#fff; font:700 13px/1 'Inter'; padding:11px 18px; border-radius:9px;">✓ Mettre à jour</span>
+    </div>
+  </div>
+
+  <div style="flex:1; min-height:0; display:flex;">
+    <!-- SIDEBAR -->
+    <div style="width:300px; flex:none; background:#fff; border-right:1px solid #eceef6; padding:20px; display:flex; flex-direction:column; gap:8px; overflow:hidden;">
+      <div style="background:#fff7ef; border:1px solid #f7e0c8; border-radius:12px; padding:15px 16px;">
+        <div style="display:flex; align-items:center; gap:8px; font:700 13px/1 'Inter'; color:#a95a1e;">⚠ Éléments manquants</div>
+        <div style="font:500 11.5px/1.4 'Inter'; color:#a97a4e; margin-top:8px;">Cliquez sur un élément pour accéder au champ concerné :</div>
+        <div style="display:flex; flex-direction:column; gap:7px; margin-top:11px;">
+          <sc-for list="{{ missing }}" as="m" hint-placeholder-count="4"><div style="font:600 12.5px/1 'Inter'; color:#c0522a;">✕ {{ m }}</div></sc-for>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 4px 6px;"><span style="font:700 14px/1 'Inter'; color:#1c1f2e;">Approbation</span><span style="color:#22a06b;">✓</span></div>
+      <div style="font:600 12px/1 'Inter'; color:#8a8da2; padding:0 4px 4px;">Approbateurs configurés</div>
+      <div style="border:1px solid #e6e7f0; border-radius:9px; padding:11px 13px; font:600 13px/1 'Inter'; color:#1c1f2e;">Damien Rousseau</div>
+      <div style="border:1px solid #e6e7f0; border-radius:9px; padding:11px 13px; font:600 13px/1 'Inter'; color:#1c1f2e;">Thomas Beaulieu</div>
+      <div style="height:1px; background:#eef0f6; margin:8px 0;"></div>
+      <sc-for list="{{ sections }}" as="s" hint-placeholder-count="6">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 4px; border-bottom:1px solid #f4f5fa;">
+          <span style="display:flex; align-items:center; gap:8px; font:700 13.5px/1 'Inter'; color:#3a3d51;">{{ s.label }} <span style="{{ s.iconStyle }}">{{ s.icon }}</span></span>
+          <span style="color:#c2c5d6;">›</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- DOCUMENT -->
+    <div style="flex:1; min-width:0; background:#f4f5fb; padding:30px 40px; overflow:hidden;">
+      <div style="max-width:820px; margin:0 auto; background:#fff; border:1px solid #eceef6; border-radius:6px; box-shadow:0 12px 30px -20px rgba(22,22,42,.3); padding:40px 46px; font:400 13.5px/1.75 'Inter'; color:#2a2d3e;">
+        <div style="font:800 14px/1.5 'Inter'; letter-spacing:.02em; color:#1c1f2e;">CONTRAT DE TRAVAIL À TEMPS PARTIEL ET À DURÉE INDÉTERMINÉE</div>
+        <p style="margin:20px 0 0;">Entre les soussignés :</p>
+        <p style="margin:12px 0 0;"><b>CINÉ HORIZON SAS</b>, société par actions simplifiée au capital de 10 000,00 €, immatriculée au RCS de Ville-Exemple sous le numéro 000 000 000, dont le siège social est situé au 1 rue de la Démo — 00000 Ville-Exemple, représentée par Madame Démo Dupont dûment habilitée en qualité de Directrice juridique.</p>
+        <p style="margin:14px 0 0; color:#5a5d70;">Ci-dessous dénommée « la Société »</p>
+        <p style="margin:14px 0 0;">Et</p>
+        <div style="margin:12px 0 0; line-height:2.1;">
+          <sc-for list="{{ vars1 }}" as="v" hint-placeholder-count="8"><span style="{{ v.style }}">{{ v.t }}</span> </sc-for>
+        </div>
+        <p style="margin:16px 0 0; color:#5a5d70;">Ci-dessous dénommé « le salarié »</p>
+        <p style="margin:16px 0 0;">Il est convenu que :</p>
+        <div style="font:800 13px/1.5 'Inter'; color:#1c1f2e; margin-top:18px;">Préambule</div>
+        <p style="margin:10px 0 0;">Le salarié est engagé à temps partiel et à durée indéterminée, en qualité de « Agent de cinéma » statut employé, niveau III, coefficient 214, à compter du <span style="{{ chip }}">◇ Date de début du contrat</span> par le cinéma CINÉ HORIZON <span style="{{ chip }}">◇ site</span> <span style="{{ chip }}">◇ adresse du site</span>.</p>
+        <p style="margin:12px 0 0;">Le salarié bénéficiera d'une visite d'information et de prévention, réalisée par un membre de l'équipe pluridisciplinaire en santé, dans les 3 mois suivant sa prise effective de poste.</p>
+        <p style="margin:12px 0 0;">Il est rappelé que les rapports contractuels des parties sont soumis aux dispositions de la Convention Collective de l'exploitation cinématographique.</p>
+        <div style="font:800 13px/1.5 'Inter'; color:#1c1f2e; margin-top:18px;">Article 1 — Missions</div>
+        <p style="margin:10px 0 0;">Le salarié exerce les fonctions de « Agent de cinéma », statut employé. Son activité est polyvalente : accueil, caisse et clôture journalière, ingest des contenus numériques, démarrage films, contrôle, vente et promotion, fabrication de pop-corn, etc.</p>
+      </div>
+    </div>
+  </div>
+
+ </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1040,&quot;height&quot;:600}}">
+class Component extends DCLogic {
+  _fit() {
+    const inner = this._scaleEl;
+    const box = inner && inner.parentElement;
+    if (!inner || !box) return;
+    const w = box.clientWidth, h = box.clientHeight;
+    if (!w || !h) return;
+    const s = w / 1440;
+    inner.style.transform = 'scale(' + s + ')';
+    inner.style.height = (h / s) + 'px';
+  }
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+  }
+  renderVals() {
+    const scaleRef = (el) => {
+      if (!el || el === this._scaleEl) return;
+      this._scaleEl = el;
+      const run = () => this._fit();
+      run(); requestAnimationFrame(run); setTimeout(run, 80);
+      if (window.ResizeObserver) {
+        if (this._ro) this._ro.disconnect();
+        this._ro = new ResizeObserver(run);
+        if (el.parentElement) this._ro.observe(el.parentElement);
+      }
+      if (!this._onResize) { this._onResize = run; window.addEventListener('resize', run); }
+    };
+    const missing = ['Employé', 'Date de début', 'Heures', 'Variables à remplir'];
+    const sec = (label, ok) => ({ label, icon: ok ? '✓' : '⚠', iconStyle: ok ? 'color:#22a06b;' : 'color:#d99a2b;' });
+    const sections = [sec('Site', true), sec('Manager', true), sec('Employé', false), sec('Contrat', false), sec('Variables', false), sec('Checklist pré-contrat', false), sec('Documents', false)];
+    const chip = "display:inline-block; background:#fff4ea; border:1px solid #f2d3ad; color:#a95a1e; font:600 12px/1.4 'Inter'; padding:2px 7px; border-radius:5px; white-space:nowrap;";
+    const V = t => ({ t, style: chip });
+    const vars1 = [V('◇ civilité'), V('◇ Nom salarié'), V('◇ Prénom salarié'), V('◇ Date de naissance'), V('◇ Ville de naissance'), V('◇ Nationalité'), V('◇ Adresse'), V('◇ Numéro de sécurité sociale')];
+    return { scaleRef, missing, sections, chip, vars1 };
+  }
+}
+</script>
+</body>
+</html>

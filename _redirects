@@ -1,0 +1,17 @@
+# URLs propres -> fichiers
+/planification            /Feature%20-%20Planification.dc.html   200
+/suivi-des-temps          /Feature%20-%20Temps.dc.html           200
+/contrats                 /Feature%20-%20Contrats.dc.html        200
+/export-paie              /Feature%20-%20Paie.dc.html            200
+/appli-equipe             /Feature%20-%20Portail.dc.html         200
+/coffre-fort-documents    /Feature%20-%20Documents.dc.html       200
+/tarifs                   /Tarifs.dc.html                        200
+/blog                     /Blog.dc.html                          200
+/article                  /Article.dc.html                       200
+/essai-gratuit            /Essai%20gratuit.dc.html               200
+/mentions-legales         /Mentions%20legales.dc.html             200
+/confidentialite          /Confidentialite.dc.html               200
+/cgu                      /CGU.dc.html                           200
+/souscrire                /Abonnement.dc.html                    200
+/abonnement               /Abonnement.dc.html                    200
+/*                        /index.html                            404

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Conditions générales d'utilisation — Ciné Planner</title>
+<meta name="description" content="Conditions générales d'utilisation du logiciel RH Ciné Planner, édité par SmartPlanner : accès au service, essai gratuit, abonnement et responsabilités.">
+<link rel="canonical" href="https://cineplanner.fr/cgu">
+<link rel="icon" type="image/png" href="./assets/logo-mark.png">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#5B4FE8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #fff; }
+  :root { --accent: #5B4FE8; --accent-dark: #241f6b; --accent-soft: #eceafd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-dark); }
+  @media (max-width: 960px) {
+    [style*="padding:72px 48px"] { padding: 44px 22px !important; }
+    [style*="padding:32px 48px"] { padding: 28px 22px !important; }
+    h1 { font-size: clamp(28px,7vw,38px) !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; overflow-x:hidden;">
+  <x-import component-from-global-scope="SiteNav" from="./SiteNav.dc.html" hint-size="100%,86px"></x-import>
+
+  <div style="max-width:820px; margin:0 auto; padding:72px 48px 40px;">
+    <div style="font:700 13px/1 'Inter'; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">Conditions</div>
+    <h1 style="font:800 clamp(30px,3.4vw,42px)/1.12 'Inter'; letter-spacing:-.02em; color:#16162a; margin:16px 0 0;">Conditions générales d'utilisation</h1>
+    <p style="font:400 18px/1.7 'Inter'; color:#5c5c72; margin:20px 0 0;">Les présentes conditions régissent l'accès au site cineplanner.fr et l'utilisation du logiciel Ciné Planner, édité par SmartPlanner (40 Allée Eugène Delacroix, 33800 Bordeaux, SIRET 934 294 083).</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Objet du service</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Ciné Planner est un logiciel en ligne de gestion RH destiné aux exploitants de cinéma : planification des équipes, suivi des temps, contrats, feuilles de présence, compteurs de congés et export des éléments de paie. L'accès s'effectue depuis un navigateur, sans installation.</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Essai gratuit</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">L'essai est proposé pour une durée de 14 jours, sans carte bancaire et sans reconduction automatique. À son terme, le client choisit librement de souscrire un abonnement.</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Abonnement et facturation</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Les abonnements sont souscrits par établissement, sur la base d'un engagement annuel. Les tarifs en vigueur sont publiés sur la <a href="Tarifs.dc.html">page Tarifs</a>. Les paiements sont traités par Stripe. Les factures sont conservées conformément aux obligations fiscales.</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Obligations du client</h2>
+    <div style="display:flex; flex-direction:column; gap:11px; margin-top:18px;">
+      <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;">Fournir des informations exactes lors de la création du compte et les maintenir à jour.</div>
+      <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;">Préserver la confidentialité de ses identifiants et gérer les droits d'accès de ses équipes.</div>
+      <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;">Utiliser le service conformément à la réglementation du travail applicable à son activité.</div>
+    </div>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Rôle des alertes de conformité</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Les alertes relatives à la convention collective constituent une aide à la décision. Elles ne se substituent pas à l'appréciation de l'employeur, qui demeure seul responsable de ses obligations légales et conventionnelles.</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Propriété intellectuelle</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">SmartPlanner concède un droit d'usage personnel et non exclusif du logiciel pendant la durée de l'abonnement. Les données saisies par le client restent sa propriété et lui sont restituables sur demande.</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Données personnelles</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Le traitement des données est décrit dans notre <a href="Confidentialite.dc.html">politique de confidentialité</a>.</p>
+
+    <div style="margin-top:48px; background:#fff8e8; border:1px solid #f2e2bd; border-radius:16px; padding:22px 26px;">
+      <div style="font:700 15px/1.4 'Inter'; color:#8a5a12;">À faire valider</div>
+      <div style="font:400 15px/1.6 'Inter'; color:#6b5320; margin-top:8px;">Ce texte est une base de travail. Les clauses contractuelles complètes (niveaux de service, limitation de responsabilité, résiliation, droit applicable) doivent être validées par votre conseil juridique avant mise en ligne.</div>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="Mentions%20legales.dc.html" style="color:#7a7a92;">Mentions légales</a><a href="Confidentialite.dc.html" style="color:#7a7a92;">Confidentialité</a><a href="CGU.dc.html" style="color:#7a7a92;">CGU</a></span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

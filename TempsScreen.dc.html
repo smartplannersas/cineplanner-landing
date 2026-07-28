@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .ts * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+</style>
+</helmet>
+<div class="ts" style="width:100%; height:100%; overflow:hidden; background:#fff;">
+ <div class="ts-scale" style="width:1200px; height:840px; transform-origin:top left; background:#fbfbfe; display:flex; flex-direction:column;">
+  <div style="flex:1; min-height:0; overflow:hidden; display:flex; justify-content:center; padding:34px 0;">
+   <div style="width:760px; max-width:760px;">
+
+    <a style="display:inline-flex; align-items:center; gap:7px; font:600 14px/1 'Inter'; color:#5B4FE8; text-decoration:none;">‹ Période paie 15/06 — 19/07</a>
+    <div style="font:800 22px/1.2 'Inter'; color:#16162a; margin:14px 0 22px;">CINÉ HORIZON · BORDEAUX</div>
+
+    <div style="display:flex; align-items:center; gap:0; border:1px solid #e7e9f2; border-radius:12px; background:#fff; padding:15px 20px; margin-bottom:20px;">
+      <sc-for list="{{ stats }}" as="st" hint-placeholder-count="5">
+        <div style="{{ st.wrap }}"><span style="font-weight:800; color:{{ st.color }};">{{ st.n }}</span> <span style="font-weight:500; color:#6a6d82;">{{ st.label }}</span></div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <sc-for list="{{ weeks }}" as="w" hint-placeholder-count="5">
+        <div style="border:1px solid #e7e9f2; border-radius:14px; background:#fff; padding:18px 20px; box-shadow:0 6px 18px -14px rgba(22,22,42,.4);">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div style="display:flex; align-items:baseline; gap:10px;">
+              <span style="font:800 16px/1 'Inter'; color:#16162a;">{{ w.sem }}</span>
+              <span style="font:500 13px/1 'Inter'; color:#8a8da2;">{{ w.range }}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="font:700 11px/1 'Inter'; color:#4a4d61; background:#eceafd; border-radius:999px; padding:6px 12px;">En cours</span>
+              <span style="color:#c2c5d6; font-size:15px;">›</span>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:14px; margin:14px 0 12px;">
+            <div style="flex:1; height:7px; border-radius:999px; background:#edeef4; overflow:hidden;">
+              <div style="width:{{ w.pct }}; height:100%; background:#28c05a; border-radius:999px;"></div>
+            </div>
+            <span style="font:600 12px/1 'Inter'; color:#8a8da2; flex:none;">{{ w.count }}</span>
+          </div>
+          <div style="font:600 12.5px/1 'Inter'; color:#e08a1e;">{{ w.pending }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+   </div>
+  </div>
+ </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1040,&quot;height&quot;:600}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    const scope = () => this.el || document;
+    const fit = () => {
+      const box = scope().querySelector('.ts');
+      const inner = scope().querySelector('.ts-scale');
+      if (!box || !inner) return;
+      const w = box.clientWidth, h = box.clientHeight;
+      if (!w || !h) return;
+      const s = w / 1200;
+      inner.style.transform = 'scale(' + s + ')';
+      inner.style.height = (h / s) + 'px';
+    };
+    fit();
+    const box = scope().querySelector('.ts');
+    if (box && window.ResizeObserver) { this._ro = new ResizeObserver(fit); this._ro.observe(box); }
+    this._fit = fit; window.addEventListener('resize', fit);
+    requestAnimationFrame(fit); setTimeout(fit, 60);
+  }
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+    if (this._fit) window.removeEventListener('resize', this._fit);
+  }
+  renderVals() {
+    const sep = "padding:0 18px; font:500 13px/1 'Inter'; border-right:1px solid #edeef4;";
+    const last = "padding:0 18px; font:500 13px/1 'Inter';";
+    const stats = [
+      { n: '49', label: 'relevés', color: '#16162a' },
+      { n: '4', label: 'contresignés', color: '#1a8a5c' },
+      { n: '0', label: 'attestés', color: '#8a8da2' },
+      { n: '45', label: 'en attente', color: '#e08a1e' },
+      { n: '45', label: 'tacites', color: '#6a6d82' }
+    ].map((s, i, a) => Object.assign(s, { wrap: (i === a.length - 1 ? last : sep) + (i === 0 ? ' padding-left:0;' : '') }));
+
+    const weeks = [
+      { sem: 'Sem. 25', range: '15 juin — 21 juin', pct: '13%', count: '1/8', pending: '7 salariés n\u2019ont pas encore attesté' },
+      { sem: 'Sem. 26', range: '22 juin — 28 juin', pct: '0%', count: '0/11', pending: '11 salariés n\u2019ont pas encore attesté' },
+      { sem: 'Sem. 27', range: '29 juin — 5 juil.', pct: '0%', count: '0/10', pending: '10 salariés n\u2019ont pas encore attesté' },
+      { sem: 'Sem. 28', range: '6 juil. — 12 juil.', pct: '12%', count: '1/10', pending: '9 salariés n\u2019ont pas encore attesté' },
+      { sem: 'Sem. 29', range: '13 juil. — 19 juil.', pct: '22%', count: '2/10', pending: '8 salariés n\u2019ont pas encore attesté' }
+    ];
+    return { stats, weeks };
+  }
+}
+</script>
+</body>
+</html>

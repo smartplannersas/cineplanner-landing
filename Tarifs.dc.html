@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Tarifs — Ciné Planner</title>
+<meta name="description" content="Trois formules par établissement et par mois : Essentielle, RH et Sur Mesure. Comparez les fonctionnalités et démarrez votre essai gratuit de 14 jours.">
+<link rel="canonical" href="https://cineplanner.fr/tarifs">
+<link rel="icon" type="image/png" href="./assets/logo-mark.png">
+<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ciné Planner">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Tarifs — Ciné Planner">
+<meta property="og:description" content="Trois formules par établissement et par mois : Essentielle, RH et Sur Mesure. Comparez les fonctionnalités et démarrez votre essai gratuit de 14 jours.">
+<meta property="og:url" content="https://cineplanner.fr/tarifs">
+<meta property="og:image" content="https://cineplanner.fr/assets/og-cineplanner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tarifs — Ciné Planner">
+<meta name="twitter:description" content="Trois formules par établissement et par mois : Essentielle, RH et Sur Mesure. Comparez les fonctionnalités et démarrez votre essai gratuit de 14 jours.">
+<meta name="twitter:image" content="https://cineplanner.fr/assets/og-cineplanner.png">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#5B4FE8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #eef0f7; --accent:#5B4FE8; --accent-dark:#3d2fc4; --accent-soft:#ecebfd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-dark); }
+  .cpl-burger { display: none; }
+  @media (max-width: 960px) {
+    [style*="grid-template-columns: repeat(3, 1fr)"],
+    [style*="grid-template-columns: repeat(4, 1fr)"],
+    [style*="grid-template-columns: 1.1fr 1fr"],
+    [style*="grid-template-columns: 1.2fr 1fr"],
+    [style*="grid-template-columns: 0.9fr 1.1fr"],
+    [style*="grid-template-columns: 1fr 1fr"],
+    [style*="grid-template-columns: auto 1fr"] { grid-template-columns: 1fr !important; }
+    .cpl-scrollx { overflow-x: auto !important; }
+    [style*="grid-template-columns: 2.6fr 1fr 1fr 1fr"] { min-width: 560px; }
+    [style*="min-height: calc(100vh - 85px)"] { min-height: 0 !important; }
+    [style*="padding: 20px 48px"] { padding: 14px 20px !important; }
+    [style*="padding: 72px 48px"], [style*="padding: 76px 48px"] { padding: 48px 22px !important; }
+    [style*="padding: 84px 48px"] { padding: 56px 22px !important; }
+    [style*="padding: 72px 56px"], [style*="padding: 64px 56px"] { padding: 44px 24px !important; }
+    [style*="padding: 60px 56px"] { padding: 44px 24px !important; }
+    [style*="padding: 52px"] { padding: 32px 24px !important; }
+    .cpl-navlinks { display: none !important; }
+    .cpl-burger { display: flex !important; }
+    h1 { font-size: clamp(28px,7vw,40px) !important; }
+    h2 { font-size: clamp(24px,5.5vw,32px) !important; }
+  }
+  @media (max-width: 640px) { /* tarifs-extra */ h2 { font-size: clamp(24px,6vw,32px) !important; } }
+</style>
+</helmet>
+
+<div style="background:#fff;">
+  <!-- NAV -->
+  <dc-import name="SiteNav" active="tarifs" hint-size="100%,86px"></dc-import>
+  </div>
+
+  <!-- HERO TARIFS -->
+  <div style="text-align:center; padding:76px 48px 8px; background:linear-gradient(180deg,var(--accent-soft) 0%,#fbfbfe 70%,#fff 100%);">
+    <div style="font:700 13px/1 'Inter'; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">Tarifs</div>
+    <h1 style="font:800 clamp(34px,4vw,50px)/1.1 'Inter'; letter-spacing:-.02em; color:#16162a; margin:16px auto 0; max-width:760px;">Un tarif clair, par établissement et par mois</h1>
+    <p style="font:400 19px/1.6 'Inter'; color:#5c5c72; margin:20px auto 0; max-width:620px;">Engagement annuel, sans coût caché. Choisissez la taille de vos établissements pour voir le prix adapté.</p>
+    <div style="display:flex; justify-content:center; margin:34px 0 4px;">
+      <div style="display:flex; gap:6px; background:#fff; border:1px solid #e9e9f2; border-radius:12px; padding:6px;">
+        <button onClick="{{ setSmall }}" style="{{ smallBtnStyle }}">1 à 3 écrans</button>
+        <button onClick="{{ setMultiplex }}" style="{{ multiplexBtnStyle }}">4 écrans et + (multiplex)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANS -->
+  <div style="max-width:1160px; margin:0 auto; padding:40px 48px 20px;">
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:stretch;">
+      <!-- Essentielle -->
+      <div style="background:#fff; border:1px solid #e9e9f2; border-radius:22px; padding:36px; display:flex; flex-direction:column;">
+        <div style="font:800 20px/1 'Inter'; color:#16162a;">Essentielle</div>
+        <div style="font:400 15px/1.5 'Inter'; color:#7a7a92; margin-top:8px;">La RH conforme, du planning à l'export paie.</div>
+        <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#16162a;">{{ essentielPrice }}</span><span style="font:500 15px/1 'Inter'; color:#7a7a92;">€ / établ. / mois</span></div>
+        <a href="Essai%20gratuit.dc.html" style="margin-top:24px; text-align:center; border:1px solid #d8d8e6; color:#16162a; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Démarrer l'essai gratuit</a>
+        <div style="height:1px; background:#eef0f7; margin:28px 0;"></div>
+        <div style="display:flex; flex-direction:column; gap:13px;">
+          <sc-for list="{{ essentielFeatures }}" as="f" hint-placeholder-count="4">
+            <div style="display:flex; align-items:flex-start; gap:10px;"><span style="flex:none; color:#22a06b; font:800 15px/1.4 'Inter';">✓</span><span style="font:500 15px/1.45 'Inter'; color:#28283e;">{{ f }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <!-- RH (ancre) -->
+      <div style="position:relative; background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); border-radius:22px; padding:36px; display:flex; flex-direction:column; box-shadow:0 30px 60px -30px rgba(36,31,107,.7);">
+        <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; font:700 12px/1 'Inter'; letter-spacing:.06em; padding:8px 16px; border-radius:999px;">LE PLUS COMPLET</div>
+        <div style="font:800 20px/1 'Inter'; color:#fff;">RH</div>
+        <div style="font:400 15px/1.5 'Inter'; color:#b6b6c8; margin-top:8px;">Contrats, présence signée, tableaux de bord et pilotage groupe.</div>
+        <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#fff;">{{ groupePrice }}</span><span style="font:500 15px/1 'Inter'; color:#b6b6c8;">€ / établ. / mois</span></div>
+        <a href="Essai%20gratuit.dc.html" style="margin-top:24px; text-align:center; background:var(--accent); color:#fff; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Démarrer l'essai gratuit</a>
+        <div style="height:1px; background:#2c2c48; margin:28px 0;"></div>
+        <div style="font:600 13px/1 'Inter'; color:#8a8aa4; margin-bottom:14px;">Tout l'Essentielle, plus :</div>
+        <div style="display:flex; flex-direction:column; gap:13px;">
+          <sc-for list="{{ groupeFeatures }}" as="f" hint-placeholder-count="6">
+            <div style="display:flex; align-items:flex-start; gap:10px;"><span style="flex:none; color:#8b81f0; font:800 15px/1.4 'Inter';">✓</span><span style="font:500 15px/1.45 'Inter'; color:#e6e6f0;">{{ f }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+      <!-- Sur Mesure -->
+      <div style="background:#fff; border:1px solid #e9e9f2; border-radius:22px; padding:36px; display:flex; flex-direction:column;">
+        <div style="font:800 20px/1 'Inter'; color:#16162a;">Sur Mesure</div>
+        <div style="font:400 15px/1.5 'Inter'; color:#7a7a92; margin-top:8px;">Pour les grands réseaux aux besoins d'intégration spécifiques.</div>
+        <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 40px/1 'Inter'; color:#16162a;">Sur devis</span></div>
+        <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener" style="margin-top:24px; text-align:center; border:1px solid #d8d8e6; color:#16162a; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Parler à un expert</a>
+        <div style="height:1px; background:#eef0f7; margin:28px 0;"></div>
+        <div style="font:600 13px/1 'Inter'; color:#8a8aa4; margin-bottom:14px;">Toute la RH, plus :</div>
+        <div style="display:flex; flex-direction:column; gap:13px;">
+          <sc-for list="{{ surMesureFeatures }}" as="f" hint-placeholder-count="4">
+            <div style="display:flex; align-items:flex-start; gap:10px;"><span style="flex:none; color:#22a06b; font:800 15px/1.4 'Inter';">✓</span><span style="font:500 15px/1.45 'Inter'; color:#28283e;">{{ f }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center; font:400 14px/1.6 'Inter'; color:#8a8aa4; margin:22px auto 0; max-width:640px;">Tous les prix sont indiqués hors taxes, par établissement et par mois, avec engagement annuel.</p>
+  </div>
+
+  <!-- MATRICE -->
+  <div style="max-width:1160px; margin:0 auto; padding:44px 48px 20px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 30px;">
+      <h2 style="font:800 30px/1.18 'Inter'; letter-spacing:-.01em; color:#16162a; margin:0;">Comparer les formules en détail</h2>
+      <p style="font:400 17px/1.6 'Inter'; color:#5c5c72; margin:14px 0 0;">Ce que couvre réellement chaque plan, ligne par ligne.</p>
+    </div>
+    <div class="cpl-scrollx" style="border:1px solid #e9e9f2; border-radius:20px; overflow:hidden; box-shadow:0 20px 50px -34px rgba(22,22,42,.3);">
+      <div style="display:grid; grid-template-columns:2.6fr 1fr 1fr 1fr; background:#16162a; color:#fff;">
+        <div style="padding:18px 24px; font:700 14px/1.3 'Inter';">Fonctionnalité</div>
+        <div style="padding:18px 12px; font:700 14px/1.3 'Inter'; text-align:center;">Essentielle</div>
+        <div style="padding:18px 12px; font:700 14px/1.3 'Inter'; text-align:center; background:var(--accent);">RH</div>
+        <div style="padding:18px 12px; font:700 14px/1.3 'Inter'; text-align:center;">Sur Mesure</div>
+      </div>
+      <sc-for list="{{ matrix }}" as="row" hint-placeholder-count="12">
+        <div style="display:grid; grid-template-columns:2.6fr 1fr 1fr 1fr; border-top:1px solid #eef0f7; background:{{ row.bg }};">
+          <div style="padding:15px 24px; font:500 15px/1.4 'Inter'; color:#28283e;">{{ row.feature }}</div>
+          <div style="padding:15px 12px; text-align:center; font:800 17px/1 'Inter'; color:{{ row.eColor }};">{{ row.eSym }}</div>
+          <div style="padding:15px 12px; text-align:center; font:800 17px/1 'Inter'; color:{{ row.gColor }}; background:#f6f5ff;">{{ row.gSym }}</div>
+          <div style="padding:15px 12px; text-align:center; font:800 17px/1 'Inter'; color:{{ row.sColor }};">{{ row.sSym }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <p style="font:400 13px/1.6 'Inter'; color:#8a8aa4; margin:16px 0 0; max-width:760px;">La signature électronique repose sur Yousign et le stockage documentaire sur Dropbox ; leur activation est configurée lors de l'onboarding.</p>
+  </div>
+
+  <!-- FAQ TARIFS -->
+  <div style="background:#f5f6fc; padding:76px 48px; margin-top:44px;">
+    <div style="text-align:center; max-width:680px; margin:0 auto 36px;">
+      <h2 style="font:800 34px/1.14 'Inter'; letter-spacing:-.015em; color:#16162a; margin:0;">Questions sur les tarifs</h2>
+    </div>
+    <div style="max-width:820px; margin:0 auto; display:flex; flex-direction:column; gap:12px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+        <div style="background:#fff; border:1px solid #e9e9f2; border-radius:14px; overflow:hidden;">
+          <button onClick="{{ f.toggle }}" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:22px 24px; display:flex; justify-content:space-between; align-items:center; gap:16px; font:700 17px/1.4 'Inter'; color:#16162a;">{{ f.q }}<span style="flex:none; color:var(--accent); font:400 24px/1 'Inter';">{{ f.sign }}</span></button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 24px 24px; font:400 16px/1.65 'Inter'; color:#5c5c72;">{{ f.a }}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="margin:76px 48px; background:linear-gradient(150deg,var(--accent),var(--accent-dark)); border-radius:26px; padding:60px 56px; text-align:center; color:#fff; box-shadow:0 40px 80px -44px rgba(61,47,196,.7);">
+    <h2 style="font:800 36px/1.12 'Inter'; letter-spacing:-.015em; margin:0;">Pas sûr de la formule ? Essayez gratuitement.</h2>
+    <p style="font:400 18px/1.6 'Inter'; color:#e0dcff; margin:16px auto 0; max-width:540px;">14 jours d'essai, sans carte bancaire, avec accompagnement pour trouver la formule adaptée à votre cinéma.</p>
+    <div style="display:flex; gap:14px; justify-content:center; margin-top:30px;">
+      <a href="Essai%20gratuit.dc.html" style="background:#fff; color:var(--accent-dark); font:700 16px/1 'Inter'; padding:17px 30px; border-radius:12px;">Démarrer l'essai gratuit</a>
+      <a href="Abonnement.dc.html" style="border:1px solid rgba(255,255,255,.5); color:#fff; font:700 16px/1 'Inter'; padding:17px 26px; border-radius:12px;">Souscrire en ligne</a>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span>
+    <span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="Mentions%20legales.dc.html" style="color:#7a7a92;">Mentions légales</a><a href="Confidentialite.dc.html" style="color:#7a7a92;">Confidentialité</a><a href="CGU.dc.html" style="color:#7a7a92;">CGU</a></span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { size: 'small', openFaq: 0, navOpen: false };
+  renderVals() {
+    const small = this.state.size === 'small';
+    const segActive = "font:600 15px/1 'Inter'; border:none; cursor:pointer; padding:11px 18px; border-radius:8px; background:var(--accent); color:#fff;";
+    const segIdle = "font:600 15px/1 'Inter'; border:none; cursor:pointer; padding:11px 18px; border-radius:8px; background:transparent; color:#7a7a92;";
+
+    const matrixRaw = [
+      ['Modèles de planning réutilisables + duplication', 1, 1, 1],
+      ['Réaffectation en masse de shifts', 1, 1, 1],
+      ['Détection automatique des chevauchements de shifts', 1, 1, 1],
+      ['Partage de planning par lien externe', 1, 1, 1],
+      ['Impression PDF du planning', 1, 1, 1],
+      ['Notifications planning temps réel (in-app + email)', 1, 1, 1],
+      ['Calcul auto heures sup/complémentaires + heures de nuit', 1, 1, 1],
+      ['Gestion des jours fériés (majoration réglementaire)', 1, 1, 1],
+      ['Retards de shift (pointage a posteriori)', 1, 1, 1],
+      ['Rôle lecture seule paie / assistant', 0, 1, 1],
+      ['Annualisation du temps de travail', 0, 1, 1],
+      ['Arrondi de paie paramétrable', 0, 1, 1],
+      ['Checklist pré-embauche (DPAE, RIB, pièce identité…)', 0, 1, 1],
+      ['Circuit d’approbation des contrats configurable', 0, 1, 1],
+      ['Avenants avec calcul automatique du delta d’heures', 0, 1, 1],
+      ['Contresignature en masse des feuilles de présence', 0, 1, 1],
+      ['Piste d’audit légale immuable (art. L3171-2/L3171-3)', 0, 1, 1],
+      ['Alerte automatique shift sans contrat signé', 0, 1, 1],
+      ['Alerte période de paie manquante', 0, 1, 1],
+      ['Support prioritaire', 0, 1, 1],
+      ['Synchronisation avec votre logiciel de programmation', 0, 0, 1],
+      ['Stockage de documents chez le prestataire de votre choix', 0, 0, 1],
+      ['Personnalisation groupe (templates, règles, alertes par site)', 0, 0, 1],
+      ['Onboarding et formation des équipes', 0, 0, 1],
+      ['API & intégrations (paie, logiciels métier)', 0, 0, 1],
+      ['Import & migration de vos données cinéma', 0, 0, 1],
+      ['Développements de fonctionnalités dédiés', 0, 0, 1]
+    ];
+    const sym = v => (v ? '\u2713' : '\u2013');
+    const col = v => (v ? '#22a06b' : '#c9c9d6');
+    const matrix = matrixRaw.map((r, i) => ({
+      feature: r[0], bg: i % 2 ? '#fafaff' : '#ffffff',
+      eSym: sym(r[1]), eColor: col(r[1]),
+      gSym: sym(r[2]), gColor: col(r[2]),
+      sSym: sym(r[3]), sColor: col(r[3])
+    }));
+
+    const faqRaw = [
+      ['Combien coûte un logiciel de planning pour un cinéma ?', "Ciné Planner démarre à 49 € par établissement et par mois pour un cinéma de 1 à 3 écrans, et 89 € pour un multiplex de 4 écrans et plus. Le tarif est par établissement, quel que soit le nombre de salariés : vous payez pour vos cinémas, pas par tête."],
+      ['Quelle est la différence entre un logiciel de planning et un logiciel RH pour cinéma (convention collective, primes de panier) ?', "Un logiciel de planning se limite à placer des shifts. Ciné Planner couvre toute la chaîne RH du cinéma : planning conforme, contrats, feuilles de présence signées, compteurs de congés et export paie. C'est ce qui évite les erreurs de paie et sécurise vos obligations d'employeur."],
+      ['Ciné Planner respecte-t-il la convention collective de l\u2019exploitation cinématographique ?', "Oui. Les règles de la CCN de l'exploitation cinématographique (IDCC 1307) sont intégrées nativement : heures de nuit, durée maximale de shift, repos, heures hebdomadaires, primes de panier repas et panier soir. Toute infraction est signalée avant validation du planning."],
+      ['Le logiciel gère-t-il plusieurs cinémas ou un réseau d’établissements ?', "Oui, dès la formule Essentielle. Vous pilotez plusieurs établissements depuis une vue consolidée, tout en laissant à chaque site son autonomie sur son planning. Les réseaux passent en formule Sur Mesure pour la personnalisation par site."],
+      ['Comment fonctionne l’export paie vers mon cabinet comptable ?', "Vos plannings validés deviennent des éléments de paie : export au jour, au mois ou sur une période personnalisée, avec heures supplémentaires, complémentaires, majorations et primes de panier déjà calculées. Vous transmettez le fichier à votre cabinet, sans une seule ressaisie."],
+      ['Mes salariés peuvent-ils consulter leur planning en ligne ?', "Oui, via l'Espace équipe : chaque salarié consulte son planning à jour depuis son téléphone ou son ordinateur, pose ses congés, demande une rectification d'horaire et signe ses feuilles de présence."],
+      ['Y a-t-il un engagement ?', "Les tarifs affichés supposent un engagement annuel. L'essai, lui, dure 14 jours sans carte bancaire : à l'issue, vous choisissez librement de continuer, sans facturation automatique."],
+      ['Combien de temps faut-il pour déployer Ciné Planner dans mon cinéma ?', "Votre compte d'essai est prêt sous 24 h ouvrées : un expert le paramètre à vos établissements et à la convention collective, puis vous accompagne sur vos premiers plannings et votre premier export paie."]
+    ];
+    const faqs = faqRaw.map((f, i) => ({
+      q: f[0], a: f[1], open: i === this.state.openFaq,
+      sign: i === this.state.openFaq ? '\u2212' : '+',
+      toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? null : i }))
+    }));
+
+    return {
+      matrix, faqs,
+      navOpen: this.state.navOpen,
+      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen })),
+      essentielPrice: small ? '49' : '89',
+      groupePrice: small ? '95' : '149',
+      setSmall: () => this.setState({ size: 'small' }),
+      setMultiplex: () => this.setState({ size: 'multiplex' }),
+      smallBtnStyle: small ? segActive : segIdle,
+      multiplexBtnStyle: small ? segIdle : segActive,
+      essentielFeatures: [
+        'Planning multi-établissements avec autonomie par site',
+        'Alertes convention collective cinéma (IDCC 1307)',
+        'Export paie automatisé, dont primes de paniers',
+        'Espace équipe : consultation du planning par les salariés'
+      ],
+      groupeFeatures: [
+        'Module contrats : CDD, CDI, avenants avec variables dynamiques',
+        'Signature électronique des contrats',
+        'Feuilles de présence signées des salariés',
+        'Demandes de congés et de rectification d’horaires par les salariés',
+        'Compteur de congés restants',
+        'Support prioritaire'
+      ],
+      surMesureFeatures: [
+        'Synchronisation avec votre logiciel de programmation : les horaires de début et de fin de séance alimentent directement le planning',
+        'Stockage de documents chez le prestataire de votre choix',
+        'Personnalisation groupe : templates, règles de calcul, alertes par site',
+        'Onboarding et formation des équipes',
+        'API & intégrations sur mesure : connexion à votre outil de paie (Silae, Sage, Cegid…) et à vos logiciels métier',
+        'Import & migration de vos données cinéma',
+        'Développements de fonctionnalités dédiés',
+        'Accompagnement et paramétrage dédiés'
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

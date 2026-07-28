@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .snav-burger { display: none; }
+  @media (max-width: 960px) {
+    .snav-links { display: none !important; }
+    .snav-burger { display: flex !important; }
+  }
+</style>
+</helmet>
+<div style="font-family:'Inter',system-ui,sans-serif;">
+  <div style="position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:16px 40px; background:rgba(255,255,255,.97); border-bottom:1px solid #eef0f7;">
+    <a href="Cine%20Planner%20Landing.dc.html" style="display:flex; align-items:center; gap:10px; text-decoration:none;"><img src="./assets/logo-full.png" alt="Ciné Planner" style="height:46px; width:auto; display:block;"></a>
+
+    <div class="snav-links" style="display:flex; align-items:center; gap:30px; font:600 15px/1 'Inter'; color:#3a3a52;">
+      <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;">
+        <a href="Cine%20Planner%20Landing.dc.html#feat" style="{{ featStyle }}">Fonctionnalités <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+          <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:fixed; top:74px; left:50%; transform:translateX(-50%); width:860px; max-width:calc(100vw - 32px); background:#fff; border:1px solid #eef0f7; border-radius:24px; box-shadow:0 40px 90px -30px rgba(22,22,42,.55); overflow:hidden; z-index:40;">
+            <div style="display:grid; grid-template-columns:1fr 1fr 0.86fr;">
+              <div style="grid-column:1 / 3; padding:22px 28px 0;">
+                <div style="font:800 17px/1.2 'Inter'; letter-spacing:-.01em; color:#16162a;">Une plateforme RH, du planning à la paie</div>
+                <div style="font:400 13px/1.4 'Inter'; color:#8a8aa4; margin-top:5px;">6 modules connectés, pensés pour l'exploitation cinématographique.</div>
+              </div>
+              <div style="grid-column:1 / 3; padding:16px 20px 22px; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <sc-for list="{{ menuItems }}" as="it" hint-placeholder-count="6">
+                  <a href="{{ it.href }}" style="display:flex; gap:13px; padding:13px; border:1px solid transparent; border-radius:14px; align-items:flex-start; text-decoration:none; transition:border-color .12s, background .12s;" style-hover="background:#faf9ff; border-color:#e6e3fb;">
+                    <span style="flex:none; width:40px; height:40px; border-radius:11px; background:#ece9ff; color:#5B4FE8; display:flex; align-items:center; justify-content:center;">{{ it.icon }}</span>
+                    <span>
+                      <span style="display:block; font:700 14px/1.2 'Inter'; color:#16162a;">{{ it.label }}</span>
+                      <span style="display:block; font:400 12px/1.45 'Inter'; color:#7a7a92; margin-top:3px;">{{ it.desc }}</span>
+                    </span>
+                  </a>
+                </sc-for>
+              </div>
+              <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 62%); padding:26px; display:flex; flex-direction:column; color:#fff;">
+                <span style="align-self:flex-start; background:rgba(255,255,255,.18); color:#fff; font:700 10px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; padding:6px 11px; border-radius:999px;">Conforme CCN cinéma</span>
+                <div style="font:800 19px/1.25 'Inter'; margin-top:16px;">Testez la RH conforme de votre cinéma</div>
+                <div style="font:400 13px/1.55 'Inter'; color:#e0dcff; margin-top:9px;">14 jours d'essai, sans carte bancaire, avec accompagnement.</div>
+                <div style="margin-top:auto; display:flex; flex-direction:column; gap:9px; padding-top:22px;">
+                  <a href="Essai%20gratuit.dc.html" style="background:#fff; color:#3d2fc4; font:700 13px/1 'Inter'; padding:12px 14px; border-radius:11px; text-align:center; text-decoration:none;">Démarrer l'essai gratuit</a>
+                  <a href="Tarifs.dc.html" style="color:#fff; font:700 13px/1 'Inter'; padding:4px; text-align:center; opacity:.9; text-decoration:none;">Voir les tarifs →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <a href="Tarifs.dc.html" style="{{ tarifsStyle }}">Tarifs</a>
+
+      <a href="Abonnement.dc.html" style="{{ aboStyle }}">Abonnement</a>
+
+      <div onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:relative;">
+        <a href="Cine%20Planner%20Landing.dc.html#temoignages" style="{{ resStyle }}">Ressources <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
+        <sc-if value="{{ resOpen }}" hint-placeholder-val="{{ false }}">
+          <div onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:absolute; top:calc(100% + 20px); left:50%; transform:translateX(-50%); width:280px; background:#fff; border:1px solid #eef0f7; border-radius:16px; box-shadow:0 30px 70px -28px rgba(22,22,42,.5); padding:10px; z-index:40;">
+            <a href="Cine%20Planner%20Landing.dc.html#temoignages" style="display:flex; gap:12px; padding:12px; border-radius:12px; align-items:flex-start; text-decoration:none;" style-hover="background:#ece9ff;">
+              <span style="flex:none; width:34px; height:34px; border-radius:10px; background:#ece9ff; color:#5B4FE8; display:flex; align-items:center; justify-content:center;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
+              <span><span style="display:block; font:700 14px/1.2 'Inter'; color:#16162a;">Témoignages</span><span style="display:block; font:400 12px/1.4 'Inter'; color:#7a7a92; margin-top:3px;">Ce que disent nos cinémas clients</span></span>
+            </a>
+            <a href="Blog.dc.html" style="display:flex; gap:12px; padding:12px; border-radius:12px; align-items:flex-start; text-decoration:none;" style-hover="background:#ece9ff;">
+              <span style="flex:none; width:34px; height:34px; border-radius:10px; background:#ece9ff; color:#5B4FE8; display:flex; align-items:center; justify-content:center;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
+              <span><span style="display:block; font:700 14px/1.2 'Inter'; color:#16162a;">Blog</span><span style="display:block; font:400 12px/1.4 'Inter'; color:#7a7a92; margin-top:3px;">Conseils RH & conformité pour l'exploitation</span></span>
+            </a>
+          </div>
+        </sc-if>
+      </div>
+
+      <a href="https://app.cineplanner.fr" style="color:#5B4FE8; text-decoration:none;">Connexion</a>
+      <a href="Essai%20gratuit.dc.html" style="background:#5B4FE8; color:#fff; padding:11px 18px; border-radius:12px; text-decoration:none;">Essai gratuit</a>
+    </div>
+
+    <button class="snav-burger" onClick="{{ toggleNav }}" style="width:44px; height:44px; border:1px solid #e4e4ef; border-radius:12px; background:#fff; cursor:pointer; align-items:center; justify-content:center;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16162a" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+    </button>
+  </div>
+
+  <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:sticky; top:78px; z-index:29; background:#fff; border-bottom:1px solid #eef0f7; padding:12px 20px 18px; display:flex; flex-direction:column; gap:4px; box-shadow:0 20px 40px -28px rgba(22,22,42,.4);">
+      <a href="Cine%20Planner%20Landing.dc.html#feat" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Fonctionnalités</a>
+      <a href="Tarifs.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Tarifs</a>
+      <a href="Abonnement.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Abonnement</a>
+      <a href="Cine%20Planner%20Landing.dc.html#temoignages" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Témoignages</a>
+      <a href="Blog.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Blog</a>
+      <a href="https://app.cineplanner.fr" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#5B4FE8; text-decoration:none;">Connexion</a>
+      <a href="Essai%20gratuit.dc.html" style="margin-top:6px; text-align:center; background:#5B4FE8; color:#fff; padding:14px; border-radius:12px; font:700 15px/1 'Inter'; text-decoration:none;">Essai gratuit</a>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, resOpen: false, navOpen: false };
+  renderVals() {
+    const _h = React.createElement;
+    const _svg = (...ch) => _h('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round' }, ...ch);
+    const icons = {
+      planif: _svg(_h('rect', { x: 3, y: 4, width: 18, height: 17, rx: 2, key: 'a' }), _h('line', { x1: 3, y1: 9, x2: 21, y2: 9, key: 'b' }), _h('line', { x1: 8, y1: 2, x2: 8, y2: 6, key: 'c' }), _h('line', { x1: 16, y1: 2, x2: 16, y2: 6, key: 'd' })),
+      temps: _svg(_h('circle', { cx: 12, cy: 12, r: 9, key: 'a' }), _h('polyline', { points: '12 7 12 12 15 14', key: 'b' })),
+      contrats: _svg(_h('rect', { x: 5, y: 3, width: 14, height: 18, rx: 2, key: 'a' }), _h('line', { x1: 9, y1: 8, x2: 15, y2: 8, key: 'b' }), _h('line', { x1: 9, y1: 12, x2: 15, y2: 12, key: 'c' }), _h('line', { x1: 9, y1: 16, x2: 13, y2: 16, key: 'd' })),
+      paie: _svg(_h('rect', { x: 2, y: 6, width: 20, height: 12, rx: 2, key: 'a' }), _h('circle', { cx: 12, cy: 12, r: 2.5, key: 'b' })),
+      portail: _svg(_h('rect', { x: 7, y: 2, width: 10, height: 20, rx: 2.5, key: 'a' }), _h('line', { x1: 10.5, y1: 18, x2: 13.5, y2: 18, key: 'c' })),
+      documents: _svg(_h('rect', { x: 4, y: 10, width: 16, height: 11, rx: 2, key: 'a' }), _h('path', { d: 'M8 10V7a4 4 0 0 1 8 0v3', key: 'b' }))
+    };
+    const defs = {
+      planif: ['Planification', 'Plannings conformes à la CCN, en un clic', 'Feature%20-%20Planification.dc.html'],
+      temps: ['Suivi des temps', 'Heures réelles et présence signée', 'Feature%20-%20Temps.dc.html'],
+      portail: ['Espace équipe', 'L’espace en ligne de toute l’équipe', 'Feature%20-%20Portail.dc.html'],
+      contrats: ['Contrats', 'CDD, CDI, avenants signés en ligne', 'Feature%20-%20Contrats.dc.html'],
+      paie: ['Export paie', 'Vos éléments de paie prêts sans ressaisie', 'Feature%20-%20Paie.dc.html'],
+      documents: ['Coffre-fort RH', 'Toutes vos pièces salariés au même endroit', 'Feature%20-%20Documents.dc.html']
+    };
+    const menuItems = ['planif', 'temps', 'portail', 'contrats', 'paie', 'documents'].map(k => ({ label: defs[k][0], desc: defs[k][1], href: defs[k][2], icon: icons[k] }));
+    const active = this.props.active || '';
+    const base = 'color:#3a3a52; display:inline-flex; align-items:center; gap:6px; text-decoration:none;';
+    const on = 'color:#5B4FE8; display:inline-flex; align-items:center; gap:6px; text-decoration:none;';
+    return {
+      menuItems,
+      menuOpen: this.state.menuOpen,
+      resOpen: this.state.resOpen,
+      navOpen: this.state.navOpen,
+      featStyle: active === 'feat' ? on : base,
+      tarifsStyle: active === 'tarifs' ? 'color:#5B4FE8; text-decoration:none;' : 'color:#3a3a52; text-decoration:none;',
+      aboStyle: active === 'abonnement' ? 'color:#5B4FE8; text-decoration:none;' : 'color:#3a3a52; text-decoration:none;',
+      resStyle: (active === 'blog' || active === 'temoignages') ? on : base,
+      openMenu: () => { clearTimeout(this._mt); this.setState({ menuOpen: true, resOpen: false }); },
+      closeMenu: () => { clearTimeout(this._mt); this._mt = setTimeout(() => this.setState({ menuOpen: false }), 140); },
+      openRes: () => { clearTimeout(this._rt); this.setState({ resOpen: true, menuOpen: false }); },
+      closeRes: () => { clearTimeout(this._rt); this._rt = setTimeout(() => this.setState({ resOpen: false }), 160); },
+      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen }))
+    };
+  }
+}
+</script>
+</body>
+</html>

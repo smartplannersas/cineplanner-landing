@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .cg * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+</style>
+</helmet>
+<div class="cg" style="width:100%; height:100%; overflow:hidden; background:#fff;">
+ <div class="cg-scale" style="width:1200px; height:760px; transform-origin:top left; background:#fbfbfe; display:flex; flex-direction:column;">
+  <div style="flex:1; min-height:0; overflow:hidden; padding:30px 34px; display:flex; flex-direction:column;">
+
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:18px;">
+      <div>
+        <div style="font:800 21px/1.2 'Inter'; color:#16162a;">Compteurs de congés payés</div>
+        <div style="font:500 13px/1 'Inter'; color:#8a8da2; margin-top:6px;">CINÉ HORIZON · BORDEAUX — Période 01/06/2025 → 31/05/2026</div>
+      </div>
+      <span style="font:600 12px/1 'Inter'; color:#5B4FE8; background:#eceafd; border-radius:8px; padding:9px 13px;">⤓ Exporter</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:18px;">
+      <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+        <div style="background:#fff; border:1px solid #e7e9f2; border-radius:13px; padding:15px 17px;">
+          <div style="font:600 11.5px/1 'Inter'; letter-spacing:.04em; text-transform:uppercase; color:#9a9db2;">{{ k.label }}</div>
+          <div style="font:800 25px/1 'Inter'; color:{{ k.color }}; margin-top:10px;">{{ k.value }}</div>
+          <div style="font:500 11.5px/1 'Inter'; color:#8a8da2; margin-top:6px;">{{ k.sub }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="flex:1; min-height:0; background:#fff; border:1px solid #e7e9f2; border-radius:14px; overflow:hidden; display:flex; flex-direction:column;">
+      <div style="flex:none; display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1.3fr; background:#f6f7fb; border-bottom:1px solid #eceef4; padding:12px 20px; font:700 11px/1 'Inter'; letter-spacing:.05em; text-transform:uppercase; color:#8a8da2;">
+        <span>Salarié</span><span style="text-align:center;">Acquis</span><span style="text-align:center;">Pris</span><span style="text-align:center;">En cours</span><span style="text-align:right;">Solde</span>
+      </div>
+      <div style="flex:1; min-height:0; display:flex; flex-direction:column;">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+          <div style="flex:1; min-height:0; display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1.3fr; align-items:center; padding:0 20px; border-bottom:1px solid #f2f3f8;">
+            <div style="display:flex; align-items:center; gap:11px;">
+              <span style="{{ r.avatar }}">{{ r.ini }}</span>
+              <div><div style="font:700 13px/1.2 'Inter'; color:#1c1f2e;">{{ r.name }}</div><div style="font:500 11px/1 'Inter'; color:#9a9db2; margin-top:3px;">{{ r.role }}</div></div>
+            </div>
+            <div style="text-align:center; font:600 13px/1 'Inter'; color:#4a4d61;">{{ r.acquis }}</div>
+            <div style="text-align:center; font:600 13px/1 'Inter'; color:#4a4d61;">{{ r.pris }}</div>
+            <div style="text-align:center; font:600 13px/1 'Inter'; color:#e08a1e;">{{ r.cours }}</div>
+            <div style="display:flex; align-items:center; justify-content:flex-end; gap:10px;">
+              <div style="width:74px; height:6px; border-radius:999px; background:#edeef4; overflow:hidden;"><div style="width:{{ r.pct }}; height:100%; background:{{ r.barColor }}; border-radius:999px;"></div></div>
+              <span style="{{ r.soldeStyle }}">{{ r.solde }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+ </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1040,&quot;height&quot;:600}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    const scope = () => this.el || document;
+    const fit = () => {
+      const box = scope().querySelector('.cg');
+      const inner = scope().querySelector('.cg-scale');
+      if (!box || !inner) return;
+      const w = box.clientWidth, h = box.clientHeight;
+      if (!w || !h) return;
+      const s = w / 1200;
+      inner.style.transform = 'scale(' + s + ')';
+      inner.style.height = (h / s) + 'px';
+    };
+    fit();
+    const box = scope().querySelector('.cg');
+    if (box && window.ResizeObserver) { this._ro = new ResizeObserver(fit); this._ro.observe(box); }
+    this._fit = fit; window.addEventListener('resize', fit);
+    requestAnimationFrame(fit); setTimeout(fit, 60);
+  }
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+    if (this._fit) window.removeEventListener('resize', this._fit);
+  }
+  renderVals() {
+    const kpis = [
+      { label: 'Salariés suivis', value: '32', sub: 'Effectif actif', color: '#16162a' },
+      { label: 'Jours acquis', value: '812,5', sub: 'Cumul équipe', color: '#16162a' },
+      { label: 'Jours pris', value: '486', sub: '59,8 % consommés', color: '#1a8a5c' },
+      { label: 'Solde à poser', value: '326,5', sub: 'Avant le 31/05', color: '#e08a1e' }
+    ];
+    const av = ['#e9e0ff','#d9e8ff','#ffe6c2','#cdeee7','#ffdfe8','#e8f6cc'];
+    const avc = ['#432f82','#1f3f77','#8a5510','#0d5548','#7a1e3d','#405812'];
+    const data = [
+      ['Camille Renard','Direction',30,18.5,2,'9.5'],
+      ['Léo Mercier','Caisse',27,21,0,'6'],
+      ['Lucie Bonnet','Agent d\u2019accueil',30,12,5,'13'],
+      ['Paul Girard','Projection',25,24,1,'0'],
+      ['Adrien Bollé','Agent de fermeture',28.5,15,3,'10.5'],
+      ['Eliott Rey','Coffee',24,9,0,'15'],
+      ['Sarah Dubois','Caisse',30,27.5,2,'0.5'],
+      ['Jeanne Morel','Agent d\u2019entretien',26,20,0,'6']
+    ];
+    const rows = data.map((d, i) => {
+      const acquis = d[2], pris = d[3], cours = d[4];
+      const soldeNum = parseFloat(d[5]);
+      const pct = Math.max(0, Math.min(100, (pris / acquis) * 100)).toFixed(0) + '%';
+      const ini = d[0].split(' ').map(x => x[0]).join('');
+      const low = soldeNum <= 1;
+      const high = soldeNum >= 12;
+      const soldeColor = low ? '#c0522a' : high ? '#e08a1e' : '#1a8a5c';
+      const soldeBg = low ? 'rgba(192,82,42,.12)' : high ? 'rgba(224,138,30,.14)' : 'rgba(26,138,92,.12)';
+      return {
+        name: d[0], role: d[1], acquis: acquis.toString().replace('.', ','),
+        pris: pris.toString().replace('.', ','), cours: cours ? '+' + cours : '—',
+        solde: d[5].replace('.', ',') + ' j', pct, barColor: high ? '#e08a1e' : '#28c05a',
+        ini, avatar: `width:32px; height:32px; flex:none; border-radius:50%; background:${av[i % av.length]}; color:${avc[i % avc.length]}; display:flex; align-items:center; justify-content:center; font:800 11px/1 'Inter';`,
+        soldeStyle: `min-width:52px; text-align:center; font:800 12px/1 'Inter'; color:${soldeColor}; background:${soldeBg}; border-radius:999px; padding:5px 9px;`
+      };
+    });
+    return { kpis, rows };
+  }
+}
+</script>
+</body>
+</html>

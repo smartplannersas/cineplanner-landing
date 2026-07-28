@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  .dm * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+</style>
+</helmet>
+<div class="dm" style="width:100%; height:100%; overflow:hidden; background:#fff;">
+ <div class="dm-scale" style="width:1400px; height:860px; transform-origin:top left; background:#fbfbfe; display:flex; flex-direction:column;">
+
+  <!-- top bar -->
+  <div style="flex:none; height:56px; background:#232637; display:flex; align-items:center; justify-content:space-between; padding:0 24px;">
+    <div style="display:flex; align-items:center; gap:34px;">
+      <img src="./assets/logo-full-white.png" alt="CinéPlanner" style="height:30px; width:auto; display:block;">
+
+      <div style="display:flex; align-items:center; gap:8px; font:600 13px/1 'Inter';">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6"><span style="{{ t.style }}">{{ t.label }}</span></sc-for>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px;"><span style="font:700 13px/1 'Inter'; color:#eceef6;">CINÉ HORIZON · BORDEAUX</span><span style="color:#b9bcce;">🔔</span><div style="width:30px; height:30px; border-radius:50%; background:linear-gradient(150deg,#6f63ff,#4536c9); display:flex; align-items:center; justify-content:center; color:#fff; font:700 11px/1 'Inter';">RH</div></div>
+  </div>
+
+  <div style="flex:1; min-height:0; display:flex;">
+    <!-- sub nav -->
+    <div style="width:230px; flex:none; background:#fff; border-right:1px solid #e7e9f2; padding:18px 14px; display:flex; flex-direction:column; gap:6px;">
+      <div onClick="{{ pickRectif }}" style="{{ navRectif }}">🕘 &nbsp;Rectification d'horaire</div>
+      <div onClick="{{ pickAbs }}" style="{{ navAbs }}">⊘ &nbsp;Absences</div>
+    </div>
+
+    <!-- content -->
+    <div style="flex:1; min-width:0; overflow:hidden; padding:26px 30px;">
+      <div style="{{ gridStyle }}">
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="4">
+          <div style="border:1px solid #e7e9f2; border-radius:14px; background:#fff; padding:18px 20px; box-shadow:0 6px 18px -14px rgba(22,22,42,.35);">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+              <span style="{{ c.badgeStyle }}">{{ c.status }}</span>
+              <div style="text-align:right; font:500 10.5px/1.5 'Inter'; color:#9a9db2;">{{ c.sent }}<br>{{ c.decided }}</div>
+            </div>
+            <div style="font:800 15px/1.2 'Inter'; color:#16162a; margin:13px 0 12px;">{{ c.name }}</div>
+            <div style="font:700 12px/1 'Inter'; color:#4a4d61; margin-bottom:8px;">{{ c.blockTitle }}</div>
+            <div style="background:#f4f5fb; border-radius:9px; padding:12px 14px; font:500 12.5px/1.7 'Inter'; color:#3a3d51;">
+              <sc-if value="{{ c.hasDate }}" hint-placeholder-val="{{ true }}"><div style="font-weight:700; color:#16162a; margin-bottom:4px;">{{ c.date }}</div></sc-if>
+              <div style="display:flex; justify-content:space-between;"><span style="color:#8a8da2;">Début</span><span>{{ c.debut }}</span></div>
+              <div style="display:flex; justify-content:space-between;"><span style="color:#8a8da2;">Fin</span><span innerHTML="{{ c.fin }}"></span></div>
+            </div>
+            <div style="font:700 12px/1 'Inter'; color:#4a4d61; margin:14px 0 8px;">{{ c.commentTitle }}</div>
+            <div style="background:#f4f5fb; border-radius:9px; padding:11px 14px; font:500 12px/1.6 'Inter'; color:#3a3d51;">{{ c.comment }}</div>
+            <sc-if value="{{ c.hasRefus }}" hint-placeholder-val="{{ false }}">
+              <div style="font:700 12px/1 'Inter'; color:#4a4d61; margin:14px 0 8px;">Motif de refus</div>
+              <div style="background:#fdeeee; border-radius:9px; padding:11px 14px; font:500 12px/1.5 'Inter'; color:#c0392a;">{{ c.refus }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+ </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:620},&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;rectif&quot;,&quot;abs&quot;],&quot;default&quot;:&quot;rectif&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { tab: this.props.view === 'abs' ? 'abs' : 'rectif' };
+  componentDidMount() {
+    const scope = () => this.el || document;
+    const fit = () => {
+      const box = scope().querySelector('.dm'), inner = scope().querySelector('.dm-scale');
+      if (!box || !inner) return;
+      const w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+      const s = w / 1400; inner.style.transform = 'scale(' + s + ')'; inner.style.height = (h / s) + 'px';
+    };
+    fit(); const box = scope().querySelector('.dm');
+    if (box && window.ResizeObserver) { this._ro = new ResizeObserver(fit); this._ro.observe(box); }
+    this._fit = fit; window.addEventListener('resize', fit); requestAnimationFrame(fit); setTimeout(fit, 60);
+  }
+  componentWillUnmount() { if (this._ro) this._ro.disconnect(); if (this._fit) window.removeEventListener('resize', this._fit); }
+  renderVals() {
+    const tab = this.state.tab;
+    const tabLabels = ['Planning','Équipe','Demandes','Présences','Contrats','Paramètres'];
+    const tabs = tabLabels.map(l => ({ label: l, style: l === 'Demandes' ? "background:#5B4FE8; color:#fff; padding:7px 12px; border-radius:8px;" : "color:#c7c9d8; padding:7px 5px;" }));
+    const navOn = "font:700 13px/1 'Inter'; color:#16162a; background:#eef0fb; border-radius:9px; padding:12px 13px; cursor:pointer;";
+    const navOff = "font:600 13px/1 'Inter'; color:#6a6d82; padding:12px 13px; border-radius:9px; cursor:pointer;";
+    const badge = (s) => s === 'Refusé'
+      ? "font:700 10.5px/1 'Inter'; color:#c0392a; background:#fbe3e0; border-radius:999px; padding:5px 11px;"
+      : "font:700 10.5px/1 'Inter'; color:#1a8a5c; background:#dcf3e6; border-radius:999px; padding:5px 11px;";
+
+    const rectif = [
+      { status:'Accepté', sent:'envoyé le 01/07/2026', decided:'accepté le 01/07/2026', name:'Nicolas Fontaine', blockTitle:'Modifications proposées', hasDate:true, date:'01/07/2026', debut:'15:30', fin:'<s style="color:#c0392a;">21:30</s> → 22:00', commentTitle:'Commentaire', comment:'Projectionniste et agent de sécurité indisponibles', hasRefus:false },
+      { status:'Accepté', sent:'envoyé le 29/04/2026', decided:'accepté le 30/04/2026', name:'Nicolas Fontaine', blockTitle:'Modifications proposées', hasDate:true, date:'29/04/2026', debut:'15:00', fin:'<s style="color:#c0392a;">22:30</s> → 23:00', commentTitle:'Commentaire', comment:'Renfort caisse et manque d\u2019agent d\u2019accueil', hasRefus:false }
+    ];
+    const abs = [
+      { status:'Accepté', sent:'envoyé le 07/07/2026', decided:'accepté le 08/07/2026', name:'Sofia Lenoir', blockTitle:'Récupérations', hasDate:false, debut:'22/08/2026', fin:'22/08/2026', commentTitle:'Commentaire', comment:'Récupération 15 août', hasRefus:false },
+      { status:'Accepté', sent:'envoyé le 07/07/2026', decided:'accepté le 08/07/2026', name:'Sofia Lenoir', blockTitle:'Récupérations', hasDate:false, debut:'25/07/2026', fin:'25/07/2026', commentTitle:'Commentaire', comment:'Travail du 14 juillet', hasRefus:false },
+      { status:'Refusé', sent:'envoyé le 07/07/2026', decided:'refusé le 07/07/2026', name:'Sofia Lenoir', blockTitle:'Récupérations', hasDate:false, debut:'14/07/2026', fin:'14/07/2026', commentTitle:'Commentaire', comment:'À récupérer le 25/07', hasRefus:true, refus:'en attente' },
+      { status:'Accepté', sent:'envoyé le 04/07/2026', decided:'accepté le 05/07/2026', name:'Inès Faure', blockTitle:'Congés payés', hasDate:false, debut:'10/07/2026', fin:'10/07/2026', commentTitle:'Commentaire', comment:'Je ne pourrai finalement pas être présente le vendredi 10 juillet à partir de 18h30. J\u2019ai regardé mon compteur de congés et il me semble qu\u2019il m\u2019en reste. Serait-il possible de poser un jour de congé ? Merci d\u2019avance.', hasRefus:false },
+      { status:'Refusé', sent:'envoyé le 16/06/2026', decided:'refusé le 16/06/2026', name:'Inès Faure', blockTitle:'Absence', hasDate:false, debut:'25/06/2026', fin:'25/06/2026', commentTitle:'Commentaire', comment:'Je dois malheureusement passer les rattrapages. J\u2019ai une épreuve le jeudi 25 de 14h à 16h, je ne pourrai donc pas être présente à 15h30 comme prévu. Serait-il possible de commencer à 17h ? Merci de votre compréhension.', hasRefus:true, refus:'Je viens de modifier le planning selon vos disponibilités' },
+      { status:'Accepté', sent:'envoyé le 03/06/2026', decided:'accepté le 04/06/2026', name:'Thomas Aubert', blockTitle:'Congés payés', hasDate:false, debut:'31/08/2026', fin:'20/09/2026', commentTitle:'Commentaire', comment:'Congés', hasRefus:false }
+    ];
+    const list = tab === 'rectif' ? rectif : abs;
+    const cards = list.map(c => Object.assign({}, c, { badgeStyle: badge(c.status) }));
+    return {
+      tabs, cards,
+      navRectif: tab === 'rectif' ? navOn : navOff,
+      navAbs: tab === 'abs' ? navOn : navOff,
+      pickRectif: () => this.setState({ tab: 'rectif' }),
+      pickAbs: () => this.setState({ tab: 'abs' }),
+      gridStyle: tab === 'rectif'
+        ? "display:grid; grid-template-columns:1fr 1fr; gap:22px; max-width:1000px;"
+        : "display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;"
+    };
+  }
+}
+</script>
+</body>
+</html>

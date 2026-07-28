@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Mentions légales — Ciné Planner</title>
+<meta name="description" content="Mentions légales du site cineplanner.fr, édité par SmartPlanner, éditrice du logiciel RH Ciné Planner.">
+<link rel="canonical" href="https://cineplanner.fr/mentions-legales">
+<link rel="icon" type="image/png" href="./assets/logo-mark.png">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#5B4FE8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #fff; }
+  :root { --accent: #5B4FE8; --accent-dark: #241f6b; --accent-soft: #eceafd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-dark); }
+  @media (max-width: 960px) {
+    [style*="padding:72px 48px"] { padding: 44px 22px !important; }
+    [style*="padding:32px 48px"] { padding: 28px 22px !important; }
+    h1 { font-size: clamp(28px,7vw,38px) !important; }
+  }
+</style>
+</helmet>
+
+<div style="width:100%; overflow-x:hidden;">
+  <x-import component-from-global-scope="SiteNav" from="./SiteNav.dc.html" hint-size="100%,86px"></x-import>
+
+  <div style="max-width:820px; margin:0 auto; padding:72px 48px 40px;">
+    <div style="font:700 13px/1 'Inter'; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">Informations légales</div>
+    <h1 style="font:800 clamp(30px,3.4vw,42px)/1.12 'Inter'; letter-spacing:-.02em; color:#16162a; margin:16px 0 0;">Mentions légales</h1>
+    <p style="font:400 18px/1.7 'Inter'; color:#5c5c72; margin:20px 0 0;">Le site cineplanner.fr est édité par SmartPlanner, éditrice du logiciel de gestion RH Ciné Planner destiné aux exploitants de cinéma.</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Éditeur du site</h2>
+    <div style="display:grid; gap:10px; margin-top:18px; background:#f7f8fc; border-radius:16px; padding:24px 26px;">
+      <div style="font:600 15px/1.6 'Inter'; color:#16162a;">SmartPlanner</div>
+      <div style="font:500 15px/1.6 'Inter'; color:#3a3a52;">Siège social : 40 Allée Eugène Delacroix, 33800 Bordeaux</div>
+      <div style="font:500 15px/1.6 'Inter'; color:#3a3a52;">Numéro SIRET : 934 294 083</div>
+      <div style="font:500 15px/1.6 'Inter'; color:#3a3a52;">Email : <a href="mailto:contact@cineplanner.fr">contact@cineplanner.fr</a></div>
+    </div>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Hébergement</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">La plateforme Ciné Planner est hébergée par Heroku (Salesforce, Inc.). Les paiements sont traités par Stripe.</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Propriété intellectuelle</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">L'ensemble des contenus de ce site (textes, visuels, interfaces, logo et marque Ciné Planner) est la propriété de SmartPlanner. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+
+    <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Données personnelles</h2>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Le traitement de vos données personnelles est détaillé dans notre <a href="Confidentialite.dc.html">politique de confidentialité</a>. Pour toute demande relative à vos données, écrivez à <a href="mailto:contact@cineplanner.fr">contact@cineplanner.fr</a>.</p>
+
+    <div style="margin-top:48px; background:var(--accent-soft); border-radius:16px; padding:24px 26px;">
+      <div style="font:700 15px/1.4 'Inter'; color:var(--accent-dark);">Une question ?</div>
+      <div style="font:400 15px/1.6 'Inter'; color:#3a3a52; margin-top:8px;">Écrivez-nous à <a href="mailto:contact@cineplanner.fr">contact@cineplanner.fr</a> ou <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener">réservez un échange</a>.</div>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="Mentions%20legales.dc.html" style="color:#7a7a92;">Mentions légales</a><a href="Confidentialite.dc.html" style="color:#7a7a92;">Confidentialité</a><a href="CGU.dc.html" style="color:#7a7a92;">CGU</a></span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
