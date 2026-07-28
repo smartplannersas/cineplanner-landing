@@ -1,6 +1,0 @@
-name = "cineplanner-checkout"
-main = "checkout.js"
-compatibility_date = "2024-11-06"
-
-# La clé secrète n'est jamais dans ce fichier ni dans le dépôt.
-# Elle se dépose une fois avec :  wrangler secret put STRIPE_SECRET_KEY
