@@ -581,7 +581,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;hero&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Clair&quot;,&quot;Sombre&quot;],&quot;default&quot;:&quot;Clair&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Indigo&quot;,&quot;Océan&quot;,&quot;Émeraude&quot;,&quot;Prune&quot;,&quot;Corail&quot;,&quot;Nuit&quot;],&quot;default&quot;:&quot;Indigo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Moderne&quot;,&quot;Éditorial&quot;],&quot;default&quot;:&quot;Moderne&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;},&quot;corners&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Arrondi&quot;,&quot;Net&quot;],&quot;default&quot;:&quot;Arrondi&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;}}">
 class Component extends DCLogic {
-  state = { tab: 'planif', size: 'small', periode: 'mensuel', openFaq: 0, menuOpen: false, botOpen: true, resOpen: false, navOpen: false, navFeatOpen: false };
+  state = { tab: 'planif', size: 'small', periode: 'mensuel', openFaq: 0, menuOpen: false, botOpen: false, resOpen: false, navOpen: false, navFeatOpen: false };
   componentDidMount() {
     try {
       const root = this._revRoot || document.querySelector('.cpl-root');
