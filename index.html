@@ -69,7 +69,10 @@
     [style*="padding: 56px 48px 40px"] { padding: 40px 20px 32px !important; }
     [style*="margin: 0px 48px 84px"] { margin: 0 20px 54px !important; }
     [style*="height: 460px"], [style*="height: 480px"] { height: 340px !important; }
-    .cpl-trust { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+    /* stretch (et non flex-start) : sinon la piste de logos, en width:max-content,
+       dimensionne le conteneur sur son contenu et fait déborder toute la page. */
+    .cpl-trust { flex-direction: column !important; align-items: stretch !important; gap: 16px !important; }
+    .cpl-trust > div { width: 100% !important; min-width: 0 !important; }
     [style*="max-width: 230px"] { max-width: none !important; }
     h1 { font-size: clamp(30px,6.4vw,46px) !important; }
     h2 { font-size: clamp(25px,5vw,34px) !important; }
@@ -157,8 +160,22 @@
     </button>
   </div>
   <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:sticky; top:64px; z-index:9; background:#fff; border-bottom:1px solid #eef0f7; padding:12px 20px 18px; display:flex; flex-direction:column; gap:4px; box-shadow:0 20px 40px -28px rgba(22,22,42,.4);">
-      <a href="#feat" onClick="{{ closeNav }}" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a;">Fonctionnalités</a>
+    <div style="position:sticky; top:64px; z-index:9; background:#fff; border-bottom:1px solid #eef0f7; padding:12px 20px 18px; display:flex; flex-direction:column; gap:4px; max-height:calc(100vh - 64px); overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:0 20px 40px -28px rgba(22,22,42,.4);">
+      <button onClick="{{ toggleNavFeat }}" style="display:flex; align-items:center; justify-content:space-between; width:100%; padding:13px 12px; border:none; background:transparent; border-radius:10px; font:600 16px/1 'Inter'; font-family:'Inter'; color:#16162a; cursor:pointer; text-align:left;">
+        Fonctionnalités
+        <span style="{{ navFeatChevron }}">▾</span>
+      </button>
+      <sc-if value="{{ navFeatOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:2px; margin:0 0 4px 10px; padding-left:8px; border-left:2px solid #ece9ff;">
+          <sc-for list="{{ menuItems }}" as="it" hint-placeholder-count="6">
+            <a href="{{ it.href }}" style="display:flex; align-items:center; gap:12px; padding:11px 10px; border-radius:10px; font:600 15px/1.25 'Inter'; color:#3a3a52;">
+              <span style="flex:none; width:34px; height:34px; border-radius:10px; background:#ece9ff; color:var(--accent); display:flex; align-items:center; justify-content:center;">{{ it.icon }}</span>
+              {{ it.label }}
+            </a>
+          </sc-for>
+          <a href="#feat" onClick="{{ closeNav }}" style="padding:10px 10px 12px; border-radius:10px; font:600 14px/1.25 'Inter'; color:var(--accent);">Vue d'ensemble →</a>
+        </div>
+      </sc-if>
       <a href="Tarifs.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a;">Tarifs</a>
       <a href="Abonnement.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a;">Abonnement</a>
       <a href="#temoignages" onClick="{{ closeNav }}" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a;">Témoignages</a>
@@ -382,12 +399,16 @@
     <div style="text-align:center; max-width:680px; margin:0 auto;">
       <div style="font:700 13px/1 'Inter'; letter-spacing:.14em; text-transform:uppercase; color:var(--accent);">Tarifs</div>
       <h2 style="font:800 40px/1.14 'Inter'; letter-spacing:-.015em; color:#16162a; margin:16px 0 0;">Un tarif par établissement, par mois</h2>
-      <p style="font:400 18px/1.6 'Inter'; color:#5c5c72; margin:18px 0 0;">Engagement annuel. Choisissez la taille de vos établissements pour voir le prix adapté.</p>
+      <p style="font:400 18px/1.6 'Inter'; color:#5c5c72; margin:18px 0 0;">Engagement annuel. Choisissez la taille de vos établissements et la périodicité de facturation pour voir le prix adapté.</p>
     </div>
-    <div style="display:flex; justify-content:center; margin:32px 0 8px;">
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin:32px 0 8px;">
       <div style="display:flex; gap:6px; background:#f5f6fc; border-radius:12px; padding:6px;">
         <button onClick="{{ setSmall }}" style="{{ smallBtnStyle }}">1 à 3 écrans</button>
         <button onClick="{{ setMultiplex }}" style="{{ multiplexBtnStyle }}">4 écrans et + (multiplex)</button>
+      </div>
+      <div style="display:flex; gap:6px; background:#f5f6fc; border-radius:12px; padding:6px;">
+        <button onClick="{{ setMensuel }}" style="{{ mensuelBtnStyle }}">Mensuel</button>
+        <button onClick="{{ setAnnuel }}" style="{{ annuelBtnStyle }}">Annuel · −5 %</button>
       </div>
     </div>
     <div data-reveal="" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:32px; align-items:stretch;">
@@ -396,7 +417,7 @@
       <div style="background:#fff; border:1px solid #e9e9f2; border-radius:22px; padding:36px; display:flex; flex-direction:column;">
         <div style="font:800 20px/1 'Inter'; color:#16162a;">Essentielle</div>
         <div style="font:400 15px/1.5 'Inter'; color:#7a7a92; margin-top:8px;">La RH conforme, du planning à l'export paie.</div>
-        <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#16162a;">{{ essentielPrice }}</span><span style="font:500 15px/1 'Inter'; color:#7a7a92;">€ / établ. / mois</span></div>
+        <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#16162a;">{{ essentielPrice }}</span><span style="font:500 15px/1 'Inter'; color:#7a7a92;">{{ priceUnit }}</span></div>
         <a href="Essai%20gratuit.dc.html" style="margin-top:24px; text-align:center; border:1px solid #d8d8e6; color:#16162a; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Démarrer l'essai gratuit</a>
         <div style="height:1px; background:#eef0f7; margin:28px 0;"></div>
         <div style="display:flex; flex-direction:column; gap:13px;">
@@ -411,7 +432,7 @@
         <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; font:700 12px/1 'Inter'; letter-spacing:.06em; padding:8px 16px; border-radius:999px;">LE PLUS COMPLET</div>
         <div style="font:800 20px/1 'Inter'; color:#fff; display:flex; align-items:center; gap:8px;">RH</div>
         <div style="font:400 15px/1.5 'Inter'; color:#b6b6c8; margin-top:8px;">Contrats, présence signée, tableaux de bord et pilotage groupe.</div>
-        <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#fff;">{{ groupePrice }}</span><span style="font:500 15px/1 'Inter'; color:#b6b6c8;">€ / établ. / mois</span></div>
+        <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#fff;">{{ groupePrice }}</span><span style="font:500 15px/1 'Inter'; color:#b6b6c8;">{{ priceUnit }}</span></div>
         <span style="margin-top:24px; text-align:center; background:var(--accent); color:#fff; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Démarrer l'essai gratuit</span>
         <div style="height:1px; background:#2c2c48; margin:28px 0;"></div>
         <div style="font:600 13px/1 'Inter'; color:#8a8aa4; margin-bottom:14px;">Tout l'Essentielle, plus :</div>
@@ -558,7 +579,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;hero&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Clair&quot;,&quot;Sombre&quot;],&quot;default&quot;:&quot;Clair&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Indigo&quot;,&quot;Océan&quot;,&quot;Émeraude&quot;,&quot;Prune&quot;,&quot;Corail&quot;,&quot;Nuit&quot;],&quot;default&quot;:&quot;Indigo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Moderne&quot;,&quot;Éditorial&quot;],&quot;default&quot;:&quot;Moderne&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;},&quot;corners&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Arrondi&quot;,&quot;Net&quot;],&quot;default&quot;:&quot;Arrondi&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;}}">
 class Component extends DCLogic {
-  state = { tab: 'planif', size: 'small', openFaq: 0, menuOpen: false, botOpen: true, resOpen: false, navOpen: false };
+  state = { tab: 'planif', size: 'small', periode: 'mensuel', openFaq: 0, menuOpen: false, botOpen: true, resOpen: false, navOpen: false, navFeatOpen: false };
   componentDidMount() {
     try {
       const root = this._revRoot || document.querySelector('.cpl-root');
@@ -676,6 +697,14 @@ class Component extends DCLogic {
     });
 
     const small = this.state.size === 'small';
+    const annuel = this.state.periode === 'annuel';
+    // Tarifs alignés sur la page Abonnement : mensuel par établissement, annuel = total sur 12 mois.
+    const GRILLE = {
+      essentielle: { mensuel: { '1-3': '51', '4+': '93' }, annuel: { '1-3': '588', '4+': '1 068' } },
+      rh:          { mensuel: { '1-3': '99', '4+': '156' }, annuel: { '1-3': '1 140', '4+': '1 788' } }
+    };
+    const per = annuel ? 'annuel' : 'mensuel';
+    const taille = small ? '1-3' : '4+';
     const segActive = 'font:600 15px/1 \'Inter\'; border:none; cursor:pointer; padding:11px 18px; border-radius:8px; background:#fff; color:#16162a; box-shadow:0 2px 8px -3px rgba(22,22,42,.25);';
     const segIdle = 'font:600 15px/1 \'Inter\'; border:none; cursor:pointer; padding:11px 18px; border-radius:8px; background:transparent; color:#7a7a92;';
 
@@ -718,7 +747,7 @@ class Component extends DCLogic {
     }));
 
     const faqRaw = [
-      ['Combien coûte un logiciel de planning pour un cinéma ?', "Ciné Planner démarre à 49 € par établissement et par mois pour un cinéma de 1 à 3 écrans, et 89 € pour un multiplex de 4 écrans et plus. Le tarif est par établissement, quel que soit le nombre de salariés."],
+      ['Combien coûte un logiciel de planning pour un cinéma ?', "Ciné Planner démarre à 51 € par établissement et par mois pour un cinéma de 1 à 3 écrans, et 93 € pour un multiplex de 4 écrans et plus. Le tarif est par établissement, quel que soit le nombre de salariés."],
       ['Quelle est la différence entre un logiciel de planning et un logiciel RH pour cinéma (convention collective, primes de panier) ?', "Un logiciel de planning se limite à placer des shifts. Ciné Planner couvre toute la chaîne RH du cinéma : planning conforme, contrats, feuilles de présence signées, compteurs de congés et export paie. C'est ce qui évite les erreurs de paie et sécurise vos obligations d'employeur."],
       ['Ciné Planner respecte-t-il la convention collective de l\u2019exploitation cinématographique ?', "Oui. Les règles de la CCN de l'exploitation cinématographique (IDCC 1307) sont intégrées nativement : heures de nuit, durée maximale de shift, repos, heures hebdomadaires, primes de panier repas et panier soir. Toute infraction est signalée avant validation du planning."],
       ['Le logiciel gère-t-il plusieurs cinémas ou un réseau d\u2019établissements ?', "Oui, dès la formule Essentielle : une vue consolidée sur tous vos établissements, tout en laissant à chaque site l'autonomie sur son planning. Les réseaux passent en Sur Mesure pour la personnalisation par site."],
@@ -762,8 +791,11 @@ class Component extends DCLogic {
       navOpen: this.state.navOpen,
       heroClair: (this.props.hero || 'Clair') !== 'Sombre',
       heroSombre: this.props.hero === 'Sombre',
-      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen })),
-      closeNav: () => this.setState({ navOpen: false }),
+      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen, navFeatOpen: false })),
+      closeNav: () => this.setState({ navOpen: false, navFeatOpen: false }),
+      navFeatOpen: this.state.navFeatOpen,
+      navFeatChevron: "display:inline-block; font-size:14px; line-height:1; color:#5B4FE8; transition:transform .18s ease; transform:rotate(" + (this.state.navFeatOpen ? '180deg' : '0deg') + ");",
+      toggleNavFeat: () => this.setState(s => ({ navFeatOpen: !s.navFeatOpen })),
       openRes: () => { clearTimeout(this._rt); this.setState({ resOpen: true }); },
       closeRes: () => { clearTimeout(this._rt); this._rt = setTimeout(() => this.setState({ resOpen: false }), 160); },
       accA: pal[0], accD: pal[1], accS: pal[2],
@@ -800,12 +832,17 @@ class Component extends DCLogic {
         el.style.cursor = 'zoom-in';
       },
       activeZoomT: ({ planif: 'translate(-172px,-150px) scale(1.35)', temps: 'translate(-20px,-150px) scale(1.3)', contrats: 'translate(-150px,-190px) scale(1.35)', paie: 'translate(-150px,-150px) scale(1.3)', documents: 'translate(-40px,-150px) scale(1.3)' }[this.state.tab]) || 'translate(-40px,-120px) scale(1.3)',
-      essentielPrice: small ? '49' : '89',
-      groupePrice: small ? '95' : '149',
+      essentielPrice: GRILLE.essentielle[per][taille],
+      groupePrice: GRILLE.rh[per][taille],
+      priceUnit: annuel ? '€ / établ. / an' : '€ / établ. / mois',
       setSmall: () => this.setState({ size: 'small' }),
       setMultiplex: () => this.setState({ size: 'multiplex' }),
+      setMensuel: () => this.setState({ periode: 'mensuel' }),
+      setAnnuel: () => this.setState({ periode: 'annuel' }),
       smallBtnStyle: small ? segActive : segIdle,
       multiplexBtnStyle: small ? segIdle : segActive,
+      mensuelBtnStyle: annuel ? segIdle : segActive,
+      annuelBtnStyle: annuel ? segActive : segIdle,
       essentielFeatures: [
         'Planning multi-établissements avec autonomie par site',
         'Alertes convention collective cinéma (IDCC 1307)',

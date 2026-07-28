@@ -86,8 +86,22 @@
   </div>
 
   <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:sticky; top:78px; z-index:29; background:#fff; border-bottom:1px solid #eef0f7; padding:12px 20px 18px; display:flex; flex-direction:column; gap:4px; box-shadow:0 20px 40px -28px rgba(22,22,42,.4);">
-      <a href="Cine%20Planner%20Landing.dc.html#feat" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Fonctionnalités</a>
+    <div style="position:sticky; top:78px; z-index:29; background:#fff; border-bottom:1px solid #eef0f7; padding:12px 20px 18px; display:flex; flex-direction:column; gap:4px; max-height:calc(100vh - 78px); overflow-y:auto; -webkit-overflow-scrolling:touch; box-shadow:0 20px 40px -28px rgba(22,22,42,.4);">
+      <button onClick="{{ toggleNavFeat }}" style="display:flex; align-items:center; justify-content:space-between; width:100%; padding:13px 12px; border:none; background:transparent; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; cursor:pointer; text-align:left; font-family:'Inter';">
+        Fonctionnalités
+        <span style="{{ navFeatChevron }}">▾</span>
+      </button>
+      <sc-if value="{{ navFeatOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:2px; margin:0 0 4px 10px; padding-left:8px; border-left:2px solid #ece9ff;">
+          <sc-for list="{{ menuItems }}" as="it" hint-placeholder-count="6">
+            <a href="{{ it.href }}" style="display:flex; align-items:center; gap:12px; padding:11px 10px; border-radius:10px; font:600 15px/1.25 'Inter'; color:#3a3a52; text-decoration:none;">
+              <span style="flex:none; width:34px; height:34px; border-radius:10px; background:#ece9ff; color:#5B4FE8; display:flex; align-items:center; justify-content:center;">{{ it.icon }}</span>
+              {{ it.label }}
+            </a>
+          </sc-for>
+          <a href="Cine%20Planner%20Landing.dc.html#feat" style="padding:10px 10px 12px; border-radius:10px; font:600 14px/1.25 'Inter'; color:#5B4FE8; text-decoration:none;">Vue d'ensemble →</a>
+        </div>
+      </sc-if>
       <a href="Tarifs.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Tarifs</a>
       <a href="Abonnement.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Abonnement</a>
       <a href="Cine%20Planner%20Landing.dc.html#temoignages" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Témoignages</a>
@@ -100,7 +114,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { menuOpen: false, resOpen: false, navOpen: false };
+  state = { menuOpen: false, resOpen: false, navOpen: false, navFeatOpen: false };
   renderVals() {
     const _h = React.createElement;
     const _svg = (...ch) => _h('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round' }, ...ch);
@@ -129,6 +143,8 @@ class Component extends DCLogic {
       menuOpen: this.state.menuOpen,
       resOpen: this.state.resOpen,
       navOpen: this.state.navOpen,
+      navFeatOpen: this.state.navFeatOpen,
+      navFeatChevron: "display:inline-block; font-size:14px; line-height:1; color:#5B4FE8; transition:transform .18s ease; transform:rotate(" + (this.state.navFeatOpen ? '180deg' : '0deg') + ");",
       featStyle: active === 'feat' ? on : base,
       tarifsStyle: active === 'tarifs' ? 'color:#5B4FE8; text-decoration:none;' : 'color:#3a3a52; text-decoration:none;',
       aboStyle: active === 'abonnement' ? 'color:#5B4FE8; text-decoration:none;' : 'color:#3a3a52; text-decoration:none;',
@@ -137,7 +153,8 @@ class Component extends DCLogic {
       closeMenu: () => { clearTimeout(this._mt); this._mt = setTimeout(() => this.setState({ menuOpen: false }), 140); },
       openRes: () => { clearTimeout(this._rt); this.setState({ resOpen: true, menuOpen: false }); },
       closeRes: () => { clearTimeout(this._rt); this._rt = setTimeout(() => this.setState({ resOpen: false }), 160); },
-      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen }))
+      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen, navFeatOpen: false })),
+      toggleNavFeat: () => this.setState(s => ({ navFeatOpen: !s.navFeatOpen }))
     };
   }
 }
