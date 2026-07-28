@@ -1,0 +1,65 @@
+# Ciné Planner
+
+> Logiciel RH et planning conçu exclusivement pour les exploitants de cinéma en France.
+> Édité par SmartPlanner SAS (Bordeaux, SIRET 934 294 083). Plus de 120 cinémas équipés.
+
+Ciné Planner n'est pas un outil de planning généraliste : les règles de la **convention
+collective de l'exploitation cinématographique (IDCC 1307)** sont intégrées nativement et
+signalent toute infraction avant la validation d'un planning — heures de nuit, durée maximale
+de shift, repos, heures hebdomadaires, primes de panier repas et panier soir.
+
+Public visé : directeurs de cinéma, responsables d'exploitation, réseaux et groupes
+multi-établissements.
+
+## Ce que couvre le logiciel
+
+- **Planification** : plannings multi-établissements, modèles réutilisables, alertes de
+  convention collective avant validation, duplication de semaines, vue par poste ou par salarié.
+- **Suivi des temps** : écart entre planifié et réalisé, heures supplémentaires et
+  complémentaires, heures de nuit, jours fériés, retards de shift, annualisation.
+- **Contrats** : CDD, CDI et avenants avec variables dynamiques, signature électronique,
+  circuit d'approbation configurable, checklist pré-embauche.
+- **Feuilles de présence** : signature électronique par les salariés, contresignature en masse,
+  piste d'audit légale immuable (articles L3171-2 et L3171-3 du Code du travail).
+- **Export de paie** : au jour, au mois ou sur période libre, primes de panier, majorations et
+  heures supplémentaires déjà calculées, sans ressaisie pour le cabinet comptable.
+- **Espace équipe** : consultation du planning, demandes de congés, rectifications d'horaires,
+  compteur de congés restants.
+- **Coffre-fort de documents** : pièces salariés centralisées.
+
+## Tarifs
+
+Par établissement et par mois, engagement annuel. Le tarif dépend du nombre de salles de
+projection de l'établissement, pas du nombre de salariés ni du nombre de cinémas.
+
+| Formule | 1 à 3 écrans | 4 écrans et plus |
+|---|---|---|
+| Essentielle | 51 € / mois | 93 € / mois |
+| RH | 99 € / mois | 156 € / mois |
+
+Une formule Sur Mesure existe pour les réseaux ayant des besoins d'intégration spécifiques
+(API, migration de données, personnalisation par site) : sur devis.
+
+Essai gratuit de 14 jours, sans carte bancaire, avec paramétrage réalisé par un expert.
+
+## Pages
+
+- [Accueil](https://cineplanner.fr/) : présentation générale du logiciel
+- [Tarifs](https://cineplanner.fr/tarifs) : les trois formules, comparatif ligne par ligne, FAQ
+- [Planification](https://cineplanner.fr/planification) : plannings conformes à la CCN
+- [Suivi des temps](https://cineplanner.fr/suivi-des-temps) : heures réelles et présence signée
+- [Contrats](https://cineplanner.fr/contrats) : CDD, CDI et avenants signés en ligne
+- [Export paie](https://cineplanner.fr/export-paie) : éléments de paie sans ressaisie
+- [Espace équipe](https://cineplanner.fr/appli-equipe) : l'espace en ligne des salariés
+- [Coffre-fort RH](https://cineplanner.fr/coffre-fort-documents) : documents salariés
+- [Blog](https://cineplanner.fr/blog) : conformité, paie et gestion d'équipe en cinéma
+- [Essai gratuit](https://cineplanner.fr/essai-gratuit) : ouverture d'un compte d'essai
+
+## Références clientes publiques
+
+Mégarama, Veo, CNC, Cinéma Confluences, Cinémas Panacéa, Ciné Triskell, Cinéma Arvor,
+Alticiné Montargis.
+
+## Contact
+
+contact@cineplanner.fr — SmartPlanner SAS, 40 Allée Eugène Delacroix, 33800 Bordeaux, France.
