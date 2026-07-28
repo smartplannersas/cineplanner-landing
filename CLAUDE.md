@@ -32,18 +32,25 @@ Chaque page est un fichier `.dc.html` autonome exécuté par `support.js`.
 7. **JavaScript classique** dans la classe de logique : pas de TypeScript, pas d'`import`.
    La classe doit s'appeler `Component` et étendre `DCLogic`.
 
-## Après toute modification de la page d'accueil
-`index.html` est une copie de `Cine Planner Landing.dc.html`. Les deux doivent rester
-identiques :
-```bash
-cp "Cine Planner Landing.dc.html" index.html
-```
+## Pages et adresses
+`index.html` est la page d'accueil et l'unique source : la copie
+`Cine Planner Landing.dc.html` a été supprimée, il n'y a plus rien à synchroniser.
+
+Les **pages** portent un nom court en `.html` (`tarifs.html`, `export-paie.html`), servi
+sans extension par GitHub Pages : `www.cineplanner.fr/tarifs`. Les liens internes utilisent
+cette forme courte, avec une barre de début (`href="/tarifs"`).
+
+Les **composants** gardent l'extension `.dc.html` (`SiteNav.dc.html`, `PlanningScreen.dc.html`) :
+`support.js` les résout par leur nom de fichier, les renommer casserait les imports.
 
 ## Nouvelle page
-1. Dupliquer une page existante de structure proche (ex. `Tarifs.dc.html`).
+1. Dupliquer une page existante de structure proche (ex. `tarifs.html`), en la nommant
+   d'après son adresse voulue, en minuscules et sans accent.
 2. Monter la navigation partagée : `<dc-import name="SiteNav" hint-size="100%,84px"></dc-import>`.
 3. Ajouter le pied de page (copier celui de la page dupliquée) avec les liens légaux.
-4. Mettre à jour `sitemap.xml`, et `_redirects` si l'URL doit être propre.
+4. Renseigner `<link rel="canonical">`, `og:url` et les données structurées JSON-LD sur
+   `https://www.cineplanner.fr/<adresse>`.
+5. Ajouter l'entrée correspondante dans `sitemap.xml`.
 
 ## Contenu sensible
 Les maquettes produit contiennent des données **fictives**. Ne jamais y injecter de vraies

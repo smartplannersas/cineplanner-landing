@@ -19,11 +19,11 @@
 </helmet>
 <div style="font-family:'Inter',system-ui,sans-serif;">
   <div style="position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:16px 40px; background:rgba(255,255,255,.97); border-bottom:1px solid #eef0f7;">
-    <a href="Cine%20Planner%20Landing.dc.html" style="display:flex; align-items:center; gap:10px; text-decoration:none;"><img src="./assets/logo-full.png" alt="Ciné Planner" style="height:46px; width:auto; display:block;"></a>
+    <a href="/" style="display:flex; align-items:center; gap:10px; text-decoration:none;"><img src="./assets/logo-full.png" alt="Ciné Planner" style="height:46px; width:auto; display:block;"></a>
 
     <div class="snav-links" style="display:flex; align-items:center; gap:30px; font:600 15px/1 'Inter'; color:#3a3a52;">
       <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;">
-        <a href="Cine%20Planner%20Landing.dc.html#feat" style="{{ featStyle }}">Fonctionnalités <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
+        <a href="/#feat" style="{{ featStyle }}">Fonctionnalités <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
         <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
           <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:fixed; top:74px; left:50%; transform:translateX(-50%); width:1000px; max-width:calc(100vw - 32px); background:#fff; border:1px solid #eef0f7; border-radius:24px; box-shadow:0 40px 90px -30px rgba(22,22,42,.55); overflow:hidden; z-index:40;">
             <div style="display:grid; grid-template-columns:1fr 1fr 0.86fr;">
@@ -47,8 +47,8 @@
                 <div style="font:800 20px/1.25 'Inter'; margin-top:18px;">Testez la RH conforme de votre cinéma</div>
                 <div style="font:400 13px/1.55 'Inter'; color:#e0dcff; margin-top:9px;">14 jours d'essai, sans carte bancaire, avec accompagnement.</div>
                 <div style="margin-top:auto; display:flex; flex-direction:column; gap:9px; padding-top:22px;">
-                  <a href="Essai%20gratuit.dc.html" style="background:#fff; color:#3d2fc4; font:700 13px/1 'Inter'; padding:12px 14px; border-radius:11px; text-align:center; text-decoration:none;">Démarrer l'essai gratuit</a>
-                  <a href="Tarifs.dc.html" style="color:#fff; font:700 13px/1 'Inter'; padding:4px; text-align:center; opacity:.9; text-decoration:none;">Voir les tarifs →</a>
+                  <a href="/essai-gratuit" style="background:#fff; color:#3d2fc4; font:700 13px/1 'Inter'; padding:12px 14px; border-radius:11px; text-align:center; text-decoration:none;">Démarrer l'essai gratuit</a>
+                  <a href="/tarifs" style="color:#fff; font:700 13px/1 'Inter'; padding:4px; text-align:center; opacity:.9; text-decoration:none;">Voir les tarifs →</a>
                 </div>
               </div>
             </div>
@@ -56,19 +56,19 @@
         </sc-if>
       </div>
 
-      <a href="Tarifs.dc.html" style="{{ tarifsStyle }}">Tarifs</a>
+      <a href="/tarifs" style="{{ tarifsStyle }}">Tarifs</a>
 
-      <a href="Abonnement.dc.html" style="{{ aboStyle }}">Abonnement</a>
+      <a href="/abonnement" style="{{ aboStyle }}">Abonnement</a>
 
       <div onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:relative;">
-        <a href="Cine%20Planner%20Landing.dc.html#temoignages" style="{{ resStyle }}">Ressources <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
+        <a href="/#temoignages" style="{{ resStyle }}">Ressources <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
         <sc-if value="{{ resOpen }}" hint-placeholder-val="{{ false }}">
           <div onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:absolute; top:calc(100% + 20px); left:50%; transform:translateX(-50%); width:280px; background:#fff; border:1px solid #eef0f7; border-radius:16px; box-shadow:0 30px 70px -28px rgba(22,22,42,.5); padding:10px; z-index:40;">
-            <a href="Cine%20Planner%20Landing.dc.html#temoignages" style="display:flex; gap:12px; padding:12px; border-radius:12px; align-items:flex-start; text-decoration:none;" style-hover="background:#ece9ff;">
+            <a href="/#temoignages" style="display:flex; gap:12px; padding:12px; border-radius:12px; align-items:flex-start; text-decoration:none;" style-hover="background:#ece9ff;">
               <span style="flex:none; width:34px; height:34px; border-radius:10px; background:#ece9ff; color:#5B4FE8; display:flex; align-items:center; justify-content:center;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
               <span><span style="display:block; font:700 14px/1.2 'Inter'; color:#16162a;">Témoignages</span><span style="display:block; font:400 12px/1.4 'Inter'; color:#7a7a92; margin-top:3px;">Ce que disent nos cinémas clients</span></span>
             </a>
-            <a href="Blog.dc.html" style="display:flex; gap:12px; padding:12px; border-radius:12px; align-items:flex-start; text-decoration:none;" style-hover="background:#ece9ff;">
+            <a href="/blog" style="display:flex; gap:12px; padding:12px; border-radius:12px; align-items:flex-start; text-decoration:none;" style-hover="background:#ece9ff;">
               <span style="flex:none; width:34px; height:34px; border-radius:10px; background:#ece9ff; color:#5B4FE8; display:flex; align-items:center; justify-content:center;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
               <span><span style="display:block; font:700 14px/1.2 'Inter'; color:#16162a;">Blog</span><span style="display:block; font:400 12px/1.4 'Inter'; color:#7a7a92; margin-top:3px;">Conseils RH & conformité pour l'exploitation</span></span>
             </a>
@@ -77,7 +77,7 @@
       </div>
 
       <a href="https://app.cineplanner.fr" style="color:#5B4FE8; text-decoration:none;">Connexion</a>
-      <a href="Essai%20gratuit.dc.html" style="background:#5B4FE8; color:#fff; padding:11px 18px; border-radius:12px; text-decoration:none;">Essai gratuit</a>
+      <a href="/essai-gratuit" style="background:#5B4FE8; color:#fff; padding:11px 18px; border-radius:12px; text-decoration:none;">Essai gratuit</a>
     </div>
 
     <button class="snav-burger" onClick="{{ toggleNav }}" style="width:44px; height:44px; border:1px solid #e4e4ef; border-radius:12px; background:#fff; cursor:pointer; align-items:center; justify-content:center;">
@@ -99,15 +99,15 @@
               {{ it.label }}
             </a>
           </sc-for>
-          <a href="Cine%20Planner%20Landing.dc.html#feat" style="padding:10px 10px 12px; border-radius:10px; font:600 14px/1.25 'Inter'; color:#5B4FE8; text-decoration:none;">Vue d'ensemble →</a>
+          <a href="/#feat" style="padding:10px 10px 12px; border-radius:10px; font:600 14px/1.25 'Inter'; color:#5B4FE8; text-decoration:none;">Vue d'ensemble →</a>
         </div>
       </sc-if>
-      <a href="Tarifs.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Tarifs</a>
-      <a href="Abonnement.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Abonnement</a>
-      <a href="Cine%20Planner%20Landing.dc.html#temoignages" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Témoignages</a>
-      <a href="Blog.dc.html" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Blog</a>
+      <a href="/tarifs" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Tarifs</a>
+      <a href="/abonnement" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Abonnement</a>
+      <a href="/#temoignages" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Témoignages</a>
+      <a href="/blog" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Blog</a>
       <a href="https://app.cineplanner.fr" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#5B4FE8; text-decoration:none;">Connexion</a>
-      <a href="Essai%20gratuit.dc.html" style="margin-top:6px; text-align:center; background:#5B4FE8; color:#fff; padding:14px; border-radius:12px; font:700 15px/1 'Inter'; text-decoration:none;">Essai gratuit</a>
+      <a href="/essai-gratuit" style="margin-top:6px; text-align:center; background:#5B4FE8; color:#fff; padding:14px; border-radius:12px; font:700 15px/1 'Inter'; text-decoration:none;">Essai gratuit</a>
     </div>
   </sc-if>
 </div>
@@ -127,12 +127,12 @@ class Component extends DCLogic {
       documents: _svg(_h('rect', { x: 4, y: 10, width: 16, height: 11, rx: 2, key: 'a' }), _h('path', { d: 'M8 10V7a4 4 0 0 1 8 0v3', key: 'b' }))
     };
     const defs = {
-      planif: ['Planification', 'Plannings conformes à la CCN, en un clic', 'Feature%20-%20Planification.dc.html'],
-      temps: ['Suivi des temps', 'Heures réelles et présence signée', 'Feature%20-%20Temps.dc.html'],
-      portail: ['Espace équipe', 'L’espace en ligne de toute l’équipe', 'Feature%20-%20Portail.dc.html'],
-      contrats: ['Contrats', 'CDD, CDI, avenants signés en ligne', 'Feature%20-%20Contrats.dc.html'],
-      paie: ['Export paie', 'Vos éléments de paie prêts sans ressaisie', 'Feature%20-%20Paie.dc.html'],
-      documents: ['Coffre-fort RH', 'Toutes vos pièces salariés au même endroit', 'Feature%20-%20Documents.dc.html']
+      planif: ['Planification', 'Plannings conformes à la CCN, en un clic', '/planification'],
+      temps: ['Suivi des temps', 'Heures réelles et présence signée', '/suivi-des-temps'],
+      portail: ['Espace équipe', 'L’espace en ligne de toute l’équipe', '/espace-equipe'],
+      contrats: ['Contrats', 'CDD, CDI, avenants signés en ligne', '/contrats'],
+      paie: ['Export paie', 'Vos éléments de paie prêts sans ressaisie', '/export-paie'],
+      documents: ['Coffre-fort RH', 'Toutes vos pièces salariés au même endroit', '/coffre-fort-documents']
     };
     const menuItems = ['planif', 'temps', 'portail', 'contrats', 'paie', 'documents'].map(k => ({ label: defs[k][0], desc: defs[k][1], href: defs[k][2], icon: icons[k] }));
     const active = this.props.active || '';

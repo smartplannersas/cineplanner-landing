@@ -9,20 +9,26 @@ Un site statique **prêt à déployer** (aucun build, aucune dépendance npm).
 Chaque page est un fichier HTML autonome qui s'ouvre directement dans un navigateur.
 
 ```
-index.html                     → page d'accueil (copie de "Cine Planner Landing.dc.html")
-Cine Planner Landing.dc.html   → page d'accueil (source de référence)
-Tarifs.dc.html                 → tarifs + tableau comparatif + FAQ
-Blog.dc.html                   → liste des articles
-Article.dc.html                → article (convention collective)
-Essai gratuit.dc.html          → formulaire de demande d'essai 14 jours
-Feature - *.dc.html            → 6 pages fonctionnalités
-Mentions legales / Confidentialite / CGU  → pages légales
-SiteNav.dc.html                → barre de navigation partagée (méga-menu + burger mobile)
-*Screen.dc.html / AppScreen    → maquettes de l'application recréées en HTML/CSS
+index.html                     → page d'accueil (source unique)
+tarifs.html                    → tarifs + tableau comparatif + FAQ
+blog.html                      → liste des articles
+convention-collective-cinema.html → article de fond
+abonnement.html                → souscription, liens de paiement Stripe
+essai-gratuit.html             → formulaire de demande d'essai 14 jours
+planification.html             → 6 pages fonctionnalités
+suivi-des-temps.html
+contrats.html
+export-paie.html
+espace-equipe.html
+coffre-fort-documents.html
+mentions-legales.html / confidentialite.html / cgu.html  → pages légales
+SiteNav.dc.html                → barre de navigation partagée (composant)
+*Screen.dc.html / AppScreen    → maquettes de l'application (composants)
 support.js                     → runtime des composants (fourni, ne pas modifier)
+trial-popup.js                 → invitation à l'essai après 30 s de navigation
 assets/                        → logos, captures, images de partage
-_redirects / netlify.toml      → URLs propres + en-têtes (Netlify)
-robots.txt / sitemap.xml       → SEO
+robots.txt / sitemap.xml / llms.txt  → référencement classique et génératif
+netlify.toml                   → en-têtes et cache (inactif sur GitHub Pages)
 ```
 
 ## Déploiement
@@ -33,18 +39,18 @@ robots.txt / sitemap.xml       → SEO
   https://smartplannersas.github.io/cineplanner-landing/
 - `.nojekyll` désactive le traitement Jekyll (sinon les fichiers commençant par `_`
   sont ignorés).
-- Les liens internes sont **relatifs** (`Tarifs.dc.html`, `./assets/…`) : indispensable,
-  le site est servi depuis le sous-chemin `/cineplanner-landing/`. Ne pas introduire de
-  chemins absolus commençant par `/`.
-- `_redirects` et `netlify.toml` ne sont **pas** interprétés par GitHub Pages : les URLs
-  propres (`/tarifs`, `/blog`, …) et les en-têtes de sécurité ne s'appliquent pas ici.
-  Ces fichiers sont conservés pour un futur déploiement Netlify.
+- Les pages sont servies **sans extension** : `tarifs.html` répond aussi sur `/tarifs`.
+  C'est un comportement natif de GitHub Pages, vérifié ; les liens internes utilisent
+  donc la forme courte avec une barre de début (`/tarifs`).
+- Les assets restent en relatif (`./assets/…`) pour fonctionner quel que soit le préfixe.
+- `netlify.toml` n'est pas interprété par GitHub Pages : les en-têtes de sécurité ne
+  s'appliquent pas ici. Le fichier est conservé pour un éventuel déploiement Netlify.
 
 **Netlify (optionnel, déjà configuré)**
 1. Connecter ce dépôt GitHub à Netlify.
 2. Build command : *(aucune)* — Publish directory : `.` (racine).
-3. `netlify.toml` gère les en-têtes de sécurité et le cache ; `_redirects` les URLs propres
-   (`/tarifs`, `/blog`, `/essai-gratuit`, `/planification`, `/mentions-legales`, …).
+3. `netlify.toml` gère les en-têtes de sécurité et le cache. Les adresses courtes ne
+   demandent aucune configuration : elles découlent du nom des fichiers.
 
 ## Architecture des pages
 
@@ -63,12 +69,12 @@ Les pages sont des **Design Components** : un fichier HTML contient un template
 
 ## Points à traiter côté développement
 
-1. **Formulaire d'essai** (`Essai gratuit.dc.html`) : variable `ENDPOINT` en haut de la logique.
+1. **Formulaire d'essai** (`essai-gratuit.html`) : variable `ENDPOINT` en haut de la logique.
    Vide → ouvre un mail vers `contact@cineplanner.fr`. Renseigner l'URL Tally/Formspree
    (ou un endpoint interne) pour un envoi direct.
 2. **Lien Connexion** : pointe vers `https://app.cineplanner.fr` — à confirmer.
 3. **Calendly** : `https://calendly.com/thibaud-cineplanner/30min` (démo / expert).
-4. **Blog** : un seul article rédigé ; les 12 cartes pointent vers lui. À enrichir.
+4. **Blog** : en cours de refonte — voir `blog.html` et les articles à la racine.
 5. **Photos du blog** : chargées depuis Pexels (licence gratuite, sans attribution).
    Pour supprimer la dépendance externe, les télécharger dans `assets/`.
 6. **Analytics** : aucun traqueur installé (la politique de confidentialité mentionne

@@ -94,7 +94,7 @@
 
   <!-- ARTICLE À LA UNE -->
   <div style="max-width:1120px; margin:0 auto; padding:44px 48px 0;">
-    <a href="Article.dc.html" style="display:grid; grid-template-columns:1.1fr 1fr; gap:0; background:#fff; border:1px solid #eceaf6; border-radius:22px; overflow:hidden; box-shadow:0 24px 54px -34px rgba(22,22,42,.35);">
+    <a href="/convention-collective-cinema" style="display:grid; grid-template-columns:1.1fr 1fr; gap:0; background:#fff; border:1px solid #eceaf6; border-radius:22px; overflow:hidden; box-shadow:0 24px 54px -34px rgba(22,22,42,.35);">
       <div style="position:relative; min-height:300px; background:linear-gradient(150deg,var(--accent),var(--accent-dark));">
         <img src="https://images.pexels.com/photos/7234229/pexels-photo-7234229.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop" alt="Salle de cinéma" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
         <span style="position:absolute; left:24px; bottom:24px; z-index:1; background:rgba(22,21,47,.72); color:#fff; font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; padding:7px 12px; border-radius:999px;">À la une</span>
@@ -121,7 +121,7 @@
   <div style="max-width:1120px; margin:0 auto; padding:28px 48px 20px;">
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
       <sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
-        <a href="Article.dc.html" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
+        <a href="/convention-collective-cinema" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
           <div style="position:relative; height:150px; background:{{ p.bgImg }};"></div>
           <div style="padding:22px; display:flex; flex-direction:column; flex:1;">
             <span style="font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">{{ p.cat }}</span>
@@ -151,7 +151,7 @@
   <!-- FOOTER -->
   <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
     <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
-    <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="Mentions%20legales.dc.html" style="color:#7a7a92;">Mentions légales</a><a href="Confidentialite.dc.html" style="color:#7a7a92;">Confidentialité</a><a href="CGU.dc.html" style="color:#7a7a92;">CGU</a></span>
+    <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="/mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="/confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="/cgu" style="color:#7a7a92;">CGU</a></span>
   </div>
 </div>
 </x-dc>
