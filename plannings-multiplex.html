@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Multiplex : construire des plannings conformes en moins d'une heure — Ciné Planner</title>
+<meta name="description" content="Semaines-types, alertes conventionnelles et autonomie par site : la méthode pour planifier un multiplexe sans y passer la journée, et sans découvrir les non-conformités au moment de la paie.">
+<link rel="canonical" href="https://www.cineplanner.fr/plannings-multiplex">
+<link rel="icon" type="image/png" href="./assets/logo-mark.png">
+<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ciné Planner">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Multiplex : construire des plannings conformes en moins d'une heure — Ciné Planner">
+<meta property="og:description" content="Semaines-types, alertes conventionnelles et autonomie par site : la méthode pour planifier un multiplexe sans y passer la journée, et sans découvrir les non-conformités au moment de la paie.">
+<meta property="og:url" content="https://www.cineplanner.fr/plannings-multiplex">
+<meta property="og:image" content="https://www.cineplanner.fr/assets/og-cineplanner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Multiplex : construire des plannings conformes en moins d'une heure — Ciné Planner">
+<meta name="twitter:description" content="Semaines-types, alertes conventionnelles et autonomie par site : la méthode pour planifier un multiplexe sans y passer la journée, et sans découvrir les non-conformités au moment de la paie.">
+<meta name="twitter:image" content="https://www.cineplanner.fr/assets/og-cineplanner.png">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#5B4FE8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #fff; --accent:#5B4FE8; --accent-dark:#3d2fc4; --accent-soft:#ecebfd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-dark); }
+  .art h2 { font: 700 26px/1.3 'Inter'; letter-spacing: -.01em; color: #16162a; margin: 44px 0 0; }
+  .art h3 { font: 700 20px/1.35 'Inter'; color: #16162a; margin: 32px 0 0; }
+  .art p { font: 400 18px/1.75 'Inter'; color: #33334a; margin: 18px 0 0; }
+  .art ul { margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .art li { position: relative; padding-left: 30px; font: 400 18px/1.65 'Inter'; color: #33334a; }
+  .art li::before { content: ""; position: absolute; left: 0; top: 9px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent-soft); box-shadow: inset 0 0 0 3px var(--accent); }
+  @media (max-width: 960px) {
+    [style*="grid-template-columns: repeat(3, 1fr)"], [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="padding: 20px 48px"] { padding: 14px 20px !important; }
+    [style*="padding: 56px 48px"], [style*="padding: 64px 48px"],
+    [style*="padding: 0px 48px"] { padding-left: 22px !important; padding-right: 22px !important; }
+    [style*="padding: 40px 44px"] { padding: 28px 22px !important; }
+  }
+
+  @media (min-width: 641px) and (max-width: 1024px) {
+    [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+    [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+</style>
+<script src="./trial-popup.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://www.cineplanner.fr/plannings-multiplex#article",
+  "headline": "Multiplex : construire des plannings conformes en moins d'une heure",
+  "description": "Semaines-types, alertes conventionnelles et autonomie par site : la méthode pour planifier un multiplexe sans y passer la journée, et sans découvrir les non-conformités au moment de la paie.",
+  "inLanguage": "fr",
+  "datePublished": "2026-05-28",
+  "dateModified": "2026-05-28",
+  "author": {
+    "@type": "Organization",
+    "name": "Ciné Planner",
+    "@id": "https://www.cineplanner.fr/#organisation"
+  },
+  "publisher": {
+    "@id": "https://www.cineplanner.fr/#organisation"
+  },
+  "mainEntityOfPage": "https://www.cineplanner.fr/plannings-multiplex",
+  "articleSection": "Planning",
+  "image": "https://images.pexels.com/photos/7991303/pexels-photo-7991303.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://www.cineplanner.fr/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.cineplanner.fr/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Multiplex : construire des plannings conformes en moins d'une heure",
+      "item": "https://www.cineplanner.fr/plannings-multiplex"
+    }
+  ]
+}
+</script>
+</helmet>
+
+<div>
+  <!-- NAV -->
+  <dc-import name="SiteNav" active="blog" hint-size="100%,86px"></dc-import>
+
+  <!-- EN-TÊTE ARTICLE -->
+  <div style="max-width:800px; margin:0 auto; padding:56px 48px 0;">
+    <div style="font:500 14px/1 'Inter'; color:#8a8aa4;"><a href="blog" style="color:#8a8aa4;">Blog</a> <span style="margin:0 8px;">/</span> <span style="color:var(--accent);">Planning</span></div>
+    <h1 style="font:800 clamp(32px,4vw,46px)/1.14 'Inter'; letter-spacing:-.02em; color:#16162a; margin:20px 0 0;">Multiplex : construire des plannings conformes en moins d'une heure</h1>
+    <div style="display:flex; align-items:center; gap:14px; margin-top:26px;">
+      <div style="width:46px; height:46px; border-radius:50%; background:linear-gradient(150deg,var(--accent),var(--accent-dark)); color:#fff; display:flex; align-items:center; justify-content:center; font:800 16px/1 'Inter';">CP</div>
+      <div>
+        <div style="font:700 15px/1.2 'Inter'; color:#16162a;">L'équipe Ciné Planner</div>
+        <div style="font:500 13px/1.3 'Inter'; color:#8a8aa4; margin-top:3px;">28 mai 2026 · 6 min de lecture</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNIÈRE -->
+  <div style="max-width:1000px; margin:36px auto 0; padding:0 48px;">
+    <div style="position:relative; height:340px; border-radius:24px; overflow:hidden; background:linear-gradient(150deg,var(--accent),var(--accent-dark)); box-shadow:0 40px 80px -44px rgba(61,47,196,.7);"><img src="{{ heroImg }}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></div>
+  </div>
+
+  <!-- CORPS -->
+  <div class="art" style="max-width:800px; margin:0 auto; padding:44px 48px 0;">
+    <p style="font-size:20px; color:#16162a; font-weight:500;">Dans un multiplexe, le planning n'est pas un tableau à remplir : c'est un arbitrage permanent entre la grille de séances, la disponibilité des équipes et les règles de la convention collective. Fait à la main, cet arbitrage prend une journée. Structuré, il prend une heure.</p>
+
+    <h2>Partir de la grille de séances, pas des salariés</h2>
+    <p>L'erreur la plus courante consiste à ouvrir le planning et à placer les personnes une par une. On raisonne alors par disponibilité individuelle, et la couverture réelle des besoins n'apparaît qu'à la fin — souvent trop tard pour corriger.</p>
+    <p>La méthode inverse est plus rapide : partir de ce que la semaine exige. Combien de personnes en caisse à quelle heure, qui ouvre, qui ferme, quels créneaux sont critiques. Une fois ces besoins posés, l'affectation devient une question d'ajustement et non de construction.</p>
+
+    <h2>Capitaliser sur les semaines-types</h2>
+    <p>Une exploitation connaît un petit nombre de configurations récurrentes : semaine ordinaire, vacances scolaires, sortie majeure, période creuse. Ces configurations se répètent toute l'année.</p>
+    <p>Les enregistrer comme modèles réutilisables transforme la planification : au lieu de repartir d'une page blanche, vous chargez la semaine-type correspondante et vous n'ajustez que les exceptions. C'est le levier qui fait passer une journée de travail à une heure.</p>
+
+    <h2>Détecter les non-conformités avant validation, pas après</h2>
+    <p>Un dépassement d'amplitude, un repos insuffisant, une séquence de nuit mal qualifiée : ces écarts sont indétectables à l'œil sur une grille dense. Ils se révèlent au moment de la paie, quand il est trop tard pour changer le planning.</p>
+    <p>Le contrôle doit donc intervenir au moment de la construction. Une alerte qui apparaît pendant que vous placez un shift vous coûte trente secondes ; la même erreur découverte en fin de mois coûte un rappel de salaire.</p>
+
+    <div style="margin:36px 0 0; background:radial-gradient(90% 70% at 0% 0%, var(--accent-soft), #f7f7fd 60%); border:1px solid #ecebf7; border-left:4px solid var(--accent); border-radius:16px; padding:26px 28px;">
+      <div style="font:700 13px/1 'Inter'; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);">À retenir</div>
+      <p style="margin:12px 0 0; font:500 17px/1.6 'Inter'; color:#28283e;">Ciné Planner applique les règles de la convention collective pendant la construction du planning : chaque infraction est signalée avant validation, et les semaines-types se dupliquent d'un site à l'autre.</p>
+    </div>
+
+    <h2>Les points de friction propres au multiplexe</h2>
+    <p>Plus il y a de salles, plus les effets de bord se multiplient.</p>
+    <ul>
+      <li>La polyvalence : un même salarié couvre caisse, confiserie et parfois projection, avec des compétences à respecter</li>
+      <li>Les séances tardives : elles engagent des majorations et des contreparties qu'il faut anticiper dès la planification</li>
+      <li>Les remplacements : une absence en période forte se répercute sur toute la semaine si le planning n'est pas réajustable rapidement</li>
+      <li>Les temps partiels : le suivi des heures complémentaires devient vite ingérable sans compteur automatique</li>
+    </ul>
+
+    <h2>Donner de l'autonomie sans perdre le contrôle</h2>
+    <p>Dans un groupe, la tentation est de centraliser toute la planification au siège. C'est une erreur d'échelle : personne au siège ne connaît les contraintes du samedi soir d'un site donné.</p>
+    <p>Le bon équilibre consiste à laisser chaque établissement construire son planning, dans un cadre commun de règles et de modèles définis au niveau du groupe. La direction garde la vue consolidée et l'alerte ; le site garde la main sur son quotidien.</p>
+
+    <h2>Mesurer ce qui compte</h2>
+    <p>Deux indicateurs suffisent à savoir si votre processus tient : le temps de construction d'une semaine, et le nombre d'écarts constatés entre planifié et réalisé.</p>
+    <p>Si le second augmente, ce n'est pas l'équipe qui dérive : c'est le planning initial qui était irréaliste.</p>
+
+  </div>
+
+  <!-- CTA -->
+  <div style="max-width:800px; margin:52px auto 0; padding:0 48px;">
+    <div style="background:linear-gradient(150deg,var(--accent),var(--accent-dark)); border-radius:22px; padding:40px 44px; color:#fff; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; box-shadow:0 40px 80px -44px rgba(61,47,196,.7);">
+      <div>
+        <div style="font:800 22px/1.25 'Inter';">Planifiez votre multiplexe sereinement</div>
+        <div style="font:400 15px/1.55 'Inter'; color:#e0dcff; margin-top:8px;">Testez Ciné Planner 14 jours, sans carte bancaire.</div>
+      </div>
+      <a href="essai-gratuit" style="flex:none; background:#fff; color:var(--accent-dark); font:700 15px/1 'Inter'; padding:15px 24px; border-radius:12px;">Démarrer l'essai</a>
+    </div>
+  </div>
+
+  <!-- ARTICLES LIÉS -->
+  <div style="max-width:1120px; margin:64px auto 0; padding:0 48px;">
+    <h2 style="font:800 26px/1.2 'Inter'; letter-spacing:-.01em; color:#16162a; margin:0 0 24px;">À lire ensuite</h2>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+        <a href="{{ r.href }}" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
+          <div style="position:relative; height:130px; background:{{ r.bgImg }};"></div>
+          <div style="padding:20px;">
+            <span style="font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">{{ r.cat }}</span>
+            <h3 style="font:800 17px/1.3 'Inter'; letter-spacing:-.01em; color:#16162a; margin:12px 0 0;">{{ r.title }}</h3>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:40px 48px; margin-top:64px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <span style="font:400 13px/1.5 'Inter'; color:#b7b4d6;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="cgu" style="color:#7a7a92;">CGU</a></span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){
+        return {
+      heroImg: 'https://images.pexels.com/photos/7991303/pexels-photo-7991303.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop',
+      related: [
+        { cat:'Paie', title:"Zéro ressaisie : fiabiliser votre export de paie en cinéma", href:'export-paie-sans-ressaisie', bgImg:'url(https://images.pexels.com/photos/6694492/pexels-photo-6694492.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
+        { cat:'Conformité', title:"Feuilles de présence signées : ce que vous devez pouvoir prouver", href:'feuilles-presence-signees', bgImg:'url(https://images.pexels.com/photos/7821913/pexels-photo-7821913.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
+        { cat:'Paie', title:"Primes de panier au cinéma : conditions d'attribution et automatisation", href:'primes-panier-cinema', bgImg:'url(https://images.pexels.com/photos/209224/pexels-photo-209224.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

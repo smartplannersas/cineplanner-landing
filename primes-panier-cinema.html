@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Primes de panier au cinéma : conditions d'attribution et automatisation — Ciné Planner</title>
+<meta name="description" content="Panier repas, panier soir : pourquoi ces primes sont la première source d'erreur de paie en exploitation cinématographique, et comment fiabiliser leur attribution.">
+<link rel="canonical" href="https://www.cineplanner.fr/primes-panier-cinema">
+<link rel="icon" type="image/png" href="./assets/logo-mark.png">
+<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ciné Planner">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Primes de panier au cinéma : conditions d'attribution et automatisation — Ciné Planner">
+<meta property="og:description" content="Panier repas, panier soir : pourquoi ces primes sont la première source d'erreur de paie en exploitation cinématographique, et comment fiabiliser leur attribution.">
+<meta property="og:url" content="https://www.cineplanner.fr/primes-panier-cinema">
+<meta property="og:image" content="https://www.cineplanner.fr/assets/og-cineplanner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Primes de panier au cinéma : conditions d'attribution et automatisation — Ciné Planner">
+<meta name="twitter:description" content="Panier repas, panier soir : pourquoi ces primes sont la première source d'erreur de paie en exploitation cinématographique, et comment fiabiliser leur attribution.">
+<meta name="twitter:image" content="https://www.cineplanner.fr/assets/og-cineplanner.png">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#5B4FE8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #fff; --accent:#5B4FE8; --accent-dark:#3d2fc4; --accent-soft:#ecebfd; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--accent-dark); }
+  .art h2 { font: 700 26px/1.3 'Inter'; letter-spacing: -.01em; color: #16162a; margin: 44px 0 0; }
+  .art h3 { font: 700 20px/1.35 'Inter'; color: #16162a; margin: 32px 0 0; }
+  .art p { font: 400 18px/1.75 'Inter'; color: #33334a; margin: 18px 0 0; }
+  .art ul { margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .art li { position: relative; padding-left: 30px; font: 400 18px/1.65 'Inter'; color: #33334a; }
+  .art li::before { content: ""; position: absolute; left: 0; top: 9px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent-soft); box-shadow: inset 0 0 0 3px var(--accent); }
+  @media (max-width: 960px) {
+    [style*="grid-template-columns: repeat(3, 1fr)"], [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="padding: 20px 48px"] { padding: 14px 20px !important; }
+    [style*="padding: 56px 48px"], [style*="padding: 64px 48px"],
+    [style*="padding: 0px 48px"] { padding-left: 22px !important; padding-right: 22px !important; }
+    [style*="padding: 40px 44px"] { padding: 28px 22px !important; }
+  }
+
+  @media (min-width: 641px) and (max-width: 1024px) {
+    [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+    [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+</style>
+<script src="./trial-popup.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://www.cineplanner.fr/primes-panier-cinema#article",
+  "headline": "Primes de panier au cinéma : conditions d'attribution et automatisation",
+  "description": "Panier repas, panier soir : pourquoi ces primes sont la première source d'erreur de paie en exploitation cinématographique, et comment fiabiliser leur attribution.",
+  "inLanguage": "fr",
+  "datePublished": "2026-05-07",
+  "dateModified": "2026-05-07",
+  "author": {
+    "@type": "Organization",
+    "name": "Ciné Planner",
+    "@id": "https://www.cineplanner.fr/#organisation"
+  },
+  "publisher": {
+    "@id": "https://www.cineplanner.fr/#organisation"
+  },
+  "mainEntityOfPage": "https://www.cineplanner.fr/primes-panier-cinema",
+  "articleSection": "Paie",
+  "image": "https://images.pexels.com/photos/209224/pexels-photo-209224.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://www.cineplanner.fr/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.cineplanner.fr/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Primes de panier au cinéma : conditions d'attribution et automatisation",
+      "item": "https://www.cineplanner.fr/primes-panier-cinema"
+    }
+  ]
+}
+</script>
+</helmet>
+
+<div>
+  <!-- NAV -->
+  <dc-import name="SiteNav" active="blog" hint-size="100%,86px"></dc-import>
+
+  <!-- EN-TÊTE ARTICLE -->
+  <div style="max-width:800px; margin:0 auto; padding:56px 48px 0;">
+    <div style="font:500 14px/1 'Inter'; color:#8a8aa4;"><a href="blog" style="color:#8a8aa4;">Blog</a> <span style="margin:0 8px;">/</span> <span style="color:var(--accent);">Paie</span></div>
+    <h1 style="font:800 clamp(32px,4vw,46px)/1.14 'Inter'; letter-spacing:-.02em; color:#16162a; margin:20px 0 0;">Primes de panier au cinéma : conditions d'attribution et automatisation</h1>
+    <div style="display:flex; align-items:center; gap:14px; margin-top:26px;">
+      <div style="width:46px; height:46px; border-radius:50%; background:linear-gradient(150deg,var(--accent),var(--accent-dark)); color:#fff; display:flex; align-items:center; justify-content:center; font:800 16px/1 'Inter';">CP</div>
+      <div>
+        <div style="font:700 15px/1.2 'Inter'; color:#16162a;">L'équipe Ciné Planner</div>
+        <div style="font:500 13px/1.3 'Inter'; color:#8a8aa4; margin-top:3px;">7 mai 2026 · 5 min de lecture</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNIÈRE -->
+  <div style="max-width:1000px; margin:36px auto 0; padding:0 48px;">
+    <div style="position:relative; height:340px; border-radius:24px; overflow:hidden; background:linear-gradient(150deg,var(--accent),var(--accent-dark)); box-shadow:0 40px 80px -44px rgba(61,47,196,.7);"><img src="{{ heroImg }}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"></div>
+  </div>
+
+  <!-- CORPS -->
+  <div class="art" style="max-width:800px; margin:0 auto; padding:44px 48px 0;">
+    <p style="font-size:20px; color:#16162a; font-weight:500;">Les primes de panier sont un petit montant et un gros problème. Petit, parce qu'une prime isolée pèse peu. Gros, parce que leur attribution dépend des horaires réellement effectués — donc d'une donnée qui change chaque jour, pour chaque salarié.</p>
+
+    <h2>Une prime qui se déclenche sur le réalisé, pas sur le prévu</h2>
+    <p>C'est toute la difficulté. Une prime de panier ne se décide pas au moment où l'on construit le planning : elle découle des horaires effectivement travaillés, connus après coup.</p>
+    <p>Un salarié dont la fermeture s'est prolongée peut y ouvrir droit alors que son planning ne le prévoyait pas. L'inverse est vrai aussi. Toute méthode fondée sur le planning prévisionnel produit donc mécaniquement des écarts.</p>
+
+    <h2>Deux erreurs symétriques, deux conséquences différentes</h2>
+    <p>Sous-attribuer expose à un rappel de salaire et, si l'erreur est systématique, à un litige collectif. Sur-attribuer ne provoque aucune réclamation — et c'est précisément ce qui la rend durable : personne ne la signale, elle passe inaperçue pendant des années.</p>
+    <p>Les deux erreurs viennent de la même cause : un calcul manuel appliqué à une règle conditionnelle sur des horaires variables.</p>
+
+    <h2>Ce qu'il faut vérifier dans votre convention</h2>
+    <p>Les conditions exactes d'attribution, les montants et leur revalorisation figurent dans la convention collective de l'exploitation cinématographique et, le cas échéant, dans vos accords d'entreprise. Ces éléments évoluent : un montant appris il y a trois ans n'est pas nécessairement celui d'aujourd'hui.</p>
+    <p>Avant d'automatiser quoi que ce soit, faites confirmer par votre cabinet les seuils horaires qui déclenchent chaque type de panier, les montants en vigueur, leur régime social et fiscal, et le cumul éventuel avec d'autres indemnités.</p>
+    <ul>
+      <li>Quel horaire déclenche le panier repas, et à partir de quelle durée</li>
+      <li>Quel horaire déclenche le panier soir</li>
+      <li>Les deux peuvent-ils se cumuler sur une même journée</li>
+      <li>Le traitement en cas d'absence, de formation ou de journée partielle</li>
+      <li>La date de la dernière revalorisation des montants</li>
+    </ul>
+
+    <div style="margin:36px 0 0; background:radial-gradient(90% 70% at 0% 0%, var(--accent-soft), #f7f7fd 60%); border:1px solid #ecebf7; border-left:4px solid var(--accent); border-radius:16px; padding:26px 28px;">
+      <div style="font:700 13px/1 'Inter'; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);">À retenir</div>
+      <p style="margin:12px 0 0; font:500 17px/1.6 'Inter'; color:#28283e;">Ciné Planner calcule les primes de panier à partir des heures réellement effectuées et les porte dans l'export de paie avec leur motif d'attribution, ce qui rend le contrôle immédiat.</p>
+    </div>
+
+    <h2>Automatiser suppose d'abord d'écrire la règle</h2>
+    <p>Un logiciel n'invente pas votre politique de paniers : il applique celle que vous lui décrivez. L'exercice utile n'est donc pas technique mais documentaire — écrire noir sur blanc la règle appliquée dans votre établissement.</p>
+    <p>Cet exercice révèle souvent que la règle n'était pas la même selon la personne qui préparait la paie. C'est en soi le premier résultat.</p>
+
+    <h2>Le contrôle qui vaut le détour</h2>
+    <p>Prenez un mois clos et comparez, pour chaque salarié, le nombre de paniers versés au nombre de journées qui remplissaient les conditions.</p>
+    <p>Un écart supérieur à quelques pourcents indique que votre calcul ne s'appuie pas sur le réalisé. C'est un bon point de départ pour une discussion avec votre cabinet.</p>
+
+  </div>
+
+  <!-- CTA -->
+  <div style="max-width:800px; margin:52px auto 0; padding:0 48px;">
+    <div style="background:linear-gradient(150deg,var(--accent),var(--accent-dark)); border-radius:22px; padding:40px 44px; color:#fff; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; box-shadow:0 40px 80px -44px rgba(61,47,196,.7);">
+      <div>
+        <div style="font:800 22px/1.25 'Inter';">Fiabilisez vos primes de panier</div>
+        <div style="font:400 15px/1.55 'Inter'; color:#e0dcff; margin-top:8px;">Testez Ciné Planner 14 jours, sans carte bancaire.</div>
+      </div>
+      <a href="essai-gratuit" style="flex:none; background:#fff; color:var(--accent-dark); font:700 15px/1 'Inter'; padding:15px 24px; border-radius:12px;">Démarrer l'essai</a>
+    </div>
+  </div>
+
+  <!-- ARTICLES LIÉS -->
+  <div style="max-width:1120px; margin:64px auto 0; padding:0 48px;">
+    <h2 style="font:800 26px/1.2 'Inter'; letter-spacing:-.01em; color:#16162a; margin:0 0 24px;">À lire ensuite</h2>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+        <a href="{{ r.href }}" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
+          <div style="position:relative; height:130px; background:{{ r.bgImg }};"></div>
+          <div style="padding:20px;">
+            <span style="font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">{{ r.cat }}</span>
+            <h3 style="font:800 17px/1.3 'Inter'; letter-spacing:-.01em; color:#16162a; margin:12px 0 0;">{{ r.title }}</h3>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:40px 48px; margin-top:64px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <span style="font:400 13px/1.5 'Inter'; color:#b7b4d6;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="cgu" style="color:#7a7a92;">CGU</a></span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){
+        return {
+      heroImg: 'https://images.pexels.com/photos/209224/pexels-photo-209224.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop',
+      related: [
+        { cat:'Paie', title:"Zéro ressaisie : fiabiliser votre export de paie en cinéma", href:'export-paie-sans-ressaisie', bgImg:'url(https://images.pexels.com/photos/6694492/pexels-photo-6694492.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
+        { cat:'Planning', title:"Multiplex : construire des plannings conformes en moins d'une heure", href:'plannings-multiplex', bgImg:'url(https://images.pexels.com/photos/7991303/pexels-photo-7991303.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
+        { cat:'Conformité', title:"Feuilles de présence signées : ce que vous devez pouvoir prouver", href:'feuilles-presence-signees', bgImg:'url(https://images.pexels.com/photos/7821913/pexels-photo-7821913.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
