@@ -108,7 +108,7 @@
 
   <!-- EN-TÊTE ARTICLE -->
   <div style="max-width:800px; margin:0 auto; padding:56px 48px 0;">
-    <div style="font:500 14px/1 'Inter'; color:#8a8aa4;"><a href="/blog" style="color:#8a8aa4;">Blog</a> <span style="margin:0 8px;">/</span> <span style="color:var(--accent);">Conformité</span></div>
+    <div style="font:500 14px/1 'Inter'; color:#8a8aa4;"><a href="blog" style="color:#8a8aa4;">Blog</a> <span style="margin:0 8px;">/</span> <span style="color:var(--accent);">Conformité</span></div>
     <h1 style="font:800 clamp(32px,4vw,46px)/1.14 'Inter'; letter-spacing:-.02em; color:#16162a; margin:20px 0 0;">Convention collective de l'exploitation cinématographique : les 6 points qui coûtent le plus cher</h1>
     <div style="display:flex; align-items:center; gap:14px; margin-top:26px;">
       <div style="width:46px; height:46px; border-radius:50%; background:linear-gradient(150deg,var(--accent),var(--accent-dark)); color:#fff; display:flex; align-items:center; justify-content:center; font:800 16px/1 'Inter';">CP</div>
@@ -190,7 +190,7 @@
   <!-- FOOTER -->
   <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:40px 48px; margin-top:64px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
     <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
-    <span style="font:400 13px/1.5 'Inter'; color:#b7b4d6;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="/mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="/confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="/cgu" style="color:#7a7a92;">CGU</a></span>
+    <span style="font:400 13px/1.5 'Inter'; color:#b7b4d6;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="cgu" style="color:#7a7a92;">CGU</a></span>
   </div>
 </div>
 </x-dc>
@@ -201,9 +201,9 @@ class Component extends DCLogic {
     return {
       heroImg: uimg('1561722798-9a732d141027'),
       related: [
-        { cat:'Paie', title:"Zéro ressaisie : fiabiliser votre export de paie en cinéma", href:'/export-paie-sans-ressaisie', bgImg:'url(https://images.pexels.com/photos/6694492/pexels-photo-6694492.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
-        { cat:'Planning', title:"Multiplex : construire des plannings conformes en moins d'une heure", href:'/plannings-multiplex', bgImg:'url(https://images.pexels.com/photos/7991303/pexels-photo-7991303.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
-        { cat:'Conformité', title:"Feuilles de présence signées : ce que vous devez pouvoir prouver", href:'/feuilles-presence-signees', bgImg:'url(https://images.pexels.com/photos/7821913/pexels-photo-7821913.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' }
+        { cat:'Paie', title:"Zéro ressaisie : fiabiliser votre export de paie en cinéma", href:'export-paie-sans-ressaisie', bgImg:'url(https://images.pexels.com/photos/6694492/pexels-photo-6694492.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
+        { cat:'Planning', title:"Multiplex : construire des plannings conformes en moins d'une heure", href:'plannings-multiplex', bgImg:'url(https://images.pexels.com/photos/7991303/pexels-photo-7991303.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
+        { cat:'Conformité', title:"Feuilles de présence signées : ce que vous devez pouvoir prouver", href:'feuilles-presence-signees', bgImg:'url(https://images.pexels.com/photos/7821913/pexels-photo-7821913.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' }
       ]
     };
   }

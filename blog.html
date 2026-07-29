@@ -94,7 +94,7 @@
 
   <!-- ARTICLE À LA UNE -->
   <div style="max-width:1120px; margin:0 auto; padding:44px 48px 0;">
-    <a href="/convention-collective-cinema" style="display:grid; grid-template-columns:1.1fr 1fr; gap:0; background:#fff; border:1px solid #eceaf6; border-radius:22px; overflow:hidden; box-shadow:0 24px 54px -34px rgba(22,22,42,.35);">
+    <a href="convention-collective-cinema" style="display:grid; grid-template-columns:1.1fr 1fr; gap:0; background:#fff; border:1px solid #eceaf6; border-radius:22px; overflow:hidden; box-shadow:0 24px 54px -34px rgba(22,22,42,.35);">
       <div style="position:relative; min-height:300px; background:linear-gradient(150deg,var(--accent),var(--accent-dark));">
         <img src="https://images.pexels.com/photos/7234229/pexels-photo-7234229.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop" alt="Salle de cinéma" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
         <span style="position:absolute; left:24px; bottom:24px; z-index:1; background:rgba(22,21,47,.72); color:#fff; font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; padding:7px 12px; border-radius:999px;">À la une</span>
@@ -151,7 +151,7 @@
   <!-- FOOTER -->
   <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
     <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
-    <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="/mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="/confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="/cgu" style="color:#7a7a92;">CGU</a></span>
+    <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span><span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="cgu" style="color:#7a7a92;">CGU</a></span>
   </div>
 </div>
 </x-dc>
@@ -177,7 +177,7 @@ class Component extends DCLogic {
     const px = id => 'url(https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=1100&h=620&fit=crop) center/cover no-repeat';
     
     const posts = postsRaw
-      .map((p, i) => ({ cat:p[0], title:p[1], excerpt:p[2], date:p[3], read:p[4] + ' de lecture', href:'/' + p[5], slot:'blog-post-' + i, bgImg: px(p[6]) }))
+      .map((p, i) => ({ cat:p[0], title:p[1], excerpt:p[2], date:p[3], read:p[4] + ' de lecture', href: p[5], slot:'blog-post-' + i, bgImg: px(p[6]) }))
       .filter(p => active === 'Tous' || p.cat === active);
     const chipOn = "font:600 14px/1 'Inter'; border:none; cursor:pointer; padding:10px 16px; border-radius:999px; background:var(--accent); color:#fff;";
     const chipOff = "font:600 14px/1 'Inter'; border:1px solid #e4e4ef; cursor:pointer; padding:10px 16px; border-radius:999px; background:#fff; color:#5c5c72;";
