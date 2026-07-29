@@ -167,7 +167,7 @@
         <div style="font:800 22px/1.25 'Inter';">Automatisez votre conformité CCN</div>
         <div style="font:400 15px/1.55 'Inter'; color:#e0dcff; margin-top:8px;">Testez Ciné Planner 14 jours, sans carte bancaire.</div>
       </div>
-      <a href="/essai-gratuit" style="flex:none; background:#fff; color:var(--accent-dark); font:700 15px/1 'Inter'; padding:15px 24px; border-radius:12px;">Démarrer l'essai</a>
+      <a href="essai-gratuit" style="flex:none; background:#fff; color:var(--accent-dark); font:700 15px/1 'Inter'; padding:15px 24px; border-radius:12px;">Démarrer l'essai</a>
     </div>
   </div>
 
@@ -176,7 +176,7 @@
     <h2 style="font:800 26px/1.2 'Inter'; letter-spacing:-.01em; color:#16162a; margin:0 0 24px;">À lire ensuite</h2>
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
       <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
-        <a href="/convention-collective-cinema" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
+        <a href="{{ r.href }}" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
           <div style="position:relative; height:130px; background:{{ r.bgImg }};"></div>
           <div style="padding:20px;">
             <span style="font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">{{ r.cat }}</span>
@@ -201,9 +201,9 @@ class Component extends DCLogic {
     return {
       heroImg: uimg('1561722798-9a732d141027'),
       related: [
-        { cat:'Paie', title:'Zéro ressaisie : fiabiliser votre export paie en cinéma', bg:'#e9e7fb', slot:'article-rel-0', bgImg:'url(https://images.pexels.com/photos/6694492/pexels-photo-6694492.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop) center/cover no-repeat' },
-        { cat:'Planning', title:"Multiplex : des plannings conformes en moins d'une heure", bg:'#e3eefe', slot:'article-rel-1', bgImg:'url(https://images.pexels.com/photos/7991303/pexels-photo-7991303.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop) center/cover no-repeat' },
-        { cat:'Conformité', title:'Feuilles de présence signées : ce que dit la loi', bg:'#fdeee3', slot:'article-rel-2', bgImg:'url(https://images.pexels.com/photos/7821913/pexels-photo-7821913.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop) center/cover no-repeat' }
+        { cat:'Paie', title:"Zéro ressaisie : fiabiliser votre export de paie en cinéma", href:'/export-paie-sans-ressaisie', bgImg:'url(https://images.pexels.com/photos/6694492/pexels-photo-6694492.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
+        { cat:'Planning', title:"Multiplex : construire des plannings conformes en moins d'une heure", href:'/plannings-multiplex', bgImg:'url(https://images.pexels.com/photos/7991303/pexels-photo-7991303.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' },
+        { cat:'Conformité', title:"Feuilles de présence signées : ce que vous devez pouvoir prouver", href:'/feuilles-presence-signees', bgImg:'url(https://images.pexels.com/photos/7821913/pexels-photo-7821913.jpeg?auto=compress&cs=tinysrgb&w=1400&h=800&fit=crop) center/cover no-repeat' }
       ]
     };
   }

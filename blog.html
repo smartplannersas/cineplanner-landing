@@ -121,7 +121,7 @@
   <div style="max-width:1120px; margin:0 auto; padding:28px 48px 20px;">
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
       <sc-for list="{{ posts }}" as="p" hint-placeholder-count="6">
-        <a href="/convention-collective-cinema" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
+        <a href="{{ p.href }}" style="display:flex; flex-direction:column; background:#fff; border:1px solid #eceaf6; border-radius:18px; overflow:hidden;" style-hover="box-shadow:0 24px 50px -32px rgba(22,22,42,.4);">
           <div style="position:relative; height:150px; background:{{ p.bgImg }};"></div>
           <div style="padding:22px; display:flex; flex-direction:column; flex:1;">
             <span style="font:700 11px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);">{{ p.cat }}</span>
@@ -165,26 +165,19 @@ class Component extends DCLogic {
       excerpt:"Heures de nuit, durée maximale de shift, paniers repas… Passage en revue des règles les plus souvent mal appliquées, et comment les automatiser.",
       date:'12 juin 2026', read:'7 min de lecture'
     };
+    // Un article = une page réelle. Ne rien ajouter ici sans écrire la page correspondante.
     const postsRaw = [
-      ['Paie', "Zéro ressaisie : comment fiabiliser votre export paie en cinéma", "Du planning validé aux éléments variables de paie, sans erreur de prime.", '4 juin 2026', '5 min', '#e9e7fb'],
-      ['Planning', "Multiplex : construire des plannings conformes en moins d'une heure", "Semaines-types, alertes conventionnelles et autonomie par site.", '28 mai 2026', '6 min', '#e3eefe'],
-      ['Management', "Faire adopter le planning mobile par toute l'équipe", "Les leviers concrets pour dépasser 90 % d'adoption mobile.", '21 mai 2026', '4 min', '#e2f4ec'],
-      ['Conformité', "Feuilles de présence signées : ce que dit vraiment la loi", "Valeur juridique de la signature électronique et bonnes pratiques d'archivage.", '14 mai 2026', '5 min', '#fdeee3'],
-      ['Paie', "Primes de panier au cinéma : le guide de calcul", "Panier repas, panier soir : conditions d'attribution et automatisation.", '7 mai 2026', '6 min', '#f0e6fa'],
-      ['Management', "Recruter et onboarder vos saisonniers d'été", "Contrats, checklist d'intégration et planning : le kit de la rentrée estivale.", '30 avril 2026', '5 min', '#e9e7fb'],
-      ['Conformité', "Heures de nuit en cinéma : majorations et contreparties", "Comment qualifier les séances tardives et sécuriser les majorations dues.", '23 avril 2026', '6 min', '#e3eefe'],
-      ['Planning', "Modulation du temps de travail : bien la paramétrer", "Lisser l'activité sur l'année sans perdre le fil des compteurs d'heures.", '16 avril 2026', '7 min', '#e2f4ec'],
-      ['Paie', "Connecter Ciné Planner à votre logiciel de paie", "Silae, Sage, Cegid : ce que change une intégration native pour votre RH.", '9 avril 2026', '4 min', '#fdeee3'],
-      ['Management', "Gérer les demandes de congés sans tableur", "Un circuit clair de demande, validation et compteur, côté salarié et direction.", '2 avril 2026', '5 min', '#f0e6fa'],
-      ['Conformité', "Contrats CDD, CDI, avenants : les erreurs à éviter", "Mentions obligatoires, variables dynamiques et workflow d'approbation.", '26 mars 2026', '6 min', '#e9e7fb'],
-      ['Planning', "Piloter plusieurs cinémas depuis une seule vue", "Autonomie par site et consolidation groupe : trouver le bon équilibre.", '19 mars 2026', '5 min', '#e3eefe']
+      ['Paie', "Zéro ressaisie : fiabiliser votre export de paie en cinéma", "Du planning validé aux éléments variables transmis au cabinet : où naissent les erreurs, et comment supprimer la ressaisie.", '4 juin 2026', '6 min', 'export-paie-sans-ressaisie', 6694492],
+      ['Planning', "Multiplex : construire des plannings conformes en moins d'une heure", "Semaines-types, alertes conventionnelles et autonomie par site : la méthode pour planifier sans y passer la journée.", '28 mai 2026', '6 min', 'plannings-multiplex', 7991303],
+      ['Conformité', "Feuilles de présence signées : ce que vous devez pouvoir prouver", "Décompte du temps de travail, valeur de la signature électronique, archivage : ce qu'il faut pouvoir démontrer.", '14 mai 2026', '5 min', 'feuilles-presence-signees', 7821913],
+      ['Paie', "Primes de panier au cinéma : conditions d'attribution et automatisation", "Pourquoi ces primes sont la première source d'erreur de paie en exploitation, et comment fiabiliser leur calcul.", '7 mai 2026', '5 min', 'primes-panier-cinema', 209224],
+      ['Management', "Piloter plusieurs cinémas : ce qui change quand on passe de un à cinq établissements", "Autonomie des sites, homogénéité des règles, consolidation pour la direction : les arbitrages d'un réseau.", '19 mars 2026', '7 min', 'piloter-plusieurs-cinemas', 758976]
     ];
     const active = this.state.cat;
     const px = id => 'url(https://images.pexels.com/photos/' + id + '/pexels-photo-' + id + '.jpeg?auto=compress&cs=tinysrgb&w=1100&h=620&fit=crop) center/cover no-repeat';
-    const photos = [6694492,7991303,5685765,7821913,209224,5439474,13936294,16282306,6814526,7433822,8470836,758976];
     
     const posts = postsRaw
-      .map((p, i) => ({ cat:p[0], title:p[1], excerpt:p[2], date:p[3], read:p[4] + ' de lecture', bg:p[5], slot:'blog-post-' + i, bgImg: px(photos[i]) + ', ' + p[5] }))
+      .map((p, i) => ({ cat:p[0], title:p[1], excerpt:p[2], date:p[3], read:p[4] + ' de lecture', href:'/' + p[5], slot:'blog-post-' + i, bgImg: px(p[6]) }))
       .filter(p => active === 'Tous' || p.cat === active);
     const chipOn = "font:600 14px/1 'Inter'; border:none; cursor:pointer; padding:10px 16px; border-radius:999px; background:var(--accent); color:#fff;";
     const chipOff = "font:600 14px/1 'Inter'; border:1px solid #e4e4ef; cursor:pointer; padding:10px 16px; border-radius:999px; background:#fff; color:#5c5c72;";
