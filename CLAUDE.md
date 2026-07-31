@@ -10,10 +10,13 @@ Chaque page est un fichier `.dc.html` autonome exécuté par `support.js`.
 - GitHub Pages est branché sur `main` (racine du dépôt) : **tout push sur `main` publie
   le site** sur https://smartplannersas.github.io/cineplanner-landing/
 - Le site est servi depuis le sous-chemin `/cineplanner-landing/` : **toujours des chemins
-  relatifs** (`Tarifs.dc.html`, `./assets/logo.png`). Un chemin absolu `/assets/…` casse.
+  relatifs** (`tarifs`, `./assets/logo.png`). Un chemin absolu `/tarifs` ou `/assets/…` casse,
+  car il repart de la racine du domaine et sort du dépôt.
 - `.nojekyll` est présent — ne pas le supprimer.
-- `_redirects` / `netlify.toml` ne sont pas interprétés par GitHub Pages (URLs propres
-  inactives ici) ; les conserver pour un éventuel déploiement Netlify.
+- GitHub Pages **complète l'extension tout seul** : `/tarifs` sert `tarifs.html`. Les adresses
+  sans extension fonctionnent donc en ligne (vérifié : `/tarifs` répond 200).
+- `_redirects` / `netlify.toml` ne sont pas interprétés par GitHub Pages ; les conserver pour
+  un éventuel déploiement Netlify.
 
 ## Règles à respecter absolument
 
@@ -38,7 +41,9 @@ Chaque page est un fichier `.dc.html` autonome exécuté par `support.js`.
 
 Les **pages** portent un nom court en `.html` (`tarifs.html`, `export-paie.html`), servi
 sans extension par GitHub Pages : `www.cineplanner.fr/tarifs`. Les liens internes utilisent
-cette forme courte, avec une barre de début (`href="/tarifs"`).
+cette forme courte **sans barre de début** (`href="tarifs"`, `href="essai-gratuit"`) : une
+barre initiale casserait le lien sur le sous-chemin `/cineplanner-landing/`.
+Pour viser l'accueil ou une de ses ancres, écrire `href="./"` et `href="./#feat"`.
 
 Les **composants** gardent l'extension `.dc.html` (`SiteNav.dc.html`, `PlanningScreen.dc.html`) :
 `support.js` les résout par leur nom de fichier, les renommer casserait les imports.
@@ -56,6 +61,14 @@ Les **composants** gardent l'extension `.dc.html` (`SiteNav.dc.html`, `PlanningS
 Les maquettes produit contiennent des données **fictives**. Ne jamais y injecter de vraies
 données salariés ni de vrais noms de cinémas clients.
 
+## Aperçu local
+**Ne pas ouvrir les fichiers en `file://`** : les liens internes sont sans extension, et ni
+`file://` ni un serveur statique basique ne complètent le `.html`. Tous les liens semblent
+alors cassés alors que le site publié fonctionne. Servir le dépôt avec un serveur qui gère
+les URLs propres, par exemple `npx serve` à la racine.
+
 ## Vérification
-Ouvrir le fichier modifié dans un navigateur et contrôler la console : zéro erreur attendue.
+Ouvrir la page modifiée depuis le serveur local et contrôler la console : zéro erreur attendue.
 Tester la largeur mobile (< 960 px) : la navigation passe en burger, les grilles en une colonne.
+Contrôler que les boutons d'appel à l'action sont bien des `<a href>` et non des `<span>`
+stylisés : le piège s'est déjà produit sur 14 boutons.
