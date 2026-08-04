@@ -25,7 +25,7 @@ multi-établissements.
   heures supplémentaires déjà calculées, sans ressaisie pour le cabinet comptable.
 - **Espace équipe** : consultation du planning, demandes de congés, rectifications d'horaires,
   compteur de congés restants.
-- **Coffre-fort de documents** : pièces salariés centralisées.
+- **Espace documentaire sécurisé** : pièces salariés centralisées.
 
 ## Tarifs
 
@@ -54,7 +54,7 @@ Essai gratuit de 14 jours, sans carte bancaire, avec paramétrage réalisé par 
 - [Contrats](https://www.cineplanner.fr/contrats) : CDD, CDI et avenants signés en ligne
 - [Export paie](https://www.cineplanner.fr/export-paie) : éléments de paie sans ressaisie
 - [Espace équipe](https://www.cineplanner.fr/espace-equipe) : l'espace en ligne des salariés
-- [Coffre-fort RH](https://www.cineplanner.fr/coffre-fort-documents) : documents salariés
+- [Espace documentaire sécurisé](https://www.cineplanner.fr/coffre-fort-documents) : documents salariés
 - [Blog](https://www.cineplanner.fr/blog) : conformité, paie et gestion d'équipe en cinéma
 - [Convention collective : les 6 points qui coûtent le plus cher](https://www.cineplanner.fr/convention-collective-cinema)
 - [Fiabiliser son export de paie en cinéma](https://www.cineplanner.fr/export-paie-sans-ressaisie)

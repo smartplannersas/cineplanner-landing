@@ -205,7 +205,7 @@
     "Contrats CDD, CDI et avenants avec signature électronique",
     "Export des éléments de paie sans ressaisie, primes de panier incluses",
     "Espace équipe : planning, congés et rectifications d'horaires",
-    "Coffre-fort de documents salariés",
+    "Espace documentaire sécurisé salariés",
     "Pilotage multi-établissements avec autonomie par site"
   ],
   "offers": [
@@ -695,7 +695,7 @@
       </div>
       <div>
         <div style="font:700 12px/1 'Inter'; letter-spacing:.09em; text-transform:uppercase; color:#fff; margin-bottom:18px;">Produit</div>
-        <div style="display:flex; flex-direction:column; gap:11px; font:500 14px/1 'Inter';"><a href="planification" style="color:#aeaec4;">Planification</a><a href="suivi-des-temps" style="color:#aeaec4;">Suivi des temps</a><a href="contrats" style="color:#aeaec4;">Contrats</a><a href="export-paie" style="color:#aeaec4;">Export paie</a><a href="espace-equipe" style="color:#aeaec4;">Espace équipe</a><a href="coffre-fort-documents" style="color:#aeaec4;">Coffre-fort RH</a></div>
+        <div style="display:flex; flex-direction:column; gap:11px; font:500 14px/1 'Inter';"><a href="planification" style="color:#aeaec4;">Planification</a><a href="suivi-des-temps" style="color:#aeaec4;">Suivi des temps</a><a href="contrats" style="color:#aeaec4;">Contrats</a><a href="export-paie" style="color:#aeaec4;">Export paie</a><a href="espace-equipe" style="color:#aeaec4;">Espace équipe</a><a href="coffre-fort-documents" style="color:#aeaec4;">Espace documentaire sécurisé</a></div>
       </div>
       <div>
         <div style="font:700 12px/1 'Inter'; letter-spacing:.09em; text-transform:uppercase; color:#fff; margin-bottom:18px;">Entreprise</div>
@@ -814,11 +814,11 @@ class Component extends DCLogic {
         slotId: 'feat-portail', slotLabel: 'Capture produit, espace équipe', screen: 'portail', badgeT: '+90 % d\'adoption mobile', badgeS: 'Toute l\'équipe connectée', href: 'espace-equipe'
       },
       documents: {
-        label: 'Coffre-fort RH', tag: 'Espace consolidé',
+        label: 'Espace documentaire sécurisé', tag: 'Espace consolidé',
         title: 'Tous vos documents RH rassemblés au même endroit',
         desc: "Un espace consolidé pour centraliser les pièces de vos salariés et vos données RH, chez le prestataire de stockage de votre choix.",
         bullets: ['Un seul espace pour toutes vos pièces salariés et données RH', 'Envoi et chargement des documents en quelques secondes', 'Le prestataire de stockage de votre choix', 'Chaque pièce classée par salarié et par établissement'],
-        slotId: 'feat-docs', slotLabel: 'Capture produit, coffre-fort RH', screen: 'presences', badgeT: 'Documents centralisés', badgeS: 'Pièces salariés et données RH', href: 'coffre-fort-documents'
+        slotId: 'feat-docs', slotLabel: 'Capture produit, espace documentaire sécurisé', screen: 'presences', badgeT: 'Documents centralisés', badgeS: 'Pièces salariés et données RH', href: 'coffre-fort-documents'
       }
     };
     const order = ['planif','temps','contrats','paie','portail','documents'];
