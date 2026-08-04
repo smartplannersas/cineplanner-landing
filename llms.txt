@@ -53,7 +53,7 @@ Essai gratuit de 14 jours, sans carte bancaire, avec paramétrage réalisé par 
 - [Suivi des temps](https://www.cineplanner.fr/suivi-des-temps) : heures réelles et présence signée
 - [Contrats](https://www.cineplanner.fr/contrats) : CDD, CDI et avenants signés en ligne
 - [Export paie](https://www.cineplanner.fr/export-paie) : éléments de paie sans ressaisie
-- [Espace équipe](https://www.cineplanner.fr/appli-equipe) : l'espace en ligne des salariés
+- [Espace équipe](https://www.cineplanner.fr/espace-equipe) : l'espace en ligne des salariés
 - [Coffre-fort RH](https://www.cineplanner.fr/coffre-fort-documents) : documents salariés
 - [Blog](https://www.cineplanner.fr/blog) : conformité, paie et gestion d'équipe en cinéma
 - [Convention collective : les 6 points qui coûtent le plus cher](https://www.cineplanner.fr/convention-collective-cinema)
