@@ -397,7 +397,11 @@
     <div style="position:absolute; top:-120px; right:-80px; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle, rgba(91,79,232,.45), transparent 62%); pointer-events:none;"></div>
     <div style="position:relative;">
       <div style="display:inline-flex; align-items:center; gap:9px; background:rgba(255,255,255,.09); color:#c9c4f0; font:700 12px/1 'Inter'; letter-spacing:.08em; text-transform:uppercase; padding:9px 15px; border-radius:999px; border:1px solid rgba(255,255,255,.12);"><span style="width:7px; height:7px; border-radius:50%; background:#8b81f0;"></span>Logiciel RH des exploitants de cinéma</div>
-      <h1 style="font:800 clamp(38px,4.4vw,54px)/1.07 'Inter'; letter-spacing:-.02em; color:#fff; margin:22px 0 0; overflow-wrap:break-word;">Toute la RH de votre cinéma, conforme à la convention collective.</h1>
+      <!-- Variante de test non affichée (heroSombre = false). Volontairement une balise div et
+           non un titre de niveau 1 : les deux variantes de hero coexistent dans la source, et un
+           scraper qui n'execute pas le JS en verrait sinon deux. Si cette variante est un jour
+           activee a la place du hero clair, intervertir les deux balises. -->
+      <div style="font:800 clamp(38px,4.4vw,54px)/1.07 'Inter'; letter-spacing:-.02em; color:#fff; margin:22px 0 0; overflow-wrap:break-word;">Toute la RH de votre cinéma, conforme à la convention collective.</div>
       <p style="font:400 19px/1.6 'Inter'; color:#b7b4d6; margin:22px 0 0; max-width:480px;">Ciné Planner n'est pas un outil de planning. C'est la solution RH complète des cinémas : planning, contrats, feuilles de présence et export paie dans un seul flux conforme.</p>
       <div style="display:flex; gap:14px; margin-top:34px;">
         <a href="essai-gratuit" style="background:#fff; color:var(--accent-dark); font:700 16px/1 'Inter'; padding:16px 26px; border-radius:12px; box-shadow:0 16px 30px -10px rgba(0,0,0,.5);">Démarrer l'essai gratuit 14 jours</a>
