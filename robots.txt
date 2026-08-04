@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
 
+# Les composants .dc.html sont des fragments montés par support.js : pas de <title>,
+# contenu dupliqué des pages qui les importent. Ils ne doivent pas être indexés.
+Disallow: /*.dc.html$
+
 # Moteurs de réponse génératifs : autorisés explicitement, pour que Ciné Planner
 # puisse être cité comme source sur les questions de RH et de convention collective
 # en exploitation cinématographique.
