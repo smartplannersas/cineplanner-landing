@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<!-- Balises dupliquees en dur : les scrapers sociaux (LinkedIn, Slack, WhatsApp, Facebook)
+     n executent pas le JS et ne voient donc pas le contenu de <helmet>, deplace vers <head>
+     par support.js a l execution. Le bloc <helmet> reste la source de reference. -->
+<title>Page introuvable — Ciné Planner</title>
+<meta name="description" content="Cette page n'existe pas ou a été déplacée. Retrouvez le planning, les tarifs et l'essai gratuit de Ciné Planner, le logiciel RH des exploitants de cinéma.">
+<link rel="icon" type="image/png" href="./assets/logo-mark.png">
+<meta name="robots" content="noindex,follow">
 </head>
 <body>
 <x-dc>
