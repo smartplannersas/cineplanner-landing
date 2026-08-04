@@ -34,8 +34,11 @@ projection de l'établissement, pas du nombre de salariés ni du nombre de ciné
 
 | Formule | 1 à 3 écrans | 4 écrans et plus |
 |---|---|---|
-| Essentielle | 51 € / mois | 93 € / mois |
-| RH | 99 € / mois | 156 € / mois |
+| Essentielle | 59 € / mois | 93 € / mois |
+| RH | 99 € / mois | 139 € / mois |
+
+En engagement annuel, la remise est de 10 % : 637 € et 1 004 € par an pour Essentielle,
+1 069 € et 1 501 € par an pour RH, facturés en une fois.
 
 Une formule Sur Mesure existe pour les réseaux ayant des besoins d'intégration spécifiques
 (API, migration de données, personnalisation par site) : sur devis.
