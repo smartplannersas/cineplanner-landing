@@ -229,10 +229,10 @@
       </div>
       <sc-for list="{{ matrix }}" as="row" hint-placeholder-count="12">
         <div style="display:grid; grid-template-columns:2.6fr 1fr 1fr 1fr; border-top:1px solid #eef0f7; background:{{ row.bg }};">
-          <div style="padding:15px 24px; font:500 15px/1.4 'Inter'; color:#28283e;">{{ row.feature }}</div>
-          <div style="padding:15px 12px; text-align:center; font:800 17px/1 'Inter'; color:{{ row.eColor }};">{{ row.eSym }}</div>
-          <div style="padding:15px 12px; text-align:center; font:800 17px/1 'Inter'; color:{{ row.gColor }}; background:#f6f5ff;">{{ row.gSym }}</div>
-          <div style="padding:15px 12px; text-align:center; font:800 17px/1 'Inter'; color:{{ row.sColor }};">{{ row.sSym }}</div>
+          <div style="{{ row.featureStyle }}">{{ row.feature }}</div>
+          <div style="{{ row.eStyle }}">{{ row.eSym }}</div>
+          <div style="{{ row.gStyle }}">{{ row.gSym }}</div>
+          <div style="{{ row.sStyle }}">{{ row.sSym }}</div>
         </div>
       </sc-for>
     </div>
@@ -294,43 +294,80 @@ class Component extends DCLogic {
     const segActive = "font:600 15px/1 'Inter'; border:none; cursor:pointer; padding:11px 18px; border-radius:8px; background:var(--accent); color:#fff;";
     const segIdle = "font:600 15px/1 'Inter'; border:none; cursor:pointer; padding:11px 18px; border-radius:8px; background:transparent; color:#7a7a92;";
 
+    // Tableau comparatif regroupé par domaine. Une entrée à un seul élément est un intitulé
+    // de groupe ; une entrée à quatre éléments est une ligne [libellé, Essentielle, RH, Sur Mesure].
+    // La répartition par formule reprend celle déjà publiée sur les cartes ci-dessus
+    // (essentielFeatures / groupeFeatures / surMesureFeatures) : elle n'est pas réinventée ici.
     const matrixRaw = [
+      ['Planning'],
+      ['Planning multi-établissements avec autonomie par site', 1, 1, 1],
+      ['Alertes convention collective cinéma (IDCC 1307) avant validation', 1, 1, 1],
       ['Modèles de planning réutilisables + duplication', 1, 1, 1],
       ['Réaffectation en masse de shifts', 1, 1, 1],
       ['Détection automatique des chevauchements de shifts', 1, 1, 1],
       ['Partage de planning par lien externe', 1, 1, 1],
       ['Impression PDF du planning', 1, 1, 1],
       ['Notifications planning temps réel (in-app + email)', 1, 1, 1],
+      ['Espace équipe : consultation du planning par les salariés', 1, 1, 1],
+
+      ['Temps et absences'],
       ['Calcul auto heures sup/complémentaires + heures de nuit', 1, 1, 1],
       ['Gestion des jours fériés (majoration réglementaire)', 1, 1, 1],
       ['Retards de shift (pointage a posteriori)', 1, 1, 1],
-      ['Rôle lecture seule paie / assistant', 0, 1, 1],
       ['Annualisation du temps de travail', 0, 1, 1],
-      ['Arrondi de paie paramétrable', 0, 1, 1],
+      ['Demandes de congés et de rectification d’horaires par les salariés', 0, 1, 1],
+      ['Compteur de congés restants', 0, 1, 1],
+
+      ['Contrats et signature'],
+      ['Module contrats : CDD, CDI, avenants avec variables dynamiques', 0, 1, 1],
+      ['Signature électronique des contrats', 0, 1, 1],
+      ['Feuilles de présence signées des salariés', 0, 1, 1],
+      ['Contresignature en masse des feuilles de présence', 0, 1, 1],
       ['Checklist pré-embauche (DPAE, RIB, pièce identité…)', 0, 1, 1],
       ['Circuit d’approbation des contrats configurable', 0, 1, 1],
       ['Avenants avec calcul automatique du delta d’heures', 0, 1, 1],
-      ['Contresignature en masse des feuilles de présence', 0, 1, 1],
       ['Piste d’audit légale immuable (art. L3171-2/L3171-3)', 0, 1, 1],
       ['Alerte automatique shift sans contrat signé', 0, 1, 1],
+
+      ['Paie et pilotage'],
+      ['Export paie automatisé, dont primes de panier repas et panier soir', 1, 1, 1],
+      ['Arrondi de paie paramétrable', 0, 1, 1],
+      ['Rôle lecture seule paie / assistant', 0, 1, 1],
       ['Alerte période de paie manquante', 0, 1, 1],
-      ['Support prioritaire', 0, 1, 1],
       ['Synchronisation avec votre logiciel de programmation', 0, 0, 1],
-      ['Stockage de documents chez le prestataire de votre choix', 0, 0, 1],
-      ['Personnalisation groupe (templates, règles, alertes par site)', 0, 0, 1],
-      ['Onboarding et formation des équipes', 0, 0, 1],
       ['API & intégrations (paie, logiciels métier)', 0, 0, 1],
+
+      ['Support et déploiement'],
+      ['Support prioritaire', 0, 1, 1],
+      ['Onboarding et formation des équipes', 0, 0, 1],
       ['Import & migration de vos données cinéma', 0, 0, 1],
+      ['Personnalisation groupe (templates, règles, alertes par site)', 0, 0, 1],
+      ['Stockage de documents chez le prestataire de votre choix', 0, 0, 1],
       ['Développements de fonctionnalités dédiés', 0, 0, 1]
     ];
     const sym = v => (v ? '\u2713' : '\u2013');
     const col = v => (v ? '#22a06b' : '#c9c9d6');
-    const matrix = matrixRaw.map((r, i) => ({
-      feature: r[0], bg: i % 2 ? '#fafaff' : '#ffffff',
-      eSym: sym(r[1]), eColor: col(r[1]),
-      gSym: sym(r[2]), gColor: col(r[2]),
-      sSym: sym(r[3]), sColor: col(r[3])
-    }));
+    const cellStyle = (v, ancre) => 'padding:15px 12px; text-align:center; font:800 17px/1 \'Inter\'; color:' + col(v) + (ancre ? '; background:#f6f5ff' : '');
+    let rang = 0;
+    const matrix = matrixRaw.map(r => {
+      if (r.length === 1) {
+        return {
+          feature: r[0], bg: '#eceafd',
+          featureStyle: 'padding:16px 24px; font:800 12px/1.3 \'Inter\'; letter-spacing:.1em; text-transform:uppercase; color:#4536c9;',
+          eSym: '', eStyle: 'padding:16px 12px;',
+          gSym: '', gStyle: 'padding:16px 12px; background:#e2dffa;',
+          sSym: '', sStyle: 'padding:16px 12px;'
+        };
+      }
+      rang++;
+      return {
+        feature: r[0], bg: rang % 2 ? '#ffffff' : '#fafaff',
+        featureStyle: 'padding:15px 24px; font:500 15px/1.4 \'Inter\'; color:#28283e;',
+        eSym: sym(r[1]), eStyle: cellStyle(r[1], false),
+        gSym: sym(r[2]), gStyle: cellStyle(r[2], true),
+        sSym: sym(r[3]), sStyle: cellStyle(r[3], false)
+      };
+    });
 
     const faqRaw = [
       ['Combien coûte un logiciel de planning pour un cinéma ?', "Ciné Planner démarre à 59 € par établissement et par mois pour un cinéma de 1 à 3 écrans, et 93 € pour un multiplex de 4 écrans et plus. Le tarif est par établissement, quel que soit le nombre de salariés : vous payez pour vos cinémas, pas par tête."],
