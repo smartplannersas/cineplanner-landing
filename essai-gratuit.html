@@ -206,10 +206,22 @@
                 <label style="display:block; font:600 13px/1 'Inter'; color:#28283e; margin-bottom:8px;">Votre besoin (optionnel)</label>
                 <textarea class="tf-input" value="{{ message }}" onInput="{{ onMessage }}" placeholder="Ex. planning multi-sites + export paie, mise en conformité CCN…"></textarea>
               </div>
+              <!-- Champ piège anti-spam : invisible et hors du parcours clavier. Un humain ne le
+                   remplit jamais ; un robot le remplit presque toujours. S'il est rempli, on
+                   n'envoie rien mais on affiche la confirmation, pour ne pas renseigner le robot. -->
+              <input name="societe_web" tabindex="-1" autocomplete="off" aria-hidden="true" value="{{ honeypot }}" onInput="{{ onHoneypot }}" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
               <sc-if value="{{ showError }}" hint-placeholder-val="{{ false }}">
                 <div style="font:500 13px/1.4 'Inter'; color:#d4372a; background:#fdecea; border-radius:10px; padding:11px 13px;">Merci de renseigner votre prénom, nom, cinéma et un email valide.</div>
               </sc-if>
-              <button onClick="{{ submit }}" style="width:100%; background:var(--accent); color:#fff; font:700 16px/1 'Inter'; border:none; cursor:pointer; padding:17px; border-radius:12px; box-shadow:0 12px 26px -10px rgba(91,79,232,.7);">Demander mon compte d'essai</button>
+              <sc-if value="{{ sendError }}" hint-placeholder-val="{{ false }}">
+                <div style="font:500 13px/1.5 'Inter'; color:#d4372a; background:#fdecea; border-radius:10px; padding:13px 15px;">L'envoi a échoué. Écrivez-nous à <a href="mailto:contact@cineplanner.fr" style="color:#d4372a; text-decoration:underline;">contact@cineplanner.fr</a> ou <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener" style="color:#d4372a; text-decoration:underline;">réservez directement un créneau</a>.</div>
+              </sc-if>
+              <sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}">
+                <button disabled style="width:100%; background:var(--accent); color:#fff; font:700 16px/1 'Inter'; border:none; cursor:default; padding:17px; border-radius:12px; opacity:.62;">Envoi…</button>
+              </sc-if>
+              <sc-if value="{{ notSending }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ submit }}" style="width:100%; background:var(--accent); color:#fff; font:700 16px/1 'Inter'; border:none; cursor:pointer; padding:17px; border-radius:12px; box-shadow:0 12px 26px -10px rgba(91,79,232,.7);">Demander mon compte d'essai</button>
+              </sc-if>
               <p style="font:400 12px/1.55 'Inter'; color:#a7a7bd; text-align:center; margin:0;">En envoyant ce formulaire, vous acceptez d'être recontacté par Ciné Planner. Aucune carte bancaire requise.</p>
             </div>
           </div>
@@ -319,7 +331,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { firstName:'', lastName:'', cinema:'', email:'', phone:'', sites:'1', message:'', submitted:false, showError:false, openFaq:0 };
+  state = { firstName:'', lastName:'', cinema:'', email:'', phone:'', sites:'1', message:'', submitted:false, showError:false, sending:false, sendError:false, honeypot:'', openFaq:0 };
   set(k){ return e => this.setState({ [k]: e.target.value, showError:false }); }
   renderVals(){
     const s = this.state;
@@ -328,24 +340,48 @@ class Component extends DCLogic {
     return {
       firstName:s.firstName, lastName:s.lastName, cinema:s.cinema, email:s.email, phone:s.phone, sites:s.sites, message:s.message,
       submitted:s.submitted, notSubmitted:!s.submitted, showError:s.showError,
+      sending:s.sending, notSending:!s.sending, sendError:s.sendError, honeypot:s.honeypot,
       onFirst:this.set('firstName'), onLast:this.set('lastName'), onCinema:this.set('cinema'),
       onEmail:this.set('email'), onPhone:this.set('phone'), onSites:this.set('sites'), onMessage:this.set('message'),
+      onHoneypot:this.set('honeypot'),
       submit:()=>{
         if(!valid){ this.setState({showError:true}); return; }
-        // ENDPOINT : remplacer par votre URL Formspree / Tally / webhook.
-        const ENDPOINT = '';
+        // Champ pi\u00e8ge rempli : c'est un robot. On n'envoie rien, mais on affiche la
+        // confirmation pour ne pas lui indiquer qu'il a \u00e9t\u00e9 d\u00e9tect\u00e9.
+        if(s.honeypot){ this.setState({submitted:true}); return; }
+
+        // Web3Forms. La cl\u00e9 d'acc\u00e8s est publique par conception : elle ne permet que
+        // d'envoyer un message vers l'adresse associ\u00e9e au compte, rien d'autre.
+        const ENDPOINT = 'https://api.web3forms.com/submit';
+        const ACCESS_KEY = '';   // <-- coller ici la cl\u00e9 Web3Forms
+
         const payload = {
+          access_key: ACCESS_KEY,
+          subject: 'Demande d\u2019essai \u2014 ' + s.cinema,
+          from_name: 'Cin\u00e9 Planner \u2014 formulaire d\u2019essai',
+          replyto: s.email,
           prenom:s.firstName, nom:s.lastName, cinema:s.cinema, email:s.email,
           telephone:s.phone, etablissements:s.sites, besoin:s.message,
           source:'Landing essai gratuit', date:new Date().toISOString()
         };
-        if (ENDPOINT) {
-          fetch(ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }).catch(()=>{});
-        } else {
-          const body = Object.entries(payload).map(([k,v])=>k+' : '+v).join('\n');
-          window.open('mailto:contact@cineplanner.fr?subject=' + encodeURIComponent('Demande d\u2019essai \u2014 ' + s.cinema) + '&body=' + encodeURIComponent(body), '_blank');
-        }
-        this.setState({submitted:true});
+
+        if(!ACCESS_KEY){ this.setState({ sending:false, sendError:true }); return; }
+
+        this.setState({ sending:true, sendError:false });
+
+        fetch(ENDPOINT, {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(r => r.json().then(d => ({ ok:r.ok, d })))
+          .then(({ ok, d }) => {
+            if(!ok || !d || d.success !== true){ throw new Error('envoi refuse'); }
+            this.setState({ submitted:true, sending:false });
+          })
+          .catch(() => {
+            this.setState({ sending:false, sendError:true });
+          });
       },
       perks:[
         '14 jours d\u2019essai complet, sans carte bancaire',
