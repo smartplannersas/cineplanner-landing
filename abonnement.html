@@ -184,7 +184,7 @@
       </div>
     </div>
 
-    <p style="text-align:center; font:400 15px/1.65 'Inter'; color:#6c6c86; margin:26px auto 0; max-width:640px;">Les tarifs sont exprimés par établissement, selon son nombre d'écrans. Pour un groupe, un réseau ou un besoin spécifique, consultez la <a href="tarifs">grille tarifaire détaillée</a> ou demandez un devis.</p>
+    <p style="text-align:center; font:400 15px/1.65 'Inter'; color:#6c6c86; margin:26px auto 0; max-width:640px;">Tous les tarifs sont exprimés hors taxes, par établissement, selon son nombre d'écrans. La TVA applicable est ajoutée au moment du paiement. Pour un groupe, un réseau ou un besoin spécifique, consultez la <a href="tarifs">grille tarifaire détaillée</a> ou demandez un devis.</p>
   </div>
 
   <!-- COMMENT ÇA MARCHE -->
@@ -294,7 +294,7 @@ class Component extends DCLogic {
     return {
       faqs,
       essPrice: ess.price, essUrl: ess.url, rhPrice: rh.price, rhUrl: rh.url,
-      unit: p === 'mensuel' ? '/ mois' : '/ an',
+      unit: p === 'mensuel' ? 'HT / mois' : 'HT / an',
       essNote: note, rhNote: note,
       smallStyle: seg(e === '1-3'), multiStyle: seg(e === '4+'),
       mensuelStyle: seg(p === 'mensuel'), annuelStyle: seg(p === 'annuel'),
