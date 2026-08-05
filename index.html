@@ -601,7 +601,7 @@
       <div style="position:relative; background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); border-radius:22px; padding:36px; display:flex; flex-direction:column; box-shadow:0 30px 60px -30px rgba(36,31,107,.7);">
         <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; font:700 12px/1 'Inter'; letter-spacing:.06em; padding:8px 16px; border-radius:999px;">LE PLUS COMPLET</div>
         <div style="font:800 20px/1 'Inter'; color:#fff; display:flex; align-items:center; gap:8px;">RH</div>
-        <div style="font:400 15px/1.5 'Inter'; color:#b6b6c8; margin-top:8px;">Contrats, présence signée, tableaux de bord et pilotage groupe.</div>
+        <div style="font:400 15px/1.5 'Inter'; color:#b6b6c8; margin-top:8px;">Contrats, présence signée et vue consolidée multi-établissements.</div>
         <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#fff;">{{ groupePrice }}</span><span style="font:500 15px/1 'Inter'; color:#b6b6c8;">{{ priceUnit }}</span></div>
         <div style="font:400 13px/1.5 'Inter'; color:#b6b6c8; margin-top:8px;">{{ groupeNote }}</div>
         <a href="essai-gratuit" style="margin-top:24px; text-align:center; background:var(--accent); color:#fff; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Démarrer l'essai gratuit</a>
@@ -905,7 +905,6 @@ class Component extends DCLogic {
       ['Alerte automatique shift sans contrat signé', 0, 1, 1],
       ['Alerte période de paie manquante', 0, 1, 1],
       ['Support prioritaire', 0, 1, 1],
-      ['Synchronisation avec votre logiciel de programmation', 0, 0, 1],
       ['Stockage de documents chez le prestataire de votre choix', 0, 0, 1],
       ['Personnalisation groupe (templates, règles, alertes par site)', 0, 0, 1],
       ['Onboarding et formation des équipes', 0, 0, 1],
@@ -1042,7 +1041,6 @@ class Component extends DCLogic {
         'Support prioritaire'
       ],
       surMesureFeatures: [
-        'Synchronisation avec votre logiciel de programmation : les horaires de début et de fin de séance alimentent directement le planning',
         'API & intégrations sur mesure : connexion à votre outil de paie (Silae, Sage, Cegid…) et à vos logiciels métier',
         'Import & migration de vos données cinéma',
         'Développements de fonctionnalités dédiés',
