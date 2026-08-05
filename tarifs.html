@@ -428,7 +428,7 @@ class Component extends DCLogic {
       toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen })),
       essentielPrice: GRILLE.essentielle[per][taille],
       groupePrice: GRILLE.rh[per][taille],
-      priceUnit: '€ / établ. / mois',
+      priceUnit: '€ HT / établ. / mois',
       essentielNote: annuel
         ? 'Soit ' + TOTAL_ANNUEL.essentielle[taille] + ' € par an, facturés en une fois'
         : 'Facturé chaque mois',
