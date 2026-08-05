@@ -430,7 +430,7 @@ class Component extends DCLogic {
         { q:"L\u2019essai est-il vraiment gratuit ?", a:"Oui. 14 jours d\u2019accès complet, sans carte bancaire ni engagement. À l\u2019issue, vous décidez librement de continuer.", open:this.state.openFaq===0, sign:this.state.openFaq===0?'\u2212':'+', toggle:()=>this.setState(st=>({openFaq:st.openFaq===0?null:0})) },
         { q:"Dois-je installer quelque chose ?", a:"Non. Ciné Planner est 100 % en ligne. Vos équipes accèdent au planning depuis un navigateur ou l\u2019appli mobile.", open:this.state.openFaq===1, sign:this.state.openFaq===1?'\u2212':'+', toggle:()=>this.setState(st=>({openFaq:st.openFaq===1?null:1})) },
         { q:"Combien de temps pour être opérationnel ?", a:"Votre compte de test est prêt sous 24 h ouvrées. Un expert vous accompagne sur la mise en place de vos premiers plannings.", open:this.state.openFaq===2, sign:this.state.openFaq===2?'\u2212':'+', toggle:()=>this.setState(st=>({openFaq:st.openFaq===2?null:2})) },
-        { q:"Puis-je tester avec plusieurs établissements ?", a:"Oui. Le multi-établissements est disponible dès l\u2019essai, avec une vue consolidée et l\u2019autonomie de chaque site.", open:this.state.openFaq===3, sign:this.state.openFaq===3?'\u2212':'+', toggle:()=>this.setState(st=>({openFaq:st.openFaq===3?null:3})) }
+        { q:"Puis-je tester avec plusieurs établissements ?", a:"Oui. L’essai donne accès à la vue consolidée sur plusieurs établissements, avec l’autonomie de chaque site. Dans les formules payantes, cette vue est incluse à partir de la formule RH.", open:this.state.openFaq===3, sign:this.state.openFaq===3?'\u2212':'+', toggle:()=>this.setState(st=>({openFaq:st.openFaq===3?null:3})) }
       ]
     };
   }
