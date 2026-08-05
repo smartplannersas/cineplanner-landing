@@ -354,7 +354,8 @@ class Component extends DCLogic {
       ['Compteur de congés restants', 0, 1, 1],
 
       ['Contrats et signature'],
-      ['Module contrats : CDD, CDI, avenants avec variables dynamiques', 0, 1, 1],
+      ['Planning multi-établissements avec vue consolidée et autonomie par site',
+        'Module contrats : CDD, CDI, avenants avec variables dynamiques', 0, 1, 1],
       ['Signature électronique des contrats', 0, 1, 1],
       ['Feuilles de présence signées des salariés', 0, 1, 1],
       ['Contresignature en masse des feuilles de présence', 0, 1, 1],
@@ -442,24 +443,25 @@ class Component extends DCLogic {
       mensuelBtnStyle: annuel ? segIdle : segActive,
       annuelBtnStyle: annuel ? segActive : segIdle,
       essentielFeatures: [
-        'Planning multi-établissements avec autonomie par site',
+        'Planning des équipes de votre établissement',
         'Alertes convention collective cinéma (IDCC 1307)',
         'Export paie automatisé, dont primes de paniers',
         'Espace équipe : consultation du planning par les salariés'
       ],
       groupeFeatures: [
+        'Planning multi-établissements avec vue consolidée et autonomie par site',
         'Module contrats : CDD, CDI, avenants avec variables dynamiques',
         'Signature électronique des contrats',
         'Feuilles de présence signées des salariés',
         'Demandes de congés et de rectification d’horaires par les salariés',
         'Compteur de congés restants',
+        'Onboarding et formation des équipes',
         'Support prioritaire'
       ],
       surMesureFeatures: [
         'Synchronisation avec votre logiciel de programmation : les horaires de début et de fin de séance alimentent directement le planning',
         'Stockage de documents chez le prestataire de votre choix',
         'Personnalisation groupe : templates, règles de calcul, alertes par site',
-        'Onboarding et formation des équipes',
         'API & intégrations sur mesure : connexion à votre outil de paie (Silae, Sage, Cegid…) et à vos logiciels métier',
         'Import & migration de vos données cinéma',
         'Développements de fonctionnalités dédiés',
