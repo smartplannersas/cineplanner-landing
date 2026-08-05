@@ -1,7 +1,7 @@
 # Ciné Planner — site web (cineplanner.fr)
 
 Site marketing de Ciné Planner : logiciel RH et planning pour les exploitants de cinéma.
-Opéré par SmartPlanner SAS (40 Allée Eugène Delacroix, 33800 Bordeaux — SIRET 934 294 083).
+Opéré par SmartPlanner SAS (40 Allée Eugène Delacroix, 33800 Bordeaux — SIRET 934 294 083 00019).
 
 ## Ce que contient ce dépôt
 
@@ -84,8 +84,8 @@ Les pages sont des **Design Components** : un fichier HTML contient un template
 
 Toutes les maquettes produit utilisent des données **fictives et anonymisées**
 (cinémas « CINÉ HORIZON », salariés inventés). Ne pas y réintroduire de données réelles.
-Seules les références clientes publiques sont citées (Mégarama, Veo, CNC, Confluences,
-Panacea, Arvor, Alticiné) avec la citation de François Garces (Mégarama Bordeaux).
+Seules les références clientes publiques sont citées (Megarama, Veo, CNC, Confluences,
+Panacea, Arvor, Alticiné) avec la citation de François Garces (Megarama Bordeaux).
 
 ## Charte
 
