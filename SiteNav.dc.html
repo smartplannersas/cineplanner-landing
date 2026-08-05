@@ -75,8 +75,6 @@
 
       <a href="tarifs" style="{{ tarifsStyle }}">Tarifs</a>
 
-      <a href="abonnement" style="{{ aboStyle }}">Abonnement</a>
-
       <div onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:relative;">
         <a href="./#temoignages" style="{{ resStyle }}">Ressources <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
         <sc-if value="{{ resOpen }}" hint-placeholder-val="{{ false }}">
@@ -120,7 +118,6 @@
         </div>
       </sc-if>
       <a href="tarifs" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Tarifs</a>
-      <a href="abonnement" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Abonnement</a>
       <a href="./#temoignages" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Témoignages</a>
       <a href="blog" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#16162a; text-decoration:none;">Blog</a>
       <a href="https://app.cineplanner.fr" style="padding:13px 12px; border-radius:10px; font:600 16px/1 'Inter'; color:#5B4FE8; text-decoration:none;">Connexion</a>
@@ -164,7 +161,6 @@ class Component extends DCLogic {
       navFeatChevron: "display:inline-block; font-size:14px; line-height:1; color:#5B4FE8; transition:transform .18s ease; transform:rotate(" + (this.state.navFeatOpen ? '180deg' : '0deg') + ");",
       featStyle: active === 'feat' ? on : base,
       tarifsStyle: active === 'tarifs' ? 'color:#5B4FE8; text-decoration:none;' : 'color:#3a3a52; text-decoration:none;',
-      aboStyle: active === 'abonnement' ? 'color:#5B4FE8; text-decoration:none;' : 'color:#3a3a52; text-decoration:none;',
       resStyle: (active === 'blog' || active === 'temoignages') ? on : base,
       openMenu: () => { clearTimeout(this._mt); this.setState({ menuOpen: true, resOpen: false }); },
       closeMenu: () => { clearTimeout(this._mt); this._mt = setTimeout(() => this.setState({ menuOpen: false }), 140); },
