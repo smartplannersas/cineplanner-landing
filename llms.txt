@@ -3,7 +3,7 @@
 > Logiciel RH et planning conçu exclusivement pour les exploitants de cinéma en France.
 > Édité par SmartPlanner SAS (Bordeaux, SIRET 934 294 083 00019). Plus de 50 cinémas équipés.
 
-Ciné Planner n'est pas un outil de planning généraliste : les règles de la **convention
+Ciné Planner est un logiciel RH spécialisé pour les exploitants de cinéma : les règles de la **convention
 collective de l'exploitation cinématographique (IDCC 1307)** sont intégrées nativement et
 signalent toute infraction avant la validation d'un planning — heures de nuit, durée maximale
 de shift, repos, heures hebdomadaires, primes de panier repas et panier soir.
