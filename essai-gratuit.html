@@ -214,7 +214,11 @@
                 <div style="font:500 13px/1.4 'Inter'; color:#d4372a; background:#fdecea; border-radius:10px; padding:11px 13px;">Merci de renseigner votre prénom, nom, cinéma et un email valide.</div>
               </sc-if>
               <sc-if value="{{ sendError }}" hint-placeholder-val="{{ false }}">
-                <div style="font:500 13px/1.5 'Inter'; color:#d4372a; background:#fdecea; border-radius:10px; padding:13px 15px;">L'envoi a échoué. Écrivez-nous à <a href="mailto:contact@cineplanner.fr" style="color:#d4372a; text-decoration:underline;">contact@cineplanner.fr</a> ou <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener" style="color:#d4372a; text-decoration:underline;">réservez directement un créneau</a>.</div>
+                <div style="font:500 13px/1.5 'Inter'; color:#d4372a; background:#fdecea; border-radius:10px; padding:13px 15px;">
+                  <div>L'envoi a échoué, vos réponses n'ont pas été perdues. Le bouton ci-dessous ouvre un message déjà rempli, il ne vous reste qu'à l'envoyer.</div>
+                  <a href="{{ mailtoHref }}" style="display:block; text-align:center; margin-top:11px; background:#d4372a; color:#fff; font:700 14px/1 'Inter'; text-decoration:none; padding:13px; border-radius:10px;">Envoyer par email</a>
+                  <div style="margin-top:9px;">Ou <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener" style="color:#d4372a; text-decoration:underline;">réservez directement un créneau</a>.</div>
+                </div>
               </sc-if>
               <sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}">
                 <button disabled style="width:100%; background:var(--accent); color:#fff; font:700 16px/1 'Inter'; border:none; cursor:default; padding:17px; border-radius:12px; opacity:.62;">Envoi…</button>
@@ -337,7 +341,24 @@ class Component extends DCLogic {
     const s = this.state;
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s.email.trim());
     const valid = s.firstName.trim() && s.lastName.trim() && s.cinema.trim() && emailOk;
+    // Repli si l'envoi échoue : un brouillon pré-rempli, pour que le visiteur qui a
+    // pris la peine de tout saisir n'ait pas à recopier ses réponses.
+    const mailBody = [
+      'Bonjour,', '',
+      'Je souhaite ouvrir un compte d’essai Ciné Planner.', '',
+      'Prénom : ' + s.firstName,
+      'Nom : ' + s.lastName,
+      'Cinéma : ' + s.cinema,
+      'Email : ' + s.email,
+      'Téléphone : ' + s.phone,
+      'Nombre d’établissements : ' + s.sites,
+      'Besoin : ' + s.message
+    ].join('\n');
+    const mailtoHref = 'mailto:contact@cineplanner.fr'
+      + '?subject=' + encodeURIComponent('Demande d’essai — ' + s.cinema)
+      + '&body=' + encodeURIComponent(mailBody);
     return {
+      mailtoHref:mailtoHref,
       firstName:s.firstName, lastName:s.lastName, cinema:s.cinema, email:s.email, phone:s.phone, sites:s.sites, message:s.message,
       submitted:s.submitted, notSubmitted:!s.submitted, showError:s.showError,
       sending:s.sending, notSending:!s.sending, sendError:s.sendError, honeypot:s.honeypot,
@@ -350,22 +371,20 @@ class Component extends DCLogic {
         // confirmation pour ne pas lui indiquer qu'il a \u00e9t\u00e9 d\u00e9tect\u00e9.
         if(s.honeypot){ this.setState({submitted:true}); return; }
 
-        // Web3Forms. La cl\u00e9 d'acc\u00e8s est publique par conception : elle ne permet que
-        // d'envoyer un message vers l'adresse associ\u00e9e au compte, rien d'autre.
-        const ENDPOINT = 'https://api.web3forms.com/submit';
-        const ACCESS_KEY = '';   // <-- coller ici la cl\u00e9 Web3Forms
+        // FormSubmit : ni compte ni cl\u00e9 d'API. L'adresse de destination est dans l'URL.
+        // Le tout premier envoi d\u00e9clenche un mail d'activation \u00e0 confirmer une seule
+        // fois ; ensuite chaque demande arrive directement dans la bo\u00eete contact@.
+        const ENDPOINT = 'https://formsubmit.co/ajax/contact@cineplanner.fr';
 
         const payload = {
-          access_key: ACCESS_KEY,
-          subject: 'Demande d\u2019essai \u2014 ' + s.cinema,
-          from_name: 'Cin\u00e9 Planner \u2014 formulaire d\u2019essai',
-          replyto: s.email,
+          _subject: 'Demande d\u2019essai \u2014 ' + s.cinema,
+          _replyto: s.email,
+          _template: 'table',
+          _captcha: 'false',
           prenom:s.firstName, nom:s.lastName, cinema:s.cinema, email:s.email,
           telephone:s.phone, etablissements:s.sites, besoin:s.message,
           source:'Landing essai gratuit', date:new Date().toISOString()
         };
-
-        if(!ACCESS_KEY){ this.setState({ sending:false, sendError:true }); return; }
 
         this.setState({ sending:true, sendError:false });
 
@@ -376,7 +395,8 @@ class Component extends DCLogic {
         })
           .then(r => r.json().then(d => ({ ok:r.ok, d })))
           .then(({ ok, d }) => {
-            if(!ok || !d || d.success !== true){ throw new Error('envoi refuse'); }
+            // FormSubmit renvoie success sous forme de chaîne "true", pas de booléen.
+            if(!ok || !d || String(d.success) !== 'true'){ throw new Error('envoi refuse'); }
             this.setState({ submitted:true, sending:false });
           })
           .catch(() => {
