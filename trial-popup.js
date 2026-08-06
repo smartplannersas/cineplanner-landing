@@ -9,7 +9,7 @@
   var CLE_TEMPS = 'cp_nav_ms';       // cumul du temps de navigation (session)
   var CLE_VU = 'cp_essai_popup';     // mémorise fermeture / clic (30 jours)
   var OUBLI_MS = 30 * 24 * 3600 * 1000;
-  var LIEN = 'essai-gratuit';        // chemin relatif : fonctionne aussi sous /cineplanner-landing/
+  var LIEN = '/essai-gratuit';        // racine-relatif : le site est servi à la racine de www.cineplanner.fr
   var ACCENT = '#5B4FE8';
 
   if (window.__cpTrialPopup) return;  // une seule instance par page

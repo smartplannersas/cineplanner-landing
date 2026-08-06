@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="/support.js"></script>
 <!-- Balises dupliquees en dur : les scrapers sociaux (LinkedIn, Slack, WhatsApp, Facebook)
      n executent pas le JS et ne voient donc pas le contenu de <helmet>, deplace vers <head>
      par support.js a l execution. Le bloc <helmet> reste la source de reference. -->
 <title>Export paie — Ciné Planner</title>
 <meta name="description" content="Export jour et récapitulatif consolidé des éléments variables : zéro ressaisie entre le planning de votre cinéma et votre cabinet de paie, mois après mois.">
 <link rel="canonical" href="https://www.cineplanner.fr/export-paie">
-<link rel="icon" type="image/png" href="./assets/logo-mark.png">
-<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<link rel="icon" type="image/png" href="/assets/logo-mark.png">
+<link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ciné Planner">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Export paie — Ciné Planner">
 <meta property="og:description" content="Export jour et récapitulatif consolidé des éléments variables : zéro ressaisie entre le planning de votre cinéma et votre cabinet de paie, mois après mois.">
 <meta property="og:url" content="https://www.cineplanner.fr/export-paie">
-<meta property="og:image" content="https://smartplannersas.github.io/cineplanner-landing/assets/og-cineplanner.jpg">
+<meta property="og:image" content="https://www.cineplanner.fr/assets/og-cineplanner.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Export paie — Ciné Planner">
 <meta name="twitter:description" content="Export jour et récapitulatif consolidé des éléments variables : zéro ressaisie entre le planning de votre cinéma et votre cabinet de paie, mois après mois.">
-<meta name="twitter:image" content="https://smartplannersas.github.io/cineplanner-landing/assets/og-cineplanner.jpg">
+<meta name="twitter:image" content="https://www.cineplanner.fr/assets/og-cineplanner.jpg">
 <meta name="robots" content="index,follow">
 </head>
 <body>
@@ -31,19 +31,19 @@
 <title>Export paie — Ciné Planner</title>
 <meta name="description" content="Export jour et récapitulatif consolidé des éléments variables : zéro ressaisie entre le planning de votre cinéma et votre cabinet de paie, mois après mois.">
 <link rel="canonical" href="https://www.cineplanner.fr/export-paie">
-<link rel="icon" type="image/png" href="./assets/logo-mark.png">
-<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<link rel="icon" type="image/png" href="/assets/logo-mark.png">
+<link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ciné Planner">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Export paie — Ciné Planner">
 <meta property="og:description" content="Export jour et récapitulatif consolidé des éléments variables : zéro ressaisie entre le planning de votre cinéma et votre cabinet de paie, mois après mois.">
 <meta property="og:url" content="https://www.cineplanner.fr/export-paie">
-<meta property="og:image" content="https://smartplannersas.github.io/cineplanner-landing/assets/og-cineplanner.jpg">
+<meta property="og:image" content="https://www.cineplanner.fr/assets/og-cineplanner.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Export paie — Ciné Planner">
 <meta name="twitter:description" content="Export jour et récapitulatif consolidé des éléments variables : zéro ressaisie entre le planning de votre cinéma et votre cabinet de paie, mois après mois.">
-<meta name="twitter:image" content="https://smartplannersas.github.io/cineplanner-landing/assets/og-cineplanner.jpg">
+<meta name="twitter:image" content="https://www.cineplanner.fr/assets/og-cineplanner.jpg">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#5B4FE8">
 <style>
@@ -53,7 +53,7 @@
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
-  src: url('./assets/fonts/inter-latin-ext.woff2') format('woff2');
+  src: url('/assets/fonts/inter-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
@@ -61,7 +61,7 @@
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
-  src: url('./assets/fonts/inter-latin.woff2') format('woff2');
+  src: url('/assets/fonts/inter-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -94,7 +94,7 @@
     [style*="display: flex; gap: 14px; justify-content: center; margin-top: 28px"] { flex-direction: column !important; }
   }
 </style>
-<script src="./trial-popup.js" defer></script>
+<script src="/trial-popup.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -140,11 +140,11 @@
 
   <div style="max-width:1160px; margin:0 auto; padding:64px 40px 48px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:56px; align-items:center;">
     <div>
-      <div style="display:flex; align-items:center; gap:8px; font:700 13px/1 'Inter'; letter-spacing:.06em; color:#5B4FE8;"><a href="./#feat" style="color:#8a8aa4; font-weight:600;">Fonctionnalités</a><span style="color:#c9c9d6;">/</span><span>PAIE & RH</span></div>
+      <div style="display:flex; align-items:center; gap:8px; font:700 13px/1 'Inter'; letter-spacing:.06em; color:#5B4FE8;"><a href="/#feat" style="color:#8a8aa4; font-weight:600;">Fonctionnalités</a><span style="color:#c9c9d6;">/</span><span>PAIE & RH</span></div>
       <h1 style="font:800 46px/1.09 'Inter'; letter-spacing:-.02em; color:#16162a; margin:18px 0 0;">Votre paie prête, sans une seule ressaisie.</h1>
       <p style="font:400 19px/1.6 'Inter'; color:#5c5c72; margin:20px 0 0; max-width:480px;">Les heures du planning sont comptées automatiquement, primes de paniers et congés inclus, et prêtes à être transmises à votre paie. Sans ressaisie.</p>
       <div style="display:flex; gap:14px; margin-top:30px;">
-        <a href="essai-gratuit" style="background:#5B4FE8; color:#fff; font:700 16px/1 'Inter'; padding:16px 26px; border-radius:13px; box-shadow:0 12px 26px -8px rgba(91,79,232,.6);">Démarrer l'essai gratuit 14 jours</a>
+        <a href="/essai-gratuit" style="background:#5B4FE8; color:#fff; font:700 16px/1 'Inter'; padding:16px 26px; border-radius:13px; box-shadow:0 12px 26px -8px rgba(91,79,232,.6);">Démarrer l'essai gratuit 14 jours</a>
         <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener" style="border:1px solid #d8d8e6; color:#16162a; font:700 16px/1 'Inter'; padding:16px 24px; border-radius:13px;">Voir une démo</a>
       </div>
     </div>
@@ -184,10 +184,10 @@
     <div style="max-width:1160px; margin:0 auto;">
       <h2 style="font:800 28px/1.2 'Inter'; color:#16162a; margin:0 0 28px;">Découvrez les autres fonctionnalités</h2>
       <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
-        <a href="planification" style="background:#fff; border:1px solid #ececf4; border-radius:16px; padding:24px; display:block;"><div style="font:700 17px/1.3 'Inter'; color:#16162a;">Planification →</div><div style="font:400 14px/1.5 'Inter'; color:#5c5c72; margin-top:8px;">Plannings conformes à la convention collective.</div></a>
-        <a href="suivi-des-temps" style="background:#fff; border:1px solid #ececf4; border-radius:16px; padding:24px; display:block;"><div style="font:700 17px/1.3 'Inter'; color:#16162a;">Suivi des temps →</div><div style="font:400 14px/1.5 'Inter'; color:#5c5c72; margin-top:8px;">Heures réelles et feuilles de présence signées.</div></a>
-        <a href="contrats" style="background:#fff; border:1px solid #ececf4; border-radius:16px; padding:24px; display:block;"><div style="font:700 17px/1.3 'Inter'; color:#16162a;">Contrats →</div><div style="font:400 14px/1.5 'Inter'; color:#5c5c72; margin-top:8px;">CDD, CDI, avenants et signature électronique.</div></a>
-        <a href="espace-equipe" style="background:#fff; border:1px solid #ececf4; border-radius:16px; padding:24px; display:block;"><div style="font:700 17px/1.3 'Inter'; color:#16162a;">Espace équipe →</div><div style="font:400 14px/1.5 'Inter'; color:#5c5c72; margin-top:8px;">L'espace en ligne des équipes : planning et absences.</div></a>
+        <a href="/planification" style="background:#fff; border:1px solid #ececf4; border-radius:16px; padding:24px; display:block;"><div style="font:700 17px/1.3 'Inter'; color:#16162a;">Planification →</div><div style="font:400 14px/1.5 'Inter'; color:#5c5c72; margin-top:8px;">Plannings conformes à la convention collective.</div></a>
+        <a href="/suivi-des-temps" style="background:#fff; border:1px solid #ececf4; border-radius:16px; padding:24px; display:block;"><div style="font:700 17px/1.3 'Inter'; color:#16162a;">Suivi des temps →</div><div style="font:400 14px/1.5 'Inter'; color:#5c5c72; margin-top:8px;">Heures réelles et feuilles de présence signées.</div></a>
+        <a href="/contrats" style="background:#fff; border:1px solid #ececf4; border-radius:16px; padding:24px; display:block;"><div style="font:700 17px/1.3 'Inter'; color:#16162a;">Contrats →</div><div style="font:400 14px/1.5 'Inter'; color:#5c5c72; margin-top:8px;">CDD, CDI, avenants et signature électronique.</div></a>
+        <a href="/espace-equipe" style="background:#fff; border:1px solid #ececf4; border-radius:16px; padding:24px; display:block;"><div style="font:700 17px/1.3 'Inter'; color:#16162a;">Espace équipe →</div><div style="font:400 14px/1.5 'Inter'; color:#5c5c72; margin-top:8px;">L'espace en ligne des équipes : planning et absences.</div></a>
       </div>
     </div>
   </div>
@@ -196,14 +196,14 @@
     <div style="background:linear-gradient(135deg,#5B4FE8,#4536c9); border-radius:24px; padding:56px; text-align:center; color:#fff;">
       <h2 style="font:800 34px/1.14 'Inter'; margin:0;">Automatisez votre paie.</h2>
       <p style="font:400 18px/1.6 'Inter'; color:#e0dcff; margin:16px auto 0; max-width:520px;">Ouvrez un compte d'essai gratuit 14 jours, sans carte bancaire.</p>
-      <div style="display:flex; gap:14px; justify-content:center; margin-top:28px;"><a href="essai-gratuit" style="background:#fff; color:#4536c9; font:700 16px/1 'Inter'; padding:16px 28px; border-radius:13px;">Démarrer l'essai gratuit</a><a href="abonnement" style="border:1px solid rgba(255,255,255,.5); color:#fff; font:700 16px/1 'Inter'; padding:16px 24px; border-radius:13px;">S'abonner</a></div>
+      <div style="display:flex; gap:14px; justify-content:center; margin-top:28px;"><a href="/essai-gratuit" style="background:#fff; color:#4536c9; font:700 16px/1 'Inter'; padding:16px 28px; border-radius:13px;">Démarrer l'essai gratuit</a><a href="/abonnement" style="border:1px solid rgba(255,255,255,.5); color:#fff; font:700 16px/1 'Inter'; padding:16px 24px; border-radius:13px;">S'abonner</a></div>
     </div>
   </div>
 
   <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
-    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;" loading="lazy"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <div style="display:flex; align-items:center; gap:10px;"><img src="/assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;" loading="lazy"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
     <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span>
-    <span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="cgu" style="color:#7a7a92;">CGU</a><a href="cgv" style="color:#7a7a92;">CGV</a></span>
+    <span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="/mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="/confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="/cgu" style="color:#7a7a92;">CGU</a><a href="/cgv" style="color:#7a7a92;">CGV</a></span>
   </div>
 </div>
 </x-dc>

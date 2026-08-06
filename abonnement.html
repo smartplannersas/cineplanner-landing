@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="/support.js"></script>
 <!-- Balises dupliquees en dur : les scrapers sociaux (LinkedIn, Slack, WhatsApp, Facebook)
      n executent pas le JS et ne voient donc pas le contenu de <helmet>, deplace vers <head>
      par support.js a l execution. Le bloc <helmet> reste la source de reference. -->
 <title>Abonnement — Ciné Planner</title>
 <meta name="description" content="Souscrivez en ligne à Ciné Planner : paiement sécurisé par Stripe, activation immédiate, facture automatique et accompagnement à la mise en route du cinéma.">
 <link rel="canonical" href="https://www.cineplanner.fr/abonnement">
-<link rel="icon" type="image/png" href="./assets/logo-mark.png">
-<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<link rel="icon" type="image/png" href="/assets/logo-mark.png">
+<link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ciné Planner">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Abonnement — Ciné Planner">
 <meta property="og:description" content="Souscrivez en ligne à Ciné Planner : paiement sécurisé, activation immédiate et accompagnement à la mise en route.">
 <meta property="og:url" content="https://www.cineplanner.fr/abonnement">
-<meta property="og:image" content="https://smartplannersas.github.io/cineplanner-landing/assets/og-cineplanner.jpg">
+<meta property="og:image" content="https://www.cineplanner.fr/assets/og-cineplanner.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Abonnement — Ciné Planner">
 <meta name="twitter:description" content="Souscrivez en ligne à Ciné Planner : paiement sécurisé, activation immédiate et accompagnement à la mise en route.">
-<meta name="twitter:image" content="https://smartplannersas.github.io/cineplanner-landing/assets/og-cineplanner.jpg">
+<meta name="twitter:image" content="https://www.cineplanner.fr/assets/og-cineplanner.jpg">
 <meta name="robots" content="index,follow">
 </head>
 <body>
@@ -31,19 +31,19 @@
 <title>Abonnement — Ciné Planner</title>
 <meta name="description" content="Souscrivez en ligne à Ciné Planner : paiement sécurisé par Stripe, activation immédiate, facture automatique et accompagnement à la mise en route du cinéma.">
 <link rel="canonical" href="https://www.cineplanner.fr/abonnement">
-<link rel="icon" type="image/png" href="./assets/logo-mark.png">
-<link rel="apple-touch-icon" href="./assets/logo-mark.png">
+<link rel="icon" type="image/png" href="/assets/logo-mark.png">
+<link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ciné Planner">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Abonnement — Ciné Planner">
 <meta property="og:description" content="Souscrivez en ligne à Ciné Planner : paiement sécurisé, activation immédiate et accompagnement à la mise en route.">
 <meta property="og:url" content="https://www.cineplanner.fr/abonnement">
-<meta property="og:image" content="https://smartplannersas.github.io/cineplanner-landing/assets/og-cineplanner.jpg">
+<meta property="og:image" content="https://www.cineplanner.fr/assets/og-cineplanner.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Abonnement — Ciné Planner">
 <meta name="twitter:description" content="Souscrivez en ligne à Ciné Planner : paiement sécurisé, activation immédiate et accompagnement à la mise en route.">
-<meta name="twitter:image" content="https://smartplannersas.github.io/cineplanner-landing/assets/og-cineplanner.jpg">
+<meta name="twitter:image" content="https://www.cineplanner.fr/assets/og-cineplanner.jpg">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#5B4FE8">
 <style>
@@ -53,7 +53,7 @@
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
-  src: url('./assets/fonts/inter-latin-ext.woff2') format('woff2');
+  src: url('/assets/fonts/inter-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
@@ -61,7 +61,7 @@
   font-style: normal;
   font-weight: 400 900;
   font-display: swap;
-  src: url('./assets/fonts/inter-latin.woff2') format('woff2');
+  src: url('/assets/fonts/inter-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
@@ -80,7 +80,7 @@
     h2 { font-size: clamp(24px,5.5vw,32px) !important; }
   }
 </style>
-<script src="./trial-popup.js" defer></script>
+<script src="/trial-popup.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -219,7 +219,7 @@
       </div>
     </div>
 
-    <p style="text-align:center; font:400 15px/1.65 'Inter'; color:#6c6c86; margin:26px auto 0; max-width:640px;">Tous les tarifs sont exprimés hors taxes, par établissement, selon son nombre d'écrans. La TVA applicable est ajoutée au moment du paiement. Pour un groupe, un réseau ou un besoin spécifique, consultez la <a href="tarifs">grille tarifaire détaillée</a> ou demandez un devis.</p>
+    <p style="text-align:center; font:400 15px/1.65 'Inter'; color:#6c6c86; margin:26px auto 0; max-width:640px;">Tous les tarifs sont exprimés hors taxes, par établissement, selon son nombre d'écrans. La TVA applicable est ajoutée au moment du paiement. Pour un groupe, un réseau ou un besoin spécifique, consultez la <a href="/tarifs">grille tarifaire détaillée</a> ou demandez un devis.</p>
   </div>
 
   <!-- COMMENT ÇA MARCHE -->
@@ -272,15 +272,15 @@
     <h2 style="font:800 36px/1.12 'Inter'; letter-spacing:-.015em; margin:0;">Vous préférez essayer d'abord ?</h2>
     <p style="font:400 18px/1.6 'Inter'; color:#e0dcff; margin:16px auto 0; max-width:540px;">14 jours d'essai gratuit, sans carte bancaire, avec un expert pour paramétrer votre cinéma.</p>
     <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:30px;">
-      <a href="essai-gratuit" style="background:#fff; color:var(--accent-dark); font:700 16px/1 'Inter'; padding:17px 30px; border-radius:12px;">Démarrer l'essai gratuit</a>
+      <a href="/essai-gratuit" style="background:#fff; color:var(--accent-dark); font:700 16px/1 'Inter'; padding:17px 30px; border-radius:12px;">Démarrer l'essai gratuit</a>
       <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener" style="border:1px solid rgba(255,255,255,.5); color:#fff; font:700 16px/1 'Inter'; padding:17px 26px; border-radius:12px;">Parler à un expert</a>
     </div>
   </div>
 
   <div style="background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); padding:32px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
-    <div style="display:flex; align-items:center; gap:10px;"><img src="./assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;" loading="lazy"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
+    <div style="display:flex; align-items:center; gap:10px;"><img src="/assets/logo-mark.png" alt="Ciné Planner" style="width:26px; height:26px;" loading="lazy"><span style="font:700 15px/1 'Inter'; color:#fff;">Ciné Planner</span></div>
     <span style="font:400 13px/1.5 'Inter'; color:#7a7a92;">© 2026 Ciné Planner, cineplanner.fr · Opéré par SmartPlanner</span>
-    <span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="cgu" style="color:#7a7a92;">CGU</a><a href="cgv" style="color:#7a7a92;">CGV</a></span>
+    <span style="display:flex; gap:18px; font:400 13px/1.5 'Inter';"><a href="/mentions-legales" style="color:#7a7a92;">Mentions légales</a><a href="/confidentialite" style="color:#7a7a92;">Confidentialité</a><a href="/cgu" style="color:#7a7a92;">CGU</a><a href="/cgv" style="color:#7a7a92;">CGV</a></span>
   </div>
 </div>
 </x-dc>
