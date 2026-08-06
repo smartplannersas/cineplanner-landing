@@ -28,29 +28,27 @@ support.js                     → runtime des composants (fourni, ne pas modifi
 trial-popup.js                 → invitation à l'essai après 30 s de navigation
 assets/                        → logos, captures, images de partage
 robots.txt / sitemap.xml / llms.txt  → référencement classique et génératif
-netlify.toml                   → en-têtes et cache (inactif sur GitHub Pages)
+CNAME                          → domaine personnalisé (www.cineplanner.fr)
+contact.html / services.html / a-propos.html  → redirections des anciennes URLs Framer
 ```
 
 ## Déploiement
 
 **GitHub Pages (en place)**
 - Dépôt : `smartplannersas/cineplanner-landing`, branche `main`, racine du dépôt.
-- Tout push sur `main` publie le site sur
-  https://smartplannersas.github.io/cineplanner-landing/
+- Tout push sur `main` publie le site sur https://www.cineplanner.fr/
+- `CNAME` porte le domaine personnalisé (`www.cineplanner.fr`, une seule ligne) : le
+  supprimer ferait retomber le site sur l'adresse `github.io`.
 - `.nojekyll` désactive le traitement Jekyll (sinon les fichiers commençant par `_`
   sont ignorés).
 - Les pages sont servies **sans extension** : `tarifs.html` répond aussi sur `/tarifs`.
   C'est un comportement natif de GitHub Pages, vérifié ; les liens internes utilisent
   donc la forme courte avec une barre de début (`/tarifs`).
-- Les assets restent en relatif (`./assets/…`) pour fonctionner quel que soit le préfixe.
-- `netlify.toml` n'est pas interprété par GitHub Pages : les en-têtes de sécurité ne
-  s'appliquent pas ici. Le fichier est conservé pour un éventuel déploiement Netlify.
-
-**Netlify (optionnel, déjà configuré)**
-1. Connecter ce dépôt GitHub à Netlify.
-2. Build command : *(aucune)* — Publish directory : `.` (racine).
-3. `netlify.toml` gère les en-têtes de sécurité et le cache. Les adresses courtes ne
-   demandent aucune configuration : elles découlent du nom des fichiers.
+- Les assets et les scripts sont **racine-relatifs** (`/assets/…`, `/support.js`) : le site
+  est servi à la racine du domaine.
+- GitHub Pages ne sait pas faire de redirection 301. Les anciennes URLs Framer sans
+  équivalent (`/contact`, `/services`, `/a-propos`) sont donc des pages HTML de redirection
+  en `noindex,follow` qui font un `location.replace` vers leur cible.
 
 ## Architecture des pages
 
