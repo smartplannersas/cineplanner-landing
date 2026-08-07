@@ -69,11 +69,15 @@
   body { margin: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #f5f6fc; --accent:#5B4FE8; --accent-dark:#3d2fc4; --accent-soft:#ecebfd; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { color: var(--accent-dark); }
-  .tf-input { width:100%; border:1.5px solid #e4e4ef; border-radius:12px; padding:14px 15px; font:500 15px/1.3 'Inter'; color:#16162a; background:#fff; outline:none; transition:border-color .15s, box-shadow .15s; }
+  /* 16px minimum : sous ce seuil, Safari iOS zoome a la mise au point du champ
+     et ne dezoome jamais. Ne pas redescendre, y compris dans les media queries. */
+  .tf-input { width:100%; border:1.5px solid #e4e4ef; border-radius:12px; padding:14px 15px; font:500 16px/1.3 'Inter'; color:#16162a; background:#fff; outline:none; transition:border-color .15s, box-shadow .15s; }
   .tf-input::placeholder { color:#a7a7bd; }
   .tf-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
   select.tf-input { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235B4FE8' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 15px center; padding-right:40px; cursor:pointer; }
   textarea.tf-input { resize:vertical; min-height:96px; }
+  /* Filet de securite : tout champ ajoute plus tard herite du meme plancher. */
+  input, select, textarea { font-size: 16px; }
   @media (max-width: 960px) {
     [style*="grid-template-columns: repeat(4, 1fr)"],
     [style*="grid-template-columns: repeat(3, 1fr)"],
