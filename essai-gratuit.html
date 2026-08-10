@@ -114,6 +114,15 @@
     [style*="font-size: 11px"]:not(.aps-root *),
     [style*="font-size: 12px"]:not(.aps-root *) { font-size: 13px !important; }
   }
+  /* Cibles tactiles 44px — voir le commentaire detaille dans SiteNav.dc.html.
+     Repete ici parce que cette page n'importe pas SiteNav. */
+  @media (max-width: 640px) {
+    a:not(.aps-root *),
+    button:not(.aps-root *) { min-height: 44px; display: flex; align-items: center; }
+    button:not(.aps-root *),
+    a[style*="text-align: center"]:not(.aps-root *) { justify-content: center; }
+    a[style*="display: inline-block"]:not(.aps-root *) { display: inline-flex !important; align-items: center; }
+  }
 </style>
 <script type="application/ld+json">
 {

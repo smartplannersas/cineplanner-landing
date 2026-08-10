@@ -62,6 +62,27 @@
     [style*="font-size: 11px"]:not(.aps-root *),
     [style*="font-size: 12px"]:not(.aps-root *) { font-size: 13px !important; }
   }
+
+  /* Cibles tactiles : 44px de hauteur minimale sous 640px.
+     Concerne les liens du menu burger (42px), « Vue d'ensemble → » (36px), les
+     bascules de périodicité des tarifs (37px) et les liens de pied de page
+     (14px). Les maquettes produit sont exclues, leurs éléments ne sont pas
+     cliquables.
+
+     Le centrage vertical passe par flex. Deux précautions :
+     — un bouton est centré par défaut, mais devenu conteneur flex il perd
+       text-align ; on lui rend son centrage par justify-content ;
+     — un inline-block ignore align-items ; on le bascule en inline-flex.
+     Aucune de ces règles n'est en !important, sauf celle qui doit vaincre un
+     display posé en ligne : les styles en ligne existants gardent la main,
+     notamment les justify-content: space-between du menu déroulant. */
+  @media (max-width: 640px) {
+    a:not(.aps-root *),
+    button:not(.aps-root *) { min-height: 44px; display: flex; align-items: center; }
+    button:not(.aps-root *),
+    a[style*="text-align: center"]:not(.aps-root *) { justify-content: center; }
+    a[style*="display: inline-block"]:not(.aps-root *) { display: inline-flex !important; align-items: center; }
+  }
 </style>
 </helmet>
 <div style="font-family:'Inter',system-ui,sans-serif;">
