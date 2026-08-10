@@ -47,7 +47,7 @@
       </div>
     </div>
     <div style="display:flex; align-items:center; gap:16px;">
-      <span style="font:700 13px/1 'Inter'; letter-spacing:.03em; color:#eceef6;">MEGARAMA · DIEPPE</span>
+      <span style="font:700 13px/1 'Inter'; letter-spacing:.03em; color:#eceef6;">CINÉ HORIZON · BORDEAUX</span>
       <div style="display:flex; align-items:center; gap:12px; color:#b9bcce;">
         <span style="position:relative; font-size:15px;">🔔<span style="position:absolute; top:-3px; right:-3px; width:7px; height:7px; border-radius:50%; background:#ff5f57;"></span></span>
         <div style="width:31px; height:31px; border-radius:50%; background:linear-gradient(150deg,#6f63ff,#4536c9); display:flex; align-items:center; justify-content:center; color:#fff; font:700 12px/1 'Inter';">RH</div>
@@ -253,17 +253,17 @@ class Component extends DCLogic {
 
     // sidebar : quelques cartes en fond pastel plein (comme la vraie app)
     const staffRaw = [
-      ['Camille Merville','25h00 / 25h00 · CDI','0 h',0,'amber-fill'],
-      ['Lina Aloyan','30h00 / 25h00 · CDI','+5 h',1,'plain'],
-      ['Stéphanie Heudebourg','25h00 / 25h00 · CDI','0 h',0,'pink-fill'],
-      ['Océane Berton','25h20 / 25h00 · CDI','+0 h',0,'purple-fill'],
-      ['Pierrick Boitout','25h00 / 25h00 · CDI','0 h',0,'plain'],
-      ['Florentine Bonnard','0h00 / 25h00 · CDI','−25 h',-1,'lime-fill'],
-      ['Simon Verdier','37h00 / 35h00 · CDI','+2 h',1,'plain'],
-      ['Benoit Pisaroni','25h00 / 25h00 · CDD','0 h',0,'plain'],
-      ['Lusine Bulur','0h00 / 20h00 · CDI','−20 h',-1,'blue-fill'],
-      ['Juliette Lepain','19h04 / 25h00 · CDI','−6 h',-1,'teal-fill'],
-      ['Léa Chevalier','25h00 / 25h00 · CDI','0 h',0,'plain']
+      ['Camille Renard','25h00 / 25h00 · CDI','0 h',0,'amber-fill'],
+      ['Sofia Lenoir','30h00 / 25h00 · CDI','+5 h',1,'plain'],
+      ['Jeanne Morel','25h00 / 25h00 · CDI','0 h',0,'pink-fill'],
+      ['Inès Faure','25h20 / 25h00 · CDI','+0 h',0,'purple-fill'],
+      ['Thomas Aubert','25h00 / 25h00 · CDI','0 h',0,'plain'],
+      ['Sarah Dubois','0h00 / 25h00 · CDI','−25 h',-1,'lime-fill'],
+      ['Paul Girard','37h00 / 35h00 · CDI','+2 h',1,'plain'],
+      ['Léo Mercier','25h00 / 25h00 · CDD','0 h',0,'plain'],
+      ['Lucie Bonnet','0h00 / 20h00 · CDI','−20 h',-1,'blue-fill'],
+      ['Léna Marchal','19h04 / 25h00 · CDI','−6 h',-1,'teal-fill'],
+      ['Eliott Rey','25h00 / 25h00 · CDI','0 h',0,'plain']
     ];
     const fills = {
       'amber-fill': '#ffedd6', 'pink-fill': '#ffdfe8', 'purple-fill': '#e9e0ff',
@@ -306,55 +306,55 @@ class Component extends DCLogic {
 
     const rowsRaw = [
       ['Direction', [
-        cell(S('Simon V.','10:30 – 18:30','8h','lime','warn')),
-        cell(S('Simon V.','11:30 – 18:30','7h','lime','warn')),
+        cell(S('Paul G.','10:30 – 18:30','8h','lime','warn')),
+        cell(S('Paul G.','11:30 – 18:30','7h','lime','warn')),
         REPOS,
-        cell(S('Simon V.','12:45 – 18:30','5h45','lime')),
-        cell(S('Simon V.','12:45 – 21:15','8h30','lime','warn')),
+        cell(S('Paul G.','12:45 – 18:30','5h45','lime')),
+        cell(S('Paul G.','12:45 – 21:15','8h30','lime','warn')),
         REPOS,
-        cell(S('Simon V.','10:00 – 17:45','7h45','lime','warn'))
+        cell(S('Paul G.','10:00 – 17:45','7h45','lime','warn'))
       ]],
       ['Caisse', [
-        cell(S('Romane D.','13:00 – 18:30','5h30','blue'), S('Pierrick B.','15:30 – 21:15','5h45','amber')),
-        cell(S('Lina N.','18:15 – 21:15','3h','green')),
-        cell(S('Pierrick B.','13:00 – 16:45','3h45','amber'), S('Romane D.','13:15 – 18:45','5h30','blue')),
-        cell(S('Benoit P.','13:15 – 18:30','5h15','blue'), S('Romane D.','17:30 – 21:15','3h45','blue'), S('Océane B.','17:15 – 21:15','4h','purple')),
-        cell(S('Romane D.','13:15 – 17:15','4h','blue','warn'), S('Lina N.','16:45 – 21:00','4h15','green'), S('Christa M.','17:45 – 21:00','3h15','amber')),
-        cell(S('Benoit P.','13:00 – 17:00','4h','amber'), S('Pierrick B.','13:15 – 21:00','7h45','amber','warn'), S('Lina N.','16:15 – 21:15','5h','green')),
-        cell(S('Christa M.','10:15 – 16:45','6h30','amber','warn'), S('Romane D.','13:15 – 19:30','6h15','blue','warn'))
+        cell(S('Stéphane P.','13:00 – 18:30','5h30','blue'), S('Thomas A.','15:30 – 21:15','5h45','amber')),
+        cell(S('Nicolas F.','18:15 – 21:15','3h','green')),
+        cell(S('Thomas A.','13:00 – 16:45','3h45','amber'), S('Stéphane P.','13:15 – 18:45','5h30','blue')),
+        cell(S('Léo M.','13:15 – 18:30','5h15','blue'), S('Stéphane P.','17:30 – 21:15','3h45','blue'), S('Inès F.','17:15 – 21:15','4h','purple')),
+        cell(S('Stéphane P.','13:15 – 17:15','4h','blue','warn'), S('Nicolas F.','16:45 – 21:00','4h15','green'), S('Adrien B.','17:45 – 21:00','3h15','amber')),
+        cell(S('Léo M.','13:00 – 17:00','4h','amber'), S('Thomas A.','13:15 – 21:00','7h45','amber','warn'), S('Nicolas F.','16:15 – 21:15','5h','green')),
+        cell(S('Adrien B.','10:15 – 16:45','6h30','amber','warn'), S('Stéphane P.','13:15 – 19:30','6h15','blue','warn'))
       ]],
       ['Agent de fermeture', [
-        cell(S('Lina N.','18:45 – 23:30','4h45','green')),
-        cell(S('Pierrick B.','15:45 – 23:30','7h45','amber','warn')),
-        cell(S('Christa M.','15:30 – 23:30','8h','amber','warn')),
-        cell(S('Christa M.','16:15 – 23:30','7h15','amber','warn')),
+        cell(S('Nicolas F.','18:45 – 23:30','4h45','green')),
+        cell(S('Thomas A.','15:45 – 23:30','7h45','amber','warn')),
+        cell(S('Adrien B.','15:30 – 23:30','8h','amber','warn')),
+        cell(S('Adrien B.','16:15 – 23:30','7h15','amber','warn')),
         REPOS,
-        cell(S('Océane B.','18:15 – 23:30','5h15','purple')),
-        cell(S('Lina N.','15:30 – 23:30','8h','green','warn'))
+        cell(S('Inès F.','18:15 – 23:30','5h15','purple')),
+        cell(S('Nicolas F.','15:30 – 23:30','8h','green','warn'))
       ]],
       ['Coffee', [
-        cell(S('Juliette L.','10:30 – 19:30','9h','teal','lock'), S('Benoit P.','15:30 – 19:30','4h','blue')),
-        cell(S('Léa C.','10:30 – 19:30','9h','lime','warn')),
-        cell(S('Léa C.','10:30 – 19:30','9h','lime','warn')),
-        cell(S('Océane B.','10:30 – 19:50','9h20','lime','warn')),
-        cell(S('Juliette L.','10:30 – 17:00','6h30','teal','lock')),
-        cell(S('Léa C.','12:30 – 19:30','7h','lime','warn')),
-        cell(S('Juliette L.','10:00 – 19:30','9h30','teal'))
+        cell(S('Léna M.','10:30 – 19:30','9h','teal','lock'), S('Léo M.','15:30 – 19:30','4h','blue')),
+        cell(S('Eliott R.','10:30 – 19:30','9h','lime','warn')),
+        cell(S('Eliott R.','10:30 – 19:30','9h','lime','warn')),
+        cell(S('Inès F.','10:30 – 19:50','9h20','lime','warn')),
+        cell(S('Léna M.','10:30 – 17:00','6h30','teal','lock')),
+        cell(S('Eliott R.','12:30 – 19:30','7h','lime','warn')),
+        cell(S('Léna M.','10:00 – 19:30','9h30','teal'))
       ]],
       ['Coffee + Cinéma', [
         REPOS, REPOS, REPOS, REPOS,
-        cell(S('Océane B.','16:45 – 23:30','6h45','purple','warn')),
+        cell(S('Inès F.','16:45 – 23:30','6h45','purple','warn')),
         REPOS,
-        cell(S('Benoit P.','15:30 – 21:15','5h45','blue'))
+        cell(S('Léo M.','15:30 – 21:15','5h45','blue'))
       ]],
       ['Agent d\u2019entretien', [
-        cell(S('Lina A.','08:30 – 14:30','6h','amber','lock')),
-        cell(S('Lina A.','08:30 – 14:30','6h','amber','lock')),
-        cell(S('Benoit P.','09:30 – 11:30','2h','blue')),
-        cell(S('Lina A.','08:30 – 14:30','6h','amber')),
-        cell(S('Lina A.','08:30 – 14:30','6h','amber','lock')),
-        cell(S('Benoit P.','09:00 – 13:00','4h','blue','lock')),
-        cell(S('Lina A.','07:00 – 13:00','6h','amber','warn'))
+        cell(S('Sofia L.','08:30 – 14:30','6h','amber','lock')),
+        cell(S('Sofia L.','08:30 – 14:30','6h','amber','lock')),
+        cell(S('Léo M.','09:30 – 11:30','2h','blue')),
+        cell(S('Sofia L.','08:30 – 14:30','6h','amber')),
+        cell(S('Sofia L.','08:30 – 14:30','6h','amber','lock')),
+        cell(S('Léo M.','09:00 – 13:00','4h','blue','lock')),
+        cell(S('Sofia L.','07:00 – 13:00','6h','amber','warn'))
       ]]
     ];
     const rows = rowsRaw.map((r,i) => {
