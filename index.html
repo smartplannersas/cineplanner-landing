@@ -851,42 +851,42 @@ class Component extends DCLogic {
         title: 'Planifiez vos équipes sans sortir du cadre légal',
         desc: "Ciné Planner applique les règles métier du cinéma directement dans le planning, avant validation.",
         bullets: ['Semaine cinéma ou semaine calendaire, selon votre organisation', 'Duplication de semaines et modèles réutilisables (vacances scolaires, périodes fortes)', 'Vue par poste ou par salarié', 'Alertes de convention collective (nuit, durée, hebdo, paniers) avant validation'],
-        slotId: 'feat-planif', slotLabel: 'Capture produit, vue planning', screen: 'planning', modal: true, badgeT: 'Écarts détectés avant publication', badgeS: 'Alertes CCN avant validation', href: 'planification'
+        slotId: 'feat-planif', slotLabel: 'Capture produit, vue planning', screen: 'planning', modal: true, badgeT: 'Écarts détectés avant publication', badgeS: 'Alertes CCN avant validation', href: '/planification'
       },
       temps: {
         label: 'Suivi des temps', tag: 'Temps & présence',
         title: 'Des heures réelles, comparées à ce qui était prévu',
         desc: "Mesurez les heures réellement travaillées, repérez les écarts au planning et fiabilisez vos éléments variables.",
         bullets: ['Feuilles de présence hebdomadaires, signées électroniquement', 'Heures réelles et heures théoriques enregistrées côte à côte', 'Demandes d\u2019absence, de congés et rectifications d\u2019horaires en ligne', 'Historique des heures par salarié, prêt en cas de contrôle'],
-        slotId: 'feat-temps', slotLabel: 'Capture produit, suivi des temps', screen: 'temps', badgeT: 'Heures réelles vs planifiées', badgeS: 'Écarts et retards signalés', href: 'suivi-des-temps'
+        slotId: 'feat-temps', slotLabel: 'Capture produit, suivi des temps', screen: 'temps', badgeT: 'Heures réelles vs planifiées', badgeS: 'Écarts et retards signalés', href: '/suivi-des-temps'
       },
       contrats: {
         label: 'Contrats', tag: 'Contrats & modèles',
         title: 'Vos modèles de contrats, réutilisables à l\u2019infini',
         desc: "Plus aucun contrat à refaire à la main : vos modèles se remplissent automatiquement, se font approuver, se signent et s\u2019archivent.",
         bullets: ['Modèles réutilisables : fini les contrats retapés à chaque embauche', 'Signature électronique des contrats (en option)', 'Workflow d\u2019approbation et commentaires entre parties prenantes', 'Archivage de tous vos contrats, accessibles à tout moment'],
-        slotId: 'feat-contrats', slotLabel: 'Capture produit, éditeur de contrat', screen: 'contrats', badgeT: 'Contrats prêts en quelques clics', badgeS: 'Modèles à variables dynamiques', href: 'contrats'
+        slotId: 'feat-contrats', slotLabel: 'Capture produit, éditeur de contrat', screen: 'contrats', badgeT: 'Contrats prêts en quelques clics', badgeS: 'Modèles à variables dynamiques', href: '/contrats'
       },
       paie: {
         label: 'Export paie', tag: 'Export paie',
         title: 'Votre paie prête, sans une seule ressaisie',
         desc: "Vos plannings validés deviennent des éléments de paie prêts à transmettre à votre cabinet, sans une seule ressaisie.",
         bullets: ['Export au jour, au mois ou sur une période personnalisée', 'Toutes les variables de paie, prêtes pour votre cabinet', 'Compteurs de congés à jour', 'Calcul automatique des primes de panier, heures supplémentaires et complémentaires'],
-        slotId: 'feat-paie', slotLabel: 'Capture produit, export paie', screen: 'paie', modal: 'paie', badgeT: 'Export sans ressaisie', badgeS: 'Écarts à la CCN signalés', href: 'export-paie'
+        slotId: 'feat-paie', slotLabel: 'Capture produit, export paie', screen: 'paie', modal: 'paie', badgeT: 'Export sans ressaisie', badgeS: 'Écarts à la CCN signalés', href: '/export-paie'
       },
       portail: {
         label: 'Espace équipe', tag: 'Côté équipes',
         title: 'Une communication RH simple et instantanée',
         desc: "Fini les plannings imprimés et les SMS perdus : chaque salarié accède à son espace en ligne, depuis son téléphone ou son ordinateur.",
         bullets: ['Planning toujours à jour, consultable partout', 'Demandes de congés et de rectification en un geste', 'Signature des feuilles de présence par le salarié', 'Notification à chaque modification de son planning'],
-        slotId: 'feat-portail', slotLabel: 'Capture produit, espace équipe', screen: 'portail', badgeT: 'Planning sur mobile', badgeS: 'Absences posées depuis le téléphone', href: 'espace-equipe'
+        slotId: 'feat-portail', slotLabel: 'Capture produit, espace équipe', screen: 'portail', badgeT: 'Planning sur mobile', badgeS: 'Absences posées depuis le téléphone', href: '/espace-equipe'
       },
       documents: {
         label: 'Espace documentaire sécurisé', tag: 'Espace consolidé',
         title: 'Tous vos documents RH rassemblés au même endroit',
         desc: "Un espace consolidé pour centraliser les pièces de vos salariés et vos données RH, chez le prestataire de stockage de votre choix.",
         bullets: ['Un seul espace pour toutes vos pièces salariés et données RH', 'Envoi et chargement des documents en quelques secondes', 'Le prestataire de stockage de votre choix', 'Chaque pièce classée par salarié et par établissement'],
-        slotId: 'feat-docs', slotLabel: 'Capture produit, espace documentaire sécurisé', screen: 'presences', badgeT: 'Documents centralisés', badgeS: 'Pièces salariés et données RH', href: 'coffre-fort-documents'
+        slotId: 'feat-docs', slotLabel: 'Capture produit, espace documentaire sécurisé', screen: 'presences', badgeT: 'Documents centralisés', badgeS: 'Pièces salariés et données RH', href: '/coffre-fort-documents'
       }
     };
     const order = ['planif','temps','contrats','paie','portail','documents'];
