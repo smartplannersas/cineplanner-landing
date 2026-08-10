@@ -83,11 +83,35 @@
     a[style*="text-align: center"]:not(.aps-root *) { justify-content: center; }
     a[style*="display: inline-block"]:not(.aps-root *) { display: inline-flex !important; align-items: center; }
   }
+
+  /* En-tête collant allégé sur mobile.
+     Logo 46px + 16px de padding vertical = 79px de barre fixe mesurés, soit 9 %
+     d'un écran de téléphone, en permanence. On descend à 36px de logo et 12px
+     de padding, soit 61px bordure comprise.
+
+     La hauteur obtenue est 69px et non 61 : le plancher n'est plus le logo mais
+     le bouton burger, porté à 44px par la règle de cibles tactiles ci-dessus.
+     Descendre plus bas demanderait de rogner cette cible, ce qui serait un
+     mauvais échange.
+
+     Le panneau du burger est couplé à cette hauteur : il colle à top:78px et
+     borne sa hauteur à 100vh moins autant. Les deux valeurs suivent, sinon le
+     menu passerait sous la barre au défilement. Un seul sélecteur suffit,
+     top: 78px n'apparaissant qu'ici.
+
+     Le logo passe par une classe et non par sa hauteur en ligne : un logo
+     client de la page d'accueil fait aussi 56px, un sélecteur d'attribut
+     l'aurait rétréci au passage. */
+  @media (max-width: 640px) {
+    .snav-logo { height: 36px !important; }
+    [style*="padding: 16px 40px"] { padding: 12px 20px !important; }
+    [style*="top: 78px"] { top: 69px !important; max-height: calc(100vh - 69px) !important; }
+  }
 </style>
 </helmet>
 <div style="font-family:'Inter',system-ui,sans-serif;">
   <div style="position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:16px 40px; background:rgba(255,255,255,.97); border-bottom:1px solid #eef0f7;">
-    <a href="/" style="display:flex; align-items:center; gap:10px; text-decoration:none;"><img src="/assets/logo-full.png" alt="Ciné Planner" style="height:46px; width:auto; display:block;"></a>
+    <a href="/" style="display:flex; align-items:center; gap:10px; text-decoration:none;"><img class="snav-logo" src="/assets/logo-full.png" alt="Ciné Planner" style="height:46px; width:auto; display:block;"></a>
 
     <div class="snav-links" style="display:flex; align-items:center; gap:30px; font:600 15px/1 'Inter'; color:#3a3a52;">
       <div data-snav-menu="" onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;">

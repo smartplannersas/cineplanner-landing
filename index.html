@@ -169,6 +169,17 @@
     a[style*="text-align: center"]:not(.aps-root *) { justify-content: center; }
     a[style*="display: inline-block"]:not(.aps-root *) { display: inline-flex !important; align-items: center; }
   }
+  /* En-tete collant allege sur mobile — voir le commentaire detaille dans
+     SiteNav.dc.html. Ici le logo fait 56px et le padding 20px, ramenes a 36
+     et 12. Le panneau du burger colle a top:64px, valeur deja incorrecte au
+     regard d un en-tete de 83px : elle est alignee sur la nouvelle hauteur.
+     La regle de padding existe aussi dans le bloc 900px ; celle-ci vient plus
+     loin dans la feuille et l emporte donc sous 640px. */
+  @media (max-width: 640px) {
+    .cpl-logo { height: 36px !important; }
+    [style*="padding: 20px 48px"] { padding: 12px 20px !important; }
+    [style*="top: 64px"] { top: 69px !important; max-height: calc(100vh - 69px) !important; }
+  }
 </style>
 <script src="/trial-popup.js" defer></script>
 <script type="application/ld+json">
@@ -311,7 +322,7 @@
 
   <!-- NAV -->
   <div style="position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; background:rgba(255,255,255,.97); border-bottom:1px solid #eef0f7;">
-    <div style="display:flex; align-items:center; gap:10px;"><img src="/assets/logo-full.png" alt="Ciné Planner" style="height:56px; width:auto; display:block;"></div>
+    <div style="display:flex; align-items:center; gap:10px;"><img class="cpl-logo" src="/assets/logo-full.png" alt="Ciné Planner" style="height:56px; width:auto; display:block;"></div>
     <div class="cpl-navlinks" style="display:flex; align-items:center; gap:30px; font:600 15px/1 'Inter'; color:#3a3a52;">
       <div data-snav-menu="" onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;">
         <a href="#feat" onClick="{{ toggleMenu }}" style="color:#3a3a52; display:inline-flex; align-items:center; gap:6px;">Fonctionnalités <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
