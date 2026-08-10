@@ -139,6 +139,12 @@
     [style*="display: flex; gap: 14px; margin-top: 30px"],
     [style*="display: flex; gap: 16px; margin-top: 28px"],
     [style*="display: flex; gap: 14px; justify-content: center; margin-top: 28px"] { flex-direction: column !important; }
+    /* Protège le panneau de l'assistant flottant, seul élément de la page à
+       340px de large. Ce n'est PAS le pop-up d'essai : celui-ci est injecté par
+       trial-popup.js, qui écrit son style avec setAttribute sans espace après
+       les deux-points, forme que ce sélecteur ne peut pas atteindre. Le pop-up
+       porte désormais sa propre feuille responsive. Ne pas retirer cette règle :
+       sans elle, l'assistant déborde sur un écran de 320px. */
     [style*="width: 340px"] { width: calc(100vw - 40px) !important; max-width: 340px !important; }
     [style*="padding: 44px;"] { padding: 28px !important; }
   }

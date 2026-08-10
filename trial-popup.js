@@ -58,18 +58,29 @@
   function afficher() {
     if (!document.body) return;
 
-    var petit = window.matchMedia('(max-width: 560px)').matches;
-    var pos = petit
-      ? 'left:14px; right:14px; bottom:96px;'                    // au-dessus de la bulle de chat
-      : 'left:26px; bottom:26px; width:340px;';
+    // Le placement et la largeur passent par une feuille injectee, pas par le
+    // style en ligne : une media query suit les changements d orientation,
+    // alors qu un matchMedia lu une seule fois a l affichage figeait la mise en
+    // page de l orientation de depart. La regle voyage avec le composant, elle
+    // s applique donc sur toutes les pages qui chargent ce script.
+    if (!document.getElementById('cp-trial-popup-style')) {
+      var feuille = document.createElement('style');
+      feuille.id = 'cp-trial-popup-style';
+      feuille.textContent =
+        '.cp-trial-popup{position:fixed;z-index:70;box-sizing:border-box;' +
+        'left:26px;bottom:26px;width:340px;}' +
+        '@media (max-width:560px){.cp-trial-popup{' +
+        'left:14px;right:14px;bottom:96px;width:auto;}}';   // bottom:96px : au-dessus de la bulle de chat
+      document.head.appendChild(feuille);
+    }
 
     var carte = el('div',
-      'position:fixed; ' + pos + ' z-index:70; box-sizing:border-box;' +
       "font-family:'Inter',system-ui,-apple-system,sans-serif;" +
       'background:#fff; border:1px solid #e9e9f2; border-radius:20px; padding:20px;' +
       'box-shadow:0 28px 70px -30px rgba(22,22,42,.5);' +
       'opacity:0; transform:translateY(14px);' +
       (lent ? '' : 'transition:opacity .34s ease, transform .34s cubic-bezier(.2,.8,.3,1);'));
+    carte.className = 'cp-trial-popup';
     carte.setAttribute('role', 'dialog');
     carte.setAttribute('aria-label', 'Essai gratuit Ciné Planner');
 
