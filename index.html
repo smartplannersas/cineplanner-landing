@@ -278,8 +278,8 @@
   <div style="position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; background:rgba(255,255,255,.97); border-bottom:1px solid #eef0f7;">
     <div style="display:flex; align-items:center; gap:10px;"><img src="/assets/logo-full.png" alt="Ciné Planner" style="height:56px; width:auto; display:block;"></div>
     <div class="cpl-navlinks" style="display:flex; align-items:center; gap:30px; font:600 15px/1 'Inter'; color:#3a3a52;">
-      <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;">
-        <a href="#feat" style="color:#3a3a52; display:inline-flex; align-items:center; gap:6px;">Fonctionnalités <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
+      <div data-snav-menu="" onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;">
+        <a href="#feat" onClick="{{ toggleMenu }}" style="color:#3a3a52; display:inline-flex; align-items:center; gap:6px;">Fonctionnalités <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
         <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
           <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:fixed; top:74px; left:50%; transform:translateX(-50%); width:1000px; max-width:calc(100vw - 32px); background:#fff; border:1px solid #eef0f7; border-radius:24px; box-shadow:0 40px 90px -30px rgba(22,22,42,.55); overflow:hidden; z-index:40;">
             <div style="display:grid; grid-template-columns:1fr 1fr 0.86fr;">
@@ -312,8 +312,8 @@
         </sc-if>
       </div>
       <a href="/tarifs" style="color:#3a3a52;">Tarifs</a>
-      <div onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:relative;">
-        <a href="#temoignages" style="color:#3a3a52; display:inline-flex; align-items:center; gap:6px;">Ressources <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
+      <div data-snav-menu="" onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:relative;">
+        <a href="#temoignages" onClick="{{ toggleRes }}" style="color:#3a3a52; display:inline-flex; align-items:center; gap:6px;">Ressources <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
         <sc-if value="{{ resOpen }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute; top:calc(100% + 20px); left:50%; transform:translateX(-50%); width:280px; background:#fff; border:1px solid #eef0f7; border-radius:16px; box-shadow:0 30px 70px -28px rgba(22,22,42,.5); padding:10px; z-index:40;">
             <a href="#temoignages" onClick="{{ closeRes }}" style="display:flex; gap:12px; padding:12px; border-radius:12px; align-items:flex-start;" style-hover="background:var(--accent-soft);">
@@ -814,6 +814,24 @@ class Component extends DCLogic {
       // filet de sécurité : rien ne doit rester invisible
       setTimeout(() => { els.forEach(el => { if (getComputedStyle(el).opacity === '0') show(el); }); }, 2500);
     } catch (e) {}
+
+    // Fermeture des déroulants sur appui ou clic hors de leur zone. Indispensable
+    // au tactile : sans survol, rien ne produit de mouseleave, et un menu ouvert
+    // au doigt resterait ouvert indéfiniment.
+    this._away = (e) => {
+      const t = e.target;
+      if (t && t.closest && t.closest('[data-snav-menu]')) return;
+      if (this.state.menuOpen || this.state.resOpen) {
+        clearTimeout(this._mt); clearTimeout(this._rt);
+        this.setState({ menuOpen: false, resOpen: false });
+      }
+    };
+    document.addEventListener('pointerdown', this._away, true);
+  }
+
+  componentWillUnmount() {
+    if (this._away) document.removeEventListener('pointerdown', this._away, true);
+    clearTimeout(this._mt); clearTimeout(this._rt);
   }
 
   renderVals() {
@@ -821,6 +839,11 @@ class Component extends DCLogic {
     // les interactions concues pour la souris (loupe des captures).
     const coarsePointer = typeof window !== 'undefined' && !!window.matchMedia
       && window.matchMedia('(pointer: coarse)').matches;
+    // Appareil sans survol reel. Le survol y declencherait mouseenter au moment
+    // du tap, juste avant le clic : le menu s ouvrirait puis se refermerait
+    // aussitot. On laisse donc le clic seul maitre des deroulants.
+    const noHover = typeof window !== 'undefined' && !!window.matchMedia
+      && window.matchMedia('(hover: none)').matches;
 
     const featureData = {
       planif: {
@@ -1039,8 +1062,21 @@ class Component extends DCLogic {
       botOpen: this.state.botOpen,
       botClosed: !this.state.botOpen,
       toggleBot: () => this.setState(s => ({ botOpen: !s.botOpen })),
-      openMenu: () => { clearTimeout(this._mt); this.setState({ menuOpen: true }); },
-      closeMenu: () => { clearTimeout(this._mt); this._mt = setTimeout(() => this.setState({ menuOpen: false }), 140); },
+      openMenu: () => { if (noHover) return; clearTimeout(this._mt); this.setState({ menuOpen: true }); },
+      closeMenu: () => { if (noHover) return; clearTimeout(this._mt); this._mt = setTimeout(() => this.setState({ menuOpen: false }), 140); },
+      // Le lien du declencheur pointe vers #feat, deja accessible depuis
+      // « Vue d'ensemble → » a l interieur du menu : on peut donc consacrer le
+      // clic a l ouverture, seul moyen d atteindre les 6 pages sans survol.
+      toggleMenu: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        clearTimeout(this._mt);
+        this.setState(s => ({ menuOpen: !s.menuOpen, resOpen: false }));
+      },
+      toggleRes: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        clearTimeout(this._rt);
+        this.setState(s => ({ resOpen: !s.resOpen, menuOpen: false }));
+      },
       resOpen: this.state.resOpen,
       navOpen: this.state.navOpen,
       heroClair: (this.props.hero || 'Clair') !== 'Sombre',
@@ -1050,8 +1086,8 @@ class Component extends DCLogic {
       navFeatOpen: this.state.navFeatOpen,
       navFeatChevron: "display:inline-block; font-size:14px; line-height:1; color:#5B4FE8; transition:transform .18s ease; transform:rotate(" + (this.state.navFeatOpen ? '180deg' : '0deg') + ");",
       toggleNavFeat: () => this.setState(s => ({ navFeatOpen: !s.navFeatOpen })),
-      openRes: () => { clearTimeout(this._rt); this.setState({ resOpen: true }); },
-      closeRes: () => { clearTimeout(this._rt); this._rt = setTimeout(() => this.setState({ resOpen: false }), 160); },
+      openRes: () => { if (noHover) return; clearTimeout(this._rt); this.setState({ resOpen: true }); },
+      closeRes: () => { if (noHover) return; clearTimeout(this._rt); this._rt = setTimeout(() => this.setState({ resOpen: false }), 160); },
       accA: pal[0], accD: pal[1], accS: pal[2],
       rootClass,
       active: featureData[this.state.tab],

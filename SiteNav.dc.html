@@ -39,8 +39,8 @@
     <a href="/" style="display:flex; align-items:center; gap:10px; text-decoration:none;"><img src="/assets/logo-full.png" alt="Ciné Planner" style="height:46px; width:auto; display:block;"></a>
 
     <div class="snav-links" style="display:flex; align-items:center; gap:30px; font:600 15px/1 'Inter'; color:#3a3a52;">
-      <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;">
-        <a href="/#feat" style="{{ featStyle }}">Fonctionnalités <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
+      <div data-snav-menu="" onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:relative;">
+        <a href="/#feat" onClick="{{ toggleMenu }}" style="{{ featStyle }}">Fonctionnalités <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
         <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
           <div onMouseEnter="{{ openMenu }}" onMouseLeave="{{ closeMenu }}" style="position:fixed; top:74px; left:50%; transform:translateX(-50%); width:1000px; max-width:calc(100vw - 32px); background:#fff; border:1px solid #eef0f7; border-radius:24px; box-shadow:0 40px 90px -30px rgba(22,22,42,.55); overflow:hidden; z-index:40;">
             <div style="display:grid; grid-template-columns:1fr 1fr 0.86fr;">
@@ -75,8 +75,8 @@
 
       <a href="/tarifs" style="{{ tarifsStyle }}">Tarifs</a>
 
-      <div onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:relative;">
-        <a href="/#temoignages" style="{{ resStyle }}">Ressources <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
+      <div data-snav-menu="" onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:relative;">
+        <a href="/#temoignages" onClick="{{ toggleRes }}" style="{{ resStyle }}">Ressources <span style="font-size:9px; opacity:.55; transform:translateY(1px);">▾</span></a>
         <sc-if value="{{ resOpen }}" hint-placeholder-val="{{ false }}">
           <div onMouseEnter="{{ openRes }}" onMouseLeave="{{ closeRes }}" style="position:absolute; top:calc(100% + 20px); left:50%; transform:translateX(-50%); width:280px; background:#fff; border:1px solid #eef0f7; border-radius:16px; box-shadow:0 30px 70px -28px rgba(22,22,42,.5); padding:10px; z-index:40;">
             <a href="/#temoignages" style="display:flex; gap:12px; padding:12px; border-radius:12px; align-items:flex-start; text-decoration:none;" style-hover="background:#ece9ff;">
@@ -129,7 +129,33 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { menuOpen: false, resOpen: false, navOpen: false, navFeatOpen: false };
+
+  componentDidMount() {
+    // Fermeture des deroulants sur appui ou clic hors de leur zone. Indispensable
+    // au tactile : sans survol, rien ne produit de mouseleave, et un menu ouvert
+    // au doigt resterait ouvert indefiniment.
+    this._away = (e) => {
+      const t = e.target;
+      if (t && t.closest && t.closest('[data-snav-menu]')) return;
+      if (this.state.menuOpen || this.state.resOpen) {
+        clearTimeout(this._mt); clearTimeout(this._rt);
+        this.setState({ menuOpen: false, resOpen: false });
+      }
+    };
+    document.addEventListener('pointerdown', this._away, true);
+  }
+
+  componentWillUnmount() {
+    if (this._away) document.removeEventListener('pointerdown', this._away, true);
+    clearTimeout(this._mt); clearTimeout(this._rt);
+  }
+
   renderVals() {
+    // Appareil sans survol reel (doigt, stylet). Le survol y declencherait
+    // mouseenter au moment du tap, juste avant le clic : le menu s ouvrirait
+    // puis se refermerait aussitot. On laisse donc le clic seul maitre.
+    const noHover = typeof window !== 'undefined' && !!window.matchMedia
+      && window.matchMedia('(hover: none)').matches;
     const _h = React.createElement;
     const _svg = (...ch) => _h('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round' }, ...ch);
     const icons = {
@@ -162,10 +188,23 @@ class Component extends DCLogic {
       featStyle: active === 'feat' ? on : base,
       tarifsStyle: active === 'tarifs' ? 'color:#5B4FE8; text-decoration:none;' : 'color:#3a3a52; text-decoration:none;',
       resStyle: (active === 'blog' || active === 'temoignages') ? on : base,
-      openMenu: () => { clearTimeout(this._mt); this.setState({ menuOpen: true, resOpen: false }); },
-      closeMenu: () => { clearTimeout(this._mt); this._mt = setTimeout(() => this.setState({ menuOpen: false }), 140); },
-      openRes: () => { clearTimeout(this._rt); this.setState({ resOpen: true, menuOpen: false }); },
-      closeRes: () => { clearTimeout(this._rt); this._rt = setTimeout(() => this.setState({ resOpen: false }), 160); },
+      openMenu: () => { if (noHover) return; clearTimeout(this._mt); this.setState({ menuOpen: true, resOpen: false }); },
+      closeMenu: () => { if (noHover) return; clearTimeout(this._mt); this._mt = setTimeout(() => this.setState({ menuOpen: false }), 140); },
+      openRes: () => { if (noHover) return; clearTimeout(this._rt); this.setState({ resOpen: true, menuOpen: false }); },
+      closeRes: () => { if (noHover) return; clearTimeout(this._rt); this._rt = setTimeout(() => this.setState({ resOpen: false }), 160); },
+      // Le lien du declencheur pointe vers /#feat, deja accessible depuis
+      // « Vue d'ensemble → » a l interieur du menu : on peut donc consacrer le
+      // clic a l ouverture, seul moyen d atteindre les 6 pages sans survol.
+      toggleMenu: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        clearTimeout(this._mt);
+        this.setState(s => ({ menuOpen: !s.menuOpen, resOpen: false }));
+      },
+      toggleRes: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        clearTimeout(this._rt);
+        this.setState(s => ({ resOpen: !s.resOpen, menuOpen: false }));
+      },
       toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen, navFeatOpen: false })),
       toggleNavFeat: () => this.setState(s => ({ navFeatOpen: !s.navFeatOpen }))
     };
