@@ -878,6 +878,8 @@ class Component extends DCLogic {
   componentWillUnmount() {
     if (this._away) document.removeEventListener('pointerdown', this._away, true);
     clearTimeout(this._mt); clearTimeout(this._rt);
+    // Ne pas laisser le corps verrouillé si le composant part menu ouvert.
+    try { document.body.style.overflow = ''; document.documentElement.style.overflow = ''; } catch (e) { /* rien */ }
   }
 
   renderVals() {
@@ -1127,8 +1129,18 @@ class Component extends DCLogic {
       navOpen: this.state.navOpen,
       heroClair: (this.props.hero || 'Clair') !== 'Sombre',
       heroSombre: this.props.hero === 'Sombre',
-      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen, navFeatOpen: false })),
-      closeNav: () => this.setState({ navOpen: false, navFeatOpen: false }),
+      // Verrou de défilement : sans lui, la page continue de glisser derrière le
+      // menu ouvert, et le visiteur se retrouve ailleurs en le refermant. Le
+      // panneau garde son propre overflow-y, il reste donc défilable.
+      toggleNav: () => this.setState(s => {
+        const ouvert = !s.navOpen;
+        try { const v = ouvert ? 'hidden' : ''; document.body.style.overflow = v; document.documentElement.style.overflow = v; } catch (e) { /* rien */ }
+        return { navOpen: ouvert, navFeatOpen: false };
+      }),
+      closeNav: () => {
+        try { document.body.style.overflow = ''; document.documentElement.style.overflow = ''; } catch (e) { /* rien */ }
+        this.setState({ navOpen: false, navFeatOpen: false });
+      },
       navFeatOpen: this.state.navFeatOpen,
       navFeatChevron: "display:inline-block; font-size:14px; line-height:1; color:#5B4FE8; transition:transform .18s ease; transform:rotate(" + (this.state.navFeatOpen ? '180deg' : '0deg') + ");",
       toggleNavFeat: () => this.setState(s => ({ navFeatOpen: !s.navFeatOpen })),
