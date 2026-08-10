@@ -84,6 +84,8 @@
   @keyframes cpl-rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
   /* ===== RESPONSIVE ===== */
   .cpl-burger { display: none; }
+  /* Accordéon comparatif : caché par défaut, révélé sous 640px à la place du tableau. */
+  .cpl-compare-mobile { display: none; }
   @media (max-width: 1024px) {
     [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
     [style*="grid-template-columns: 1.6fr 1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; gap: 30px !important; }
@@ -121,8 +123,10 @@
     [style*="grid-template-columns: 1.6fr 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
     .cpl-scrollx { overflow-x: auto !important; }
     [style*="grid-template-columns: 2.6fr 1fr 1fr 1fr"] { min-width: 520px; }
-    /* 4 colonnes sur 520px minimum : illisible sur téléphone, on masque la section */
+    /* 4 colonnes sur 520px minimum : illisible sur téléphone. Le tableau cède la
+       place à l'accordéon, qui porte exactement les mêmes données. */
     .cpl-compare { display: none !important; }
+    .cpl-compare-mobile { display: block !important; }
     [style*="display: flex; gap: 14px; margin-top: 34px"],
     [style*="display: flex; gap: 14px; margin-top: 30px"],
     [style*="display: flex; gap: 16px; margin-top: 28px"],
@@ -661,6 +665,37 @@
     <p style="font:400 13px/1.6 'Inter'; color:#8a8aa4; margin:16px 0 0; max-width:760px;">La signature électronique et le stockage documentaire reposent sur des prestataires spécialisés ; leur activation est configurée lors de l'onboarding.</p>
   </div>
 
+  <!-- COMPARATIF, VERSION MOBILE
+       Le tableau à 4 colonnes ci-dessus demande 520px minimum : il est masqué sous
+       640px, où cet accordéon le remplace. Même source de données (matrixRaw). -->
+  <div class="cpl-compare-mobile" style="padding:0 20px 40px;">
+    <div style="text-align:center; margin:0 auto 22px;">
+      <h3 style="font:800 24px/1.2 'Inter'; letter-spacing:-.01em; color:#16162a; margin:0;">Comparer les formules en détail</h3>
+      <p style="font:400 15px/1.6 'Inter'; color:#5c5c72; margin:10px 0 0;">Ce que couvre réellement chaque plan. Touchez une formule pour la déplier.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <sc-for list="{{ plans }}" as="p" hint-placeholder-count="3">
+        <div style="{{ p.cardStyle }}">
+          <button onClick="{{ p.toggle }}" style="width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:15px 18px; min-height:44px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <span style="display:flex; flex-direction:column; gap:3px;">
+              <span style="font:800 17px/1.2 'Inter'; color:#16162a;">{{ p.nom }}</span>
+              <span style="font:400 13px/1.3 'Inter'; color:#7a7a92;">{{ p.resume }}</span>
+            </span>
+            <span style="flex:none; color:var(--accent); font:400 24px/1 'Inter';">{{ p.sign }}</span>
+          </button>
+          <sc-if value="{{ p.ouvert }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 18px 14px;">
+              <sc-for list="{{ p.features }}" as="f" hint-placeholder-count="12">
+                <div style="{{ f.rowStyle }}"><span style="{{ f.symStyle }}">{{ f.sym }}</span><span style="{{ f.labelStyle }}">{{ f.label }}</span></div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <p style="font:400 13px/1.6 'Inter'; color:#8a8aa4; margin:14px 0 0;">La signature électronique et le stockage documentaire reposent sur des prestataires spécialisés ; leur activation est configurée lors de l'onboarding.</p>
+  </div>
+
   <!-- FAQ -->
   <div style="background:radial-gradient(90% 70% at 50% -10%, var(--accent-soft) 0%, #f2f1fa 55%); padding:84px 48px;">
     <div style="text-align:center; max-width:680px; margin:0 auto 40px;">
@@ -755,7 +790,9 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;hero&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Clair&quot;,&quot;Sombre&quot;],&quot;default&quot;:&quot;Clair&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Indigo&quot;,&quot;Océan&quot;,&quot;Émeraude&quot;,&quot;Prune&quot;,&quot;Corail&quot;,&quot;Nuit&quot;],&quot;default&quot;:&quot;Indigo&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;},&quot;heading&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Moderne&quot;,&quot;Éditorial&quot;],&quot;default&quot;:&quot;Moderne&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;},&quot;corners&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Arrondi&quot;,&quot;Net&quot;],&quot;default&quot;:&quot;Arrondi&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ambiance&quot;}}">
 class Component extends DCLogic {
-  state = { tab: 'planif', size: 'small', periode: 'mensuel', openFaq: 0, menuOpen: false, botOpen: false, resOpen: false, navOpen: false, navFeatOpen: false };
+  // openPlan : carte ouverte de l'accordéon comparatif mobile. 1 = RH, la formule
+  // mise en avant dans le tableau desktop ; la section n'apparaît donc pas vide.
+  state = { tab: 'planif', size: 'small', periode: 'mensuel', openFaq: 0, openPlan: 1, menuOpen: false, botOpen: false, resOpen: false, navOpen: false, navFeatOpen: false };
   componentDidMount() {
     try {
       const root = this._revRoot || document.querySelector('.cpl-root');
@@ -926,6 +963,38 @@ class Component extends DCLogic {
       sSym: sym(r[3]), sColor: col(r[3])
     }));
 
+    // Accordéon mobile (< 640px) : dérivé de matrixRaw, la même source que le tableau
+    // ci-dessus. Aucune donnée n'est ressaisie ici — modifier matrixRaw met à jour les
+    // deux vues. Le filtre sur la longueur écarte d'éventuels intitulés de groupe, comme
+    // sur tarifs.html, pour que les deux pages partagent la même dérivation.
+    const featureRows = matrixRaw.filter(r => r.length > 1);
+    const PLAN_COLS = [['Essentielle', 1], ['RH', 2], ['Sur Mesure', 3]];
+    const planRowStyle = 'display:flex; gap:10px; align-items:flex-start; padding:9px 0; border-top:1px solid #f2f2f8;';
+    const plans = PLAN_COLS.map(function (pc, i) {
+      const nom = pc[0], colonne = pc[1];
+      const ouvert = i === this.state.openPlan;
+      const inclus = featureRows.filter(r => r[colonne]).length;
+      return {
+        nom: nom,
+        ouvert: ouvert,
+        sign: ouvert ? '−' : '+',
+        resume: inclus + ' fonctionnalités sur ' + featureRows.length,
+        toggle: () => this.setState(s => ({ openPlan: s.openPlan === i ? null : i })),
+        cardStyle: 'border:1px solid ' + (i === 1 ? 'var(--accent)' : '#e9e9f2') + '; border-radius:16px; background:#fff; overflow:hidden;',
+        features: featureRows.map(r => ({
+          label: r[0],
+          sym: r[colonne] ? '✓' : '–',
+          rowStyle: planRowStyle,
+          // La barre passe sur le libellé seul : posée sur la ligne flex, elle
+          // barrerait aussi le symbole.
+          labelStyle: r[colonne]
+            ? 'font:500 15px/1.45 \'Inter\'; color:#28283e;'
+            : 'font:500 15px/1.45 \'Inter\'; color:#a7a7bd; text-decoration:line-through;',
+          symStyle: 'flex:none; width:16px; font:800 15px/1.45 \'Inter\'; color:' + (r[colonne] ? '#22a06b' : '#c9c9d6') + ';'
+        }))
+      };
+    }, this);
+
     const faqRaw = [
       ['Combien coûte un logiciel de planning pour un cinéma ?', "Ciné Planner démarre à 59 € par établissement et par mois pour un cinéma de 1 à 3 écrans, et 93 € pour un multiplex de 4 écrans et plus. Le tarif est par établissement, quel que soit le nombre de salariés."],
       ['Quelle est la différence entre un logiciel de planning et un logiciel RH pour cinéma (convention collective, primes de panier) ?', "Un logiciel de planning se limite à placer des shifts. Ciné Planner couvre toute la chaîne RH du cinéma : planning conforme, contrats, feuilles de présence signées, compteurs de congés et export paie. C'est ce qui évite les erreurs de paie et sécurise vos obligations d'employeur."],
@@ -957,7 +1026,7 @@ class Component extends DCLogic {
 
     return {
       tabs,
-      matrix,
+      matrix, plans,
       faqs,
       menuCols,
       menuItems,
