@@ -171,7 +171,7 @@
   <!-- DÉTAIL -->
   <div style="max-width:1160px; margin:0 auto; padding:80px 40px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:56px; align-items:center;">
     <div style="position:relative; height:440px; overflow:hidden; border-radius:16px;" onMouseMove="{{ zMove }}" onMouseLeave="{{ zLeave }}">
-      <div ref="{{ zRef }}" style="position:absolute; inset:0; transition:transform .18s ease-out; transform-origin:center center; cursor:zoom-in;">
+      <div ref="{{ zRef }}" style="{{ zStyle }}">
         <dc-import name="AppScreen" screen="ccn" frame="laptop" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import>
       </div>
     </div>
@@ -222,9 +222,17 @@
 class Component extends DCLogic {
   renderVals() {
     const setEl = (el) => { this._z = el; };
+    // Pointeur grossier : doigt ou stylet, sans survol reel. La loupe est une
+    // interaction souris ; au doigt elle laisse la capture agrandie et bloquee,
+    // faute de mouseleave. On la neutralise et on laisse la vue statique.
+    const coarsePointer = typeof window !== 'undefined' && !!window.matchMedia
+      && window.matchMedia('(pointer: coarse)').matches;
     return {
       zRef: setEl,
+      zStyle: 'position:absolute; inset:0; transition:transform .18s ease-out; transform-origin:center center;'
+        + (coarsePointer ? '' : ' cursor:zoom-in;'),
       zMove: (e) => {
+        if (coarsePointer) return;
         const el = this._z; if (!el) return;
         const box = el.parentElement.getBoundingClientRect();
         const x = ((e.clientX - box.left) / box.width) * 100;

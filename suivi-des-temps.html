@@ -149,7 +149,7 @@
       </div>
     </div>
     <div style="position:relative; height:460px; overflow:hidden; border-radius:16px;" onMouseMove="{{ zMove }}" onMouseLeave="{{ zLeave }}">
-      <div ref="{{ zRef }}" style="position:absolute; inset:0; transition:transform .18s ease-out; transform-origin:center center; cursor:zoom-in;">
+      <div ref="{{ zRef }}" style="{{ zStyle }}">
         <dc-import name="AppScreen" screen="temps" frame="laptop" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import>
       </div>
     </div>
@@ -168,7 +168,7 @@
 
   <div style="max-width:1160px; margin:0 auto; padding:80px 40px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:56px; align-items:center;">
     <div style="position:relative; height:400px; border-radius:18px; overflow:hidden; box-shadow:0 24px 54px -28px rgba(22,22,42,.38); border:1px solid #eceaf9;" onMouseMove="{{ zMove2 }}" onMouseLeave="{{ zLeave2 }}">
-      <div ref="{{ zRef2 }}" style="position:absolute; inset:0; transition:transform .18s ease-out; transform-origin:center center; cursor:zoom-in;">
+      <div ref="{{ zRef2 }}" style="{{ zStyle }}">
         <dc-import name="CongesScreen" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import>
       </div>
     </div>
@@ -190,7 +190,7 @@
       <h2 style="font:800 32px/1.16 'Inter'; letter-spacing:-.01em; color:#16162a; margin:14px 0 6px;">Rectifications d'horaire, tracées et validées.</h2>
       <p style="font:400 17px/1.6 'Inter'; color:#5c5c72; margin:0 0 26px; max-width:640px;">Chaque correction de pointage demandée par un salarié arrive horodatée, avec heures avant/après et commentaire — validée en un clic.</p>
       <div style="position:relative; height:470px; border-radius:18px; overflow:hidden; box-shadow:0 24px 54px -28px rgba(22,22,42,.4); border:1px solid #eceaf9;" onMouseMove="{{ zMove3 }}" onMouseLeave="{{ zLeave3 }}">
-        <div ref="{{ zRef3 }}" style="position:absolute; inset:0; transition:transform .18s ease-out; transform-origin:center center; cursor:zoom-in;">
+        <div ref="{{ zRef3 }}" style="{{ zStyle }}">
           <dc-import name="DemandesScreen" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import>
         </div>
       </div>
@@ -202,7 +202,7 @@
       <h2 style="font:800 32px/1.16 'Inter'; letter-spacing:-.01em; color:#16162a; margin:14px 0 6px;">Demandes d'absence et de congés.</h2>
       <p style="font:400 17px/1.6 'Inter'; color:#5c5c72; margin:0 0 26px; max-width:640px;">Congés payés, récupérations et absences : chaque demande est suivie avec statut, dates, commentaire du salarié et motif de décision.</p>
       <div style="position:relative; height:520px; border-radius:18px; overflow:hidden; box-shadow:0 24px 54px -28px rgba(22,22,42,.4); border:1px solid #eceaf9;" onMouseMove="{{ zMove4 }}" onMouseLeave="{{ zLeave4 }}">
-        <div ref="{{ zRef4 }}" style="position:absolute; inset:0; transition:transform .18s ease-out; transform-origin:center center; cursor:zoom-in;">
+        <div ref="{{ zRef4 }}" style="{{ zStyle }}">
           <dc-import name="DemandesScreen" view="abs" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import>
         </div>
       </div>
@@ -239,47 +239,37 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   renderVals() {
+    // Pointeur grossier : doigt ou stylet, sans survol reel. La loupe est une
+    // interaction souris ; au doigt elle laisse la capture agrandie et bloquee,
+    // faute de mouseleave. On la neutralise et on laisse la vue statique.
+    const coarsePointer = typeof window !== 'undefined' && !!window.matchMedia
+      && window.matchMedia('(pointer: coarse)').matches;
+    const zStyle = 'position:absolute; inset:0; transition:transform .18s ease-out; transform-origin:center center;'
+      + (coarsePointer ? '' : ' cursor:zoom-in;');
+    const move = (cle) => (e) => {
+      if (coarsePointer) return;
+      const el = this[cle]; if (!el) return;
+      const box = el.parentElement.getBoundingClientRect();
+      const x = ((e.clientX - box.left) / box.width) * 100;
+      const y = ((e.clientY - box.top) / box.height) * 100;
+      el.style.transformOrigin = x + '% ' + y + '%';
+      el.style.transform = 'scale(1.8)';
+    };
+    const leave = (cle) => () => { const el = this[cle]; if (el) el.style.transform = 'scale(1)'; };
     return {
+      zStyle,
       zRef: (el) => { this._z = el; },
-      zMove: (e) => {
-        const el = this._z; if (!el) return;
-        const box = el.parentElement.getBoundingClientRect();
-        const x = ((e.clientX - box.left) / box.width) * 100;
-        const y = ((e.clientY - box.top) / box.height) * 100;
-        el.style.transformOrigin = x + '% ' + y + '%';
-        el.style.transform = 'scale(1.8)';
-      },
-      zLeave: () => { const el = this._z; if (el) el.style.transform = 'scale(1)'; },
+      zMove: move('_z'),
+      zLeave: leave('_z'),
       zRef2: (el) => { this._z2 = el; },
-      zMove2: (e) => {
-        const el = this._z2; if (!el) return;
-        const box = el.parentElement.getBoundingClientRect();
-        const x = ((e.clientX - box.left) / box.width) * 100;
-        const y = ((e.clientY - box.top) / box.height) * 100;
-        el.style.transformOrigin = x + '% ' + y + '%';
-        el.style.transform = 'scale(1.8)';
-      },
-      zLeave2: () => { const el = this._z2; if (el) el.style.transform = 'scale(1)'; },
+      zMove2: move('_z2'),
+      zLeave2: leave('_z2'),
       zRef3: (el) => { this._z3 = el; },
-      zMove3: (e) => {
-        const el = this._z3; if (!el) return;
-        const box = el.parentElement.getBoundingClientRect();
-        const x = ((e.clientX - box.left) / box.width) * 100;
-        const y = ((e.clientY - box.top) / box.height) * 100;
-        el.style.transformOrigin = x + '% ' + y + '%';
-        el.style.transform = 'scale(1.8)';
-      },
-      zLeave3: () => { const el = this._z3; if (el) el.style.transform = 'scale(1)'; },
+      zMove3: move('_z3'),
+      zLeave3: leave('_z3'),
       zRef4: (el) => { this._z4 = el; },
-      zMove4: (e) => {
-        const el = this._z4; if (!el) return;
-        const box = el.parentElement.getBoundingClientRect();
-        const x = ((e.clientX - box.left) / box.width) * 100;
-        const y = ((e.clientY - box.top) / box.height) * 100;
-        el.style.transformOrigin = x + '% ' + y + '%';
-        el.style.transform = 'scale(1.8)';
-      },
-      zLeave4: () => { const el = this._z4; if (el) el.style.transform = 'scale(1)'; }
+      zMove4: move('_z4'),
+      zLeave4: leave('_z4')
     };
   }
 }

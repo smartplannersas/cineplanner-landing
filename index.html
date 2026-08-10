@@ -493,7 +493,7 @@
           <h3 style="font:800 23px/1.2 'Inter'; letter-spacing:-.01em; color:#16162a; margin:0;">{{ active.title }}</h3>
         </div>
         <div style="position:relative; flex:1; min-height:320px; overflow:hidden; background:radial-gradient(90% 80% at 15% 8%, var(--accent-soft), transparent 60%), radial-gradient(90% 80% at 92% 95%, var(--accent-soft), transparent 55%); border-radius:16px;">
-          <div style="position:absolute; inset:0; transition:transform .5s cubic-bezier(.2,.7,.2,1); cursor:zoom-in;" onMouseEnter="{{ zoomEnter }}" onMouseMove="{{ zoomMove }}" onMouseLeave="{{ zoomLeave }}" onClick="{{ zoomClick }}">
+          <div style="{{ zoomBoxStyle }}" onMouseEnter="{{ zoomEnter }}" onMouseMove="{{ zoomMove }}" onMouseLeave="{{ zoomLeave }}" onClick="{{ zoomClick }}">
             <dc-import name="AppScreen" screen="{{ active.screen }}" modal="{{ active.modal }}" frame="laptop" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import>
           </div>
           <div style="position:absolute; left:16px; bottom:16px; z-index:2; background:#fff; border-radius:14px; padding:12px 15px; box-shadow:0 18px 36px -14px rgba(22,22,42,.4); display:flex; align-items:center; gap:12px;">
@@ -817,6 +817,11 @@ class Component extends DCLogic {
   }
 
   renderVals() {
+    // Pointeur grossier : doigt ou stylet, sans survol reel. Sert a desactiver
+    // les interactions concues pour la souris (loupe des captures).
+    const coarsePointer = typeof window !== 'undefined' && !!window.matchMedia
+      && window.matchMedia('(pointer: coarse)').matches;
+
     const featureData = {
       planif: {
         label: 'Planification', tag: 'Planning conforme',
@@ -1051,12 +1056,19 @@ class Component extends DCLogic {
       rootClass,
       active: featureData[this.state.tab],
       activeZoom: this.state.tab !== 'portail',
+      // La loupe est une interaction souris. Au doigt, un appui declenche
+      // mouseenter puis click sans jamais produire mouseleave : la capture
+      // partait a scale(2.5) et y restait bloquee. Sur pointeur grossier on
+      // neutralise l ensemble et on laisse la vue statique.
+      zoomBoxStyle: 'position:absolute; inset:0; transition:transform .5s cubic-bezier(.2,.7,.2,1);' + (coarsePointer ? '' : ' cursor:zoom-in;'),
       zoomEnter: (e) => {
+        if (coarsePointer) return;
         const el = e.currentTarget;
         el.style.transitionDuration = '.4s';
         if (el.dataset.zoomed !== '1') el.style.transform = 'scale(1.55)';
       },
       zoomMove: (e) => {
+        if (coarsePointer) return;
         const el = e.currentTarget, r = el.getBoundingClientRect();
         const x = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100));
         const y = Math.max(0, Math.min(100, ((e.clientY - r.top) / r.height) * 100));
@@ -1065,6 +1077,7 @@ class Component extends DCLogic {
         el.style.transform = el.dataset.zoomed === '1' ? 'scale(2.5)' : 'scale(1.55)';
       },
       zoomClick: (e) => {
+        if (coarsePointer) return;
         const el = e.currentTarget;
         const on = el.dataset.zoomed === '1';
         el.dataset.zoomed = on ? '0' : '1';
@@ -1073,6 +1086,7 @@ class Component extends DCLogic {
         el.style.cursor = on ? 'zoom-in' : 'zoom-out';
       },
       zoomLeave: (e) => {
+        if (coarsePointer) return;
         const el = e.currentTarget;
         el.dataset.zoomed = '0';
         el.style.transitionDuration = '.5s';
