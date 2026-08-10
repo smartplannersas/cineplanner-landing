@@ -28,9 +28,26 @@
 }
 
   .aps-root * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+
+  /* Cadrage mobile des maquettes produit.
+     Sous 640px, la maquette entière tombe à l'échelle 0,25 : un libellé déclaré
+     à 13px se rend à 4px, illisible. On montre alors une zone parlante agrandie
+     plutôt que l'écran entier. Le recadrage porte sur le CONTENU de l'écran du
+     laptop, pas sur le conteneur : la coque reste intacte.
+     Les trois valeurs viennent de la table cropByScreen, posées en propriétés
+     personnalisées sur .aps-root. Sans elles la règle est neutre (k=1, décalage
+     nul), ce qui laisse le cadre téléphone et la vue navigateur inchangés. */
+  @media (max-width: 640px) {
+    .aps-screen > * {
+      width: calc(100% * var(--crop-k, 1)) !important;
+      height: calc(100% * var(--crop-k, 1)) !important;
+      transform: translate(var(--crop-x, 0px), var(--crop-y, 0px));
+      transform-origin: top left;
+    }
+  }
 </style>
 </helmet>
-<div class="aps-root" style="width:100%; height:100%; min-height:360px; background:transparent; border-radius:14px; overflow:hidden; position:relative; container-type:size;">
+<div class="aps-root" style="{{ rootStyle }}">
 
   <!-- DESKTOP : capture produit réelle dans une fenêtre navigateur -->
   <sc-if value="{{ isBrowserFrame }}" hint-placeholder-val="{{ true }}">
@@ -52,7 +69,7 @@
     <!-- écran -->
     <div style="width:90%; flex:1; min-height:0; background:linear-gradient(155deg,#20222e,#0a0b11); border-radius:18px 18px 5px 5px; padding:12px 12px 14px; box-shadow:0 30px 55px -26px rgba(22,22,42,.6), inset 0 0 0 1px rgba(255,255,255,.07); position:relative;">
       <div style="position:absolute; top:6px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:50%; background:#3a3d4d; box-shadow:inset 0 0 0 1px rgba(255,255,255,.15);"></div>
-      <div style="height:100%; border-radius:5px; overflow:hidden; background:#fff; box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);">
+      <div class="aps-screen" style="height:100%; border-radius:5px; overflow:hidden; background:#fff; box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);">
         <sc-if value="{{ isPlanningHtml }}" hint-placeholder-val="{{ false }}">
           <dc-import name="PlanningScreen" modal="{{ planModal }}" base="{{ planBase }}" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import>
         </sc-if>
@@ -163,7 +180,26 @@ class Component extends DCLogic {
       };
     }
     const phoneRef = this._phoneRef;
+
+    // Cadrage mobile, un jeu de valeurs par écran (voir la règle .aps-screen
+    // dans le helmet). k agrandit le contenu de l'écran du laptop, x et y
+    // amènent la zone parlante dans la fenêtre visible ; le reste est rogné.
+    // Un écran absent de cette table n'est pas recadré.
+    const cropByScreen = {
+      // planning : les lignes salariés avec leur écart d'heures contractuelles,
+      // le seul signal de conformité porté par cette maquette. La fenêtre fait
+      // 271x183 pour un contenu agrandi à 923x623 ; les lignes sont espacées de
+      // 57px. Le décalage vertical amène le trio 0 h / −25 h / +2 h, qui montre
+      // à la fois un écart neutre, un fort négatif et un positif.
+      planning: { k: 3.4, x: 0, y: -300 }
+    };
+    const crop = cropByScreen[s];
+    const rootStyle = 'width:100%; height:100%; min-height:360px; background:transparent;'
+      + ' border-radius:14px; overflow:hidden; position:relative; container-type:size;'
+      + (crop ? ' --crop-k:' + crop.k + '; --crop-x:' + crop.x + 'px; --crop-y:' + crop.y + 'px;' : '');
+
     return {
+      rootStyle,
       isDesktop,
       isLaptop,
       phoneRef,
