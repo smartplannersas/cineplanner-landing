@@ -102,6 +102,18 @@
     [style*="grid-template-columns: repeat(4, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
     [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
   }
+  /* Plancher de lisibilite sur mobile — voir le commentaire detaille dans
+     SiteNav.dc.html. Repete ici parce que cette page n'importe pas SiteNav.
+     Vise la forme serialisee par le navigateur (« font: 700 12px / 1 Inter »),
+     est indifferent a la graisse, et exclut les maquettes produit. */
+  @media (max-width: 640px) {
+    [style*=" 10px /"]:not(.aps-root *),
+    [style*=" 11px /"]:not(.aps-root *),
+    [style*=" 12px /"]:not(.aps-root *),
+    [style*="font-size: 10px"]:not(.aps-root *),
+    [style*="font-size: 11px"]:not(.aps-root *),
+    [style*="font-size: 12px"]:not(.aps-root *) { font-size: 13px !important; }
+  }
 </style>
 <script type="application/ld+json">
 {

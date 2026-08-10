@@ -35,6 +35,33 @@
     .snav-links { display: none !important; }
     .snav-burger { display: flex !important; }
   }
+
+  /* Plancher de lisibilité sur mobile.
+     Badges, mentions sous les prix, notes de pied de page et descriptions du
+     méga-menu sont déclarés à 10, 11 ou 12px : sous le seuil de confort sur
+     téléphone. On les remonte à 13px sous 640px.
+
+     Le sélecteur vise la taille dans la forme SÉRIALISÉE par le navigateur —
+     « font: 700 12px / 1 Inter », espaces autour de la barre oblique et sans
+     guillemets — et non la forme écrite dans le source. Il est indifférent à
+     la graisse, ce qui évite d'énumérer les combinaisons.
+
+     Les maquettes produit sont exclues : leur typographie est mise à l'échelle
+     par leur composant, la modifier déformerait la capture.
+
+     Cette règle est globale et non propre à la navigation. Elle vit ici parce
+     que SiteNav est le seul point d'injection CSS partagé par les pages du
+     site — le projet n'a pas de feuille commune. Elle est répétée à
+     l'identique dans index.html et essai-gratuit.html, qui n'importent pas
+     SiteNav. */
+  @media (max-width: 640px) {
+    [style*=" 10px /"]:not(.aps-root *),
+    [style*=" 11px /"]:not(.aps-root *),
+    [style*=" 12px /"]:not(.aps-root *),
+    [style*="font-size: 10px"]:not(.aps-root *),
+    [style*="font-size: 11px"]:not(.aps-root *),
+    [style*="font-size: 12px"]:not(.aps-root *) { font-size: 13px !important; }
+  }
 </style>
 </helmet>
 <div style="font-family:'Inter',system-ui,sans-serif;">
