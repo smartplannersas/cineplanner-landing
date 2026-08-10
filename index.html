@@ -86,6 +86,16 @@
   .cpl-burger { display: none; }
   /* Accordéon comparatif : caché par défaut, révélé sous 640px à la place du tableau. */
   .cpl-compare-mobile { display: none; }
+
+  /* Bascule burger, isolée dans son propre point de rupture : 1024px, identique
+     à SiteNav.dc.html. Elle vivait auparavant dans le bloc 900px de cette page,
+     ce qui affichait la navigation desktop sur l'accueil et le burger partout
+     ailleurs entre 900 et 960px. Ne pas y ajouter de règles de mise en page :
+     celles-ci gardent leurs propres points de rupture. */
+  @media (max-width: 1024px) {
+    .cpl-navlinks { display: none !important; }
+    .cpl-burger { display: flex !important; }
+  }
   @media (max-width: 1024px) {
     [style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
     [style*="grid-template-columns: 1.6fr 1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; gap: 30px !important; }
@@ -99,8 +109,6 @@
     [style*="grid-template-columns: 1.4fr 1fr"],
     [style*="grid-template-columns: repeat(3, 1fr)"],
     [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
-    .cpl-navlinks { display: none !important; }
-    .cpl-burger { display: flex !important; }
     [style*="padding: 84px 48px"] { padding: 54px 20px !important; }
     [style*="padding: 76px 48px 72px"] { padding: 36px 20px 40px !important; }
     [style*="padding: 84px 48px 88px"] { padding: 44px 20px 48px !important; }

@@ -28,7 +28,10 @@
 }
 
   .snav-burger { display: none; }
-  @media (max-width: 960px) {
+  /* Bascule burger à 1024px : un iPad en paysage fait exactement 1024px et
+     n'a pas de survol, donc pas de méga-menu utilisable. Point de rupture
+     identique dans l'en-tête inline de index.html. */
+  @media (max-width: 1024px) {
     .snav-links { display: none !important; }
     .snav-burger { display: flex !important; }
   }

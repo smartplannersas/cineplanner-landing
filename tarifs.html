@@ -70,6 +70,14 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { color: var(--accent-dark); }
   .cpl-burger { display: none; }
+  /* Bascule burger, isolee dans son propre point de rupture : 1024px, identique
+     a SiteNav.dc.html. Ces regles ne s'appliquent a rien sur cette page, qui
+     importe SiteNav et utilise donc .snav-* ; elles sont conservees et alignees
+     pour ne pas laisser un second point de rupture divergent dans le depot. */
+  @media (max-width: 1024px) {
+    .cpl-navlinks { display: none !important; }
+    .cpl-burger { display: flex !important; }
+  }
   /* Accordéon comparatif : caché par défaut, révélé sous 640px à la place du tableau. */
   .cpl-compare-mobile { display: none; }
   @media (max-width: 960px) {
@@ -89,8 +97,6 @@
     [style*="padding: 72px 56px"], [style*="padding: 64px 56px"] { padding: 44px 24px !important; }
     [style*="padding: 60px 56px"] { padding: 44px 24px !important; }
     [style*="padding: 52px"] { padding: 32px 24px !important; }
-    .cpl-navlinks { display: none !important; }
-    .cpl-burger { display: flex !important; }
     h1 { font-size: clamp(28px,7vw,40px) !important; }
     h2 { font-size: clamp(24px,5.5vw,32px) !important; }
   }
