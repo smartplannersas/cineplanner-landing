@@ -191,7 +191,20 @@ class Component extends DCLogic {
       // 271x183 pour un contenu agrandi à 923x623 ; les lignes sont espacées de
       // 57px. Le décalage vertical amène le trio 0 h / −25 h / +2 h, qui montre
       // à la fois un écart neutre, un fort négatif et un positif.
-      planning: { k: 3.4, x: 0, y: -300 }
+      planning: { k: 3.4, x: 0, y: -300 },
+      // temps : deux cartes de semaine avec leur statut et la ligne
+      // « N salariés n'ont pas encore attesté », le signal utile de cet écran.
+      temps: { k: 3.4, x: -165, y: -140 },
+      // contrats : l'encart « ⚠ Éléments manquants » et la liste des champs à
+      // compléter (employé, date de début, heures, variables).
+      contrats: { k: 3.4, x: 0, y: -55 },
+      // paie : le bloc « Récap et export ». Le bouton de téléchargement est à
+      // 717px, hors d'atteinte d'une fenêtre de 268px : on garde le récapitulatif.
+      paie: { k: 3.4, x: -60, y: -140 },
+      // presences : la fiche contrat de l'employé, avec son type et son statut.
+      presences: { k: 3.4, x: 0, y: -45 },
+      // ccn : le panneau « Règles de Convention Collective » et son chapô.
+      ccn: { k: 3.4, x: -190, y: -55 }
     };
     const crop = cropByScreen[s];
     const rootStyle = 'width:100%; height:100%; min-height:360px; background:transparent;'
