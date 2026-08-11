@@ -60,6 +60,33 @@ Les **composants** gardent l'extension `.dc.html` (`SiteNav.dc.html`, `PlanningS
    `https://www.cineplanner.fr/<adresse>`.
 5. Ajouter l'entrée correspondante dans `sitemap.xml`.
 
+## Formulaire d'essai gratuit
+`essai-gratuit.html` poste en JSON vers FormSubmit
+(`https://formsubmit.co/ajax/191c3a86945ea237ab43abbde4eebf0f`), qui relaie vers
+`contact@cineplanner.fr`.
+
+**L'activation FormSubmit est liée à l'URL de la page qui poste, pas seulement à
+l'endpoint.** Tant qu'elle n'est pas confirmée pour cette URL précise, chaque envoi
+reçoit `{"success":"false","message":"This form needs Activation…"}` et la page
+bascule sur son repli mailto. Le formulaire a passé plusieurs jours dans cet état :
+le lien d'activation cliqué portait sur `https://www.cineplanner.fr/` et non sur
+`https://www.cineplanner.fr/essai-gratuit`. Après le clic, **vérifier que la page de
+confirmation affiche l'URL complète de la page du formulaire**, pas la racine.
+
+Conséquence : si la page change d'adresse, ou si ce formulaire est repris sur une
+autre page, il faut réactiver pour la nouvelle URL.
+
+Piège de diagnostic : appelé sans en-tête `Referer`, FormSubmit répond
+« Make sure you open this page through a web server ». Ce message ne parle pas de
+l'activation et n'a rien à voir avec des fichiers HTML locaux — c'est simplement sa
+réponse à une requête sans `Referer`. Un navigateur en envoie toujours un ; ce cas ne
+se rencontre qu'en test depuis la ligne de commande.
+
+Le repli est volontaire : en cas d'échec, le formulaire reste rempli et propose un
+`mailto:contact@cineplanner.fr` pré-rempli avec toutes les réponses. Le champ
+`societe_web` est un leurre anti-robot : s'il est rempli, la confirmation s'affiche
+mais rien n'est envoyé.
+
 ## Contenu sensible
 Les maquettes produit contiennent des données **fictives**. Ne jamais y injecter de vraies
 données salariés ni de vrais noms de cinémas clients.
