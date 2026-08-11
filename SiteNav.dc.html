@@ -107,6 +107,17 @@
     [style*="padding: 16px 40px"] { padding: 12px 20px !important; }
     [style*="top: 78px"] { top: 69px !important; max-height: calc(100vh - 69px) !important; }
   }
+
+  /* Pied de page a 5 colonnes (marque + Produit, Ressources, Entreprise, Legal).
+     Le crochet est la propriete personnalisee --cp-foot portee par la grille :
+     ses proportions (1.4fr 1fr 1.3fr 0.9fr 0.9fr) ne se pretent pas a un
+     selecteur d'attribut stable, et aucun autre element ne porte ce marqueur. */
+  @media (max-width: 1024px) {
+    [style*="--cp-foot"] { grid-template-columns: repeat(2, minmax(0px, 1fr)) !important; gap: 34px !important; }
+  }
+  @media (max-width: 640px) {
+    [style*="--cp-foot"] { grid-template-columns: minmax(0px, 1fr) !important; gap: 30px !important; }
+  }
 </style>
 </helmet>
 <div style="font-family:'Inter',system-ui,sans-serif;">
