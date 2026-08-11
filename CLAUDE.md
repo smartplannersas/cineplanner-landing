@@ -35,8 +35,41 @@ Chaque page est un fichier `.dc.html` autonome exécuté par `support.js`.
 5. **Composants enfants** : `<dc-import name="SiteNav" hint-size="100%,84px"></dc-import>`.
    Jamais de balise capitalisée (`<SiteNav />` ne fonctionne pas). Toujours fermer la balise.
 6. **Pas de `<script src>` dans le corps du template** — uniquement dans `<helmet>`.
-7. **JavaScript classique** dans la classe de logique : pas de TypeScript, pas d'`import`.
+7. **Le `<helmet>` d'un fichier `.dc.html` ne contient qu'un `<style>`.** Voir la
+   section ci-dessous : toute autre balise contamine les pages hôtes.
+8. **JavaScript classique** dans la classe de logique : pas de TypeScript, pas d'`import`.
    La classe doit s'appeler `Component` et étendre `DCLogic`.
+
+## Le `<helmet>` d'un composant fuit dans le `<head>` de la page hôte
+
+`support.js` recopie le contenu de chaque `<helmet>` dans `document.head` — celui de
+**la page qui importe le composant**, pas un espace isolé. Pour `SCRIPT`, `LINK` et
+`META`, c'est un `head.appendChild(child.cloneNode(true))` **sans aucun filtrage**
+(`support.js`, lignes 1367-1404).
+
+Conséquence : une balise `meta`, `title` ou `link` placée dans le `<helmet>` d'un
+`.dc.html` s'applique aux **20 pages** qui importent ce composant. Un `<title>` y
+écraserait le titre de chaque page, un `link rel="canonical"` ferait pointer toutes
+les pages vers la même URL.
+
+**Donc : uniquement `<style>` dans le `<helmet>` d'un `.dc.html`.** C'est l'état
+actuel des 11 fragments — 10 n'ont qu'un `<style>`, `export-planning.dc.html` n'a
+pas de `<helmet>`. Les métadonnées d'une page se déclarent dans la page elle-même.
+
+**Piste déjà explorée et écartée — ne pas la rouvrir.** Pour empêcher l'indexation
+des fragments, l'idée d'ajouter `<meta name="robots" content="noindex">` dans leur
+`<helmet>` a été testée sur `SiteNav.dc.html` (11 août 2026). Le rendu n'est pas
+cassé, mais le `<head>` de `/tarifs` se retrouve avec :
+
+```html
+<meta name="robots" content="index,follow">
+<meta name="robots" content="noindex" data-dc-tpl="1">   <!-- venu de SiteNav -->
+```
+
+Google arbitre deux directives `robots` contradictoires en retenant **la plus
+restrictive** : les 20 pages passeraient en `noindex`. Le `Disallow: /*.dc.html$`
+dans `robots.txt` n'est pas une alternative non plus — voir le commentaire qui a
+remplacé cette règle. Les fragments restent donc accessibles et sans directive.
 
 ## Pages et adresses
 `index.html` est la page d'accueil et l'unique source : la copie
