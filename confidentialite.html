@@ -9,7 +9,8 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-GJ4V7PV6C2');
+  // 13 mois : duree maximale recommandee par la CNIL, annoncee sur /confidentialite.
+  gtag('config', 'G-GJ4V7PV6C2', { 'cookie_expires': 34128000 });
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="/support.js"></script>
@@ -114,7 +115,7 @@
       <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>Paiement :</strong> informations liées au moyen de paiement, gérées par Stripe, notre prestataire de paiement.</div>
     </div>
     <h3 style="font:700 18px/1.35 'Inter'; color:#16162a; margin:26px 0 0;">Données collectées automatiquement</h3>
-    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:14px 0 0;">Adresse IP, type de navigateur, système d'exploitation et temps de connexion, enregistrés dans les journaux techniques nécessaires au fonctionnement et à la sécurité du service. Aucun traceur publicitaire ni outil de mesure d'audience tiers n'est déposé sur ce site.</p>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:14px 0 0;">Adresse IP, type de navigateur, système d'exploitation et temps de connexion, enregistrés dans les journaux techniques nécessaires au fonctionnement et à la sécurité du service. Aucun traceur publicitaire n'est déposé sur ce site.</p>
 
     <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Finalités du traitement</h2>
     <div style="display:flex; flex-direction:column; gap:11px; margin-top:18px;">
@@ -139,19 +140,21 @@
       <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>Stripe</strong> : gestion des paiements.</div>
       <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>Scalingo</strong> : hébergement de notre plateforme, sur une infrastructure située en France.</div>
       <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>FormSubmit</strong> : acheminement des demandes envoyées depuis le formulaire d'essai de ce site vers notre boîte mail. Seules les informations que vous saisissez dans ce formulaire transitent par ce service.</div>
+      <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>Google Analytics</strong> : mesure d'audience de ce site vitrine. Ce service ne reçoit aucune donnée de la plateforme Ciné Planner, et donc aucune donnée salariés.</div>
       <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;">Les autorités administratives ou judiciaires si la loi l'exige, et nos sous-traitants techniques pour les besoins du service.</div>
     </div>
     <div style="margin-top:20px; background:var(--accent-soft); border-radius:14px; padding:18px 22px; font:600 15px/1.6 'Inter'; color:var(--accent-dark);">Vos données ne sont jamais vendues à des tiers.</div>
 
     <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Transferts hors Union européenne</h2>
     <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">La plateforme Ciné Planner et les données que vous y enregistrez — plannings, contrats, données salariés — sont hébergées par Scalingo sur une infrastructure située en France. <strong>Ces données ne font l'objet d'aucun transfert hors de l'Union européenne.</strong></p>
-    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:14px 0 0;">Deux services accessoires sont susceptibles de traiter des données depuis un pays tiers : Stripe, pour le paiement des abonnements, et FormSubmit, pour l'acheminement des demandes envoyées depuis le formulaire d'essai de ce site. Les données qui leur sont transmises se limitent à ce qui est strictement nécessaire à leur fonction, à l'exclusion de toute donnée salariés. Ces transferts s'appuient sur les garanties prévues au chapitre V du RGPD, notamment les clauses contractuelles types de la Commission européenne.</p>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:14px 0 0;">Trois services accessoires sont susceptibles de traiter des données depuis un pays tiers : Stripe, pour le paiement des abonnements, FormSubmit, pour l'acheminement des demandes envoyées depuis le formulaire d'essai de ce site, et Google Analytics, pour la mesure d'audience de ce site vitrine. Les données qui leur sont transmises se limitent à ce qui est strictement nécessaire à leur fonction, à l'exclusion de toute donnée salariés. Ces transferts s'appuient sur les garanties prévues au chapitre V du RGPD, notamment les clauses contractuelles types de la Commission européenne.</p>
 
     <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Durée de conservation</h2>
     <div style="display:flex; flex-direction:column; gap:11px; margin-top:18px;">
       <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>Données de compte :</strong> jusqu'à la résiliation du compte, puis 3 ans.</div>
       <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>Données de facturation :</strong> 10 ans, conformément à la législation fiscale.</div>
       <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>Cookies strictement nécessaires :</strong> durée de la session.</div>
+      <div style="font:400 16px/1.7 'Inter'; color:#3a3a52;"><strong>Cookies de mesure d'audience :</strong> 13 mois au maximum, conformément à la recommandation de la CNIL.</div>
     </div>
 
     <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Vos droits</h2>
@@ -170,7 +173,8 @@
     <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données : chiffrement des données sensibles, contrôles d'accès stricts et sauvegardes régulières.</p>
 
     <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Cookies</h2>
-    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Ce site n'utilise que des cookies strictement nécessaires à son fonctionnement et à la sécurité de votre session. Aucun cookie de mesure d'audience, de publicité ou de réseau social n'y est déposé. C'est la raison pour laquelle aucun bandeau de consentement ne vous est présenté : la réglementation ne l'impose que pour les traceurs non essentiels, dont nous n'utilisons aucun.</p>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Ce site dépose deux catégories de cookies : ceux qui sont strictement nécessaires à son fonctionnement et à la sécurité de votre session, et ceux de Google Analytics, qui servent à mesurer l'audience du site vitrine. Aucun cookie publicitaire ni de réseau social n'y est déposé, et la plateforme Ciné Planner elle-même n'en dépose aucun de mesure d'audience.</p>
+    <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:14px 0 0;">Vous pouvez vous opposer à cette mesure d'audience à tout moment, en activant le signal « Do Not Track » de votre navigateur, en bloquant les cookies tiers dans ses réglages, ou en nous écrivant à <a href="mailto:contact@cineplanner.fr" style="color:var(--accent);">contact@cineplanner.fr</a>. Le refus n'a aucune conséquence sur votre navigation ni sur l'accès au service.</p>
 
     <h2 style="font:800 26px/1.22 'Inter'; letter-spacing:-.015em; color:#16162a; margin:48px 0 0;">Modifications de la politique</h2>
     <p style="font:400 16px/1.7 'Inter'; color:#3a3a52; margin:18px 0 0;">Cette politique peut être modifiée à tout moment pour refléter les évolutions légales ou techniques. La version en vigueur est toujours disponible sur ce site.</p>
