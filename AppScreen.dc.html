@@ -196,10 +196,13 @@ class Component extends DCLogic {
     // modifier, et chaque écran y montre son vrai contenu plutôt qu'une capture
     // empruntée. Le cadre laptop est abandonné, sa coque coûtant de la largeur
     // sans rien apprendre à cette taille.
+    // La bascule vaut pour les deux habillages desktop, cadre laptop comme
+    // fenêtre navigateur : le second servait lui aussi un JPEG rogné, avec des
+    // noms non anonymisés. Le cadre téléphone de l'Espace équipe n'est pas
+    // concerné, isDesktop étant faux pour lui.
     const isBare = this.props.frame === 'bare';
-    const laptopDemande = isDesktop && this.props.frame === 'laptop';
-    const isLaptop = laptopDemande && !petitEcran;
-    const isEcranMobile = laptopDemande && petitEcran;
+    const isLaptop = isDesktop && this.props.frame === 'laptop' && !petitEcran;
+    const isEcranMobile = isDesktop && !isBare && petitEcran;
     const htmlEnv = isLaptop || isBare || isEcranMobile;
 
     // Proportion de conception de chaque maquette. Le conteneur mobile l'adopte,
