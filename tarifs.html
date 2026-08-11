@@ -146,7 +146,7 @@
       "name": "Le logiciel gère-t-il plusieurs cinémas ou un réseau d’établissements ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui, à partir de la formule RH. Vous pilotez plusieurs établissements depuis une vue consolidée, tout en laissant à chaque site son autonomie sur son planning. La formule Essentielle couvre un établissement à la fois. Les réseaux passent en formule Sur Mesure pour la personnalisation par site."
+        "text": "Oui. Toutes les formules permettent de planifier plusieurs établissements, chaque site gardant son autonomie sur son planning. La vue consolidée sur l'ensemble des établissements démarre à la formule RH. Les réseaux passent en formule Sur Mesure pour la personnalisation par site."
       }
     },
     {
@@ -380,7 +380,8 @@ class Component extends DCLogic {
     // (essentielFeatures / groupeFeatures / surMesureFeatures) : elle n'est pas réinventée ici.
     const matrixRaw = [
       ['Planning'],
-      ['Planning multi-établissements avec autonomie par site', 0, 1, 1],
+      ['Planning multi-établissements, avec autonomie par site', 1, 1, 1],
+      ['Vue consolidée sur l’ensemble des établissements', 0, 1, 1],
       ['Alertes convention collective cinéma (IDCC 1307) avant validation', 1, 1, 1],
       ['Modèles de planning réutilisables + duplication', 1, 1, 1],
       ['Réaffectation en masse de shifts', 1, 1, 1],
@@ -484,7 +485,7 @@ class Component extends DCLogic {
       ['Combien coûte un logiciel de planning pour un cinéma ?', "Ciné Planner démarre à 59 € par établissement et par mois pour un cinéma de 1 à 3 écrans, et 93 € pour un multiplex de 4 écrans et plus. Le tarif est par établissement, quel que soit le nombre de salariés : vous payez pour vos cinémas, pas par tête."],
       ['Quelle est la différence entre un logiciel de planning et un logiciel RH pour cinéma (convention collective, primes de panier) ?', "Un logiciel de planning se limite à placer des shifts. Ciné Planner couvre toute la chaîne RH du cinéma : planning conforme, contrats, feuilles de présence signées, compteurs de congés et export paie. C'est ce qui évite les erreurs de paie et sécurise vos obligations d'employeur."],
       ['Ciné Planner respecte-t-il la convention collective de l\u2019exploitation cinématographique ?', "Oui. Les règles de la CCN de l'exploitation cinématographique (IDCC 1307) sont intégrées nativement : heures de nuit, durée maximale de shift, repos, heures hebdomadaires, primes de panier repas et panier soir. Toute infraction est signalée avant validation du planning."],
-      ['Le logiciel gère-t-il plusieurs cinémas ou un réseau d’établissements ?', "Oui, à partir de la formule RH. Vous pilotez plusieurs établissements depuis une vue consolidée, tout en laissant à chaque site son autonomie sur son planning. La formule Essentielle couvre un établissement à la fois. Les réseaux passent en formule Sur Mesure pour la personnalisation par site."],
+      ['Le logiciel gère-t-il plusieurs cinémas ou un réseau d’établissements ?', "Oui. Toutes les formules permettent de planifier plusieurs établissements, chaque site gardant son autonomie sur son planning. La vue consolidée sur l'ensemble des établissements démarre à la formule RH. Les réseaux passent en formule Sur Mesure pour la personnalisation par site."],
       ['Comment fonctionne l’export paie vers mon cabinet comptable ?', "Vos plannings validés deviennent des éléments de paie : export au jour, au mois ou sur une période personnalisée, avec heures supplémentaires, complémentaires, majorations et primes de panier déjà calculées. Vous transmettez le fichier à votre cabinet, sans une seule ressaisie."],
       ['Mes salariés peuvent-ils consulter leur planning en ligne ?', "Oui, via l'Espace équipe : chaque salarié consulte son planning à jour depuis son téléphone ou son ordinateur, pose ses congés, demande une rectification d'horaire et signe ses feuilles de présence."],
       ['Y a-t-il un engagement ?', "Les tarifs affichés supposent un engagement annuel. L'essai, lui, dure 14 jours sans carte bancaire : à l'issue, vous choisissez librement de continuer, sans facturation automatique."],
@@ -518,13 +519,13 @@ class Component extends DCLogic {
       mensuelBtnStyle: annuel ? segIdle : segActive,
       annuelBtnStyle: annuel ? segActive : segIdle,
       essentielFeatures: [
-        'Planning des équipes de votre établissement',
+        'Planning multi-établissements, avec autonomie par site',
         'Alertes convention collective cinéma (IDCC 1307)',
         'Export paie automatisé, dont primes de paniers',
         'Espace équipe : consultation du planning par les salariés'
       ],
       groupeFeatures: [
-        'Planning multi-établissements avec vue consolidée et autonomie par site',
+        'Vue consolidée sur l’ensemble des établissements',
         'Module contrats : CDD, CDI, avenants avec variables dynamiques',
         'Signature électronique des contrats',
         'Feuilles de présence signées des salariés',
