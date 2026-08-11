@@ -29,34 +29,23 @@
 
   .aps-root * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
 
-  /* Écrans sans capture JPEG (ccn, demandes) : rien à montrer sous 640px.
-     On escamote aussi le conteneur de la page — qui impose sa hauteur et
-     laisserait un trou — via :has(), sans avoir à toucher aux sept pages. */
-  @media (max-width: 640px) {
-    .aps-vide { display: none !important; }
-    div:has(> .aps-vide) { display: none !important; }
+  /* Maquette entière sur mobile, à sa proportion de conception.
+     Les conteneurs des pages imposent une hauteur fixe — 460px ramenés à 340 ou
+     300 — pour une largeur d'environ 335 : une boîte presque carrée, alors que
+     les maquettes sont deux fois plus larges que hautes. Forcer l'écran dedans
+     le rognait par le bas. On libère donc la hauteur, ici et sur le conteneur
+     parent, et la carte impose elle-même l'aspect-ratio de sa maquette.
 
-    /* Capture entière, à son propre format, sans rien rogner.
-       Les conteneurs des pages imposent une hauteur fixe — 460px ramenés à 340
-       ou 300 selon les pages — qui ne correspond à aucune capture : les nôtres
-       sont deux fois plus larges que hautes. Forcer l'image dans cette boîte
-       presque carrée la coupait par le milieu. On rend donc la hauteur libre,
-       ici et sur le conteneur parent, et l'image trouve seule sa proportion.
-       .aps-root porte container-type:size, qui rend sa taille indépendante de
-       son contenu : avec height:auto il retombe à zéro et son overflow:hidden
-       efface l'image. Il faut donc lever la containment et le débordement en
-       même temps que la hauteur. */
-    .aps-image, div:has(> .aps-image) { height: auto !important; min-height: 0 !important; }
+     Deux obstacles non évidents à cette libération. .aps-root porte
+     container-type:size, qui rend sa taille indépendante de son contenu : avec
+     height:auto il retombe à zéro, et son overflow:hidden efface tout. Et
+     support.js interpose un .sc-host entre le conteneur de la page et la racine
+     du composant : c'est ce .sc-host qui est l'élément de grille, donc lui qu'il
+     faut libérer, un niveau plus haut que le parent direct. */
+  @media (max-width: 640px) {
+    .aps-image, div:has(> .aps-image) { height: auto !important; min-height: 0 !important; min-width: 0 !important; }
     .aps-image { container-type: normal !important; overflow: visible !important; }
-    /* Sans min-width:0, la largeur intrinsèque du JPEG — 1694px — impose son
-       minimum à la piste de grille qui porte la maquette, et la page déborde
-       de 74px. C'est le comportement par défaut de minmax(auto, 1fr). */
-    /* support.js interpose un .sc-host entre le conteneur de la page et la
-       racine du composant : c'est ce conteneur-là qui est l'élément de grille,
-       et donc lui qu'il faut libérer, un niveau plus haut que le parent direct. */
     div:has(> .sc-host > .aps-image) { height: auto !important; min-height: 0 !important; min-width: 0 !important; }
-    .aps-image, div:has(> .aps-image) { min-width: 0 !important; max-width: 100% !important; }
-    .aps-image img { max-width: 100% !important; }
   }
 </style>
 </helmet>
@@ -82,9 +71,14 @@
        tranchée en plein tableau. On sert donc la capture JPEG, recadrée par
        object-position : un cadrage d'image se lit comme un choix graphique,
        pas comme une interface coupée. -->
-  <sc-if value="{{ isImageMobile }}" hint-placeholder-val="{{ false }}">
-  <div style="width:100%; border-radius:14px; overflow:hidden; background:#fff; border:1px solid #e9e9f2; box-shadow:0 20px 44px -26px rgba(22,22,42,.45);">
-    <img src="{{ shotMobile }}" alt="Ciné Planner" style="width:100%; height:auto; display:block;">
+  <sc-if value="{{ isEcranMobile }}" hint-placeholder-val="{{ false }}">
+  <div class="aps-ecran-mobile" style="width:100%; aspect-ratio:{{ formatMobile }}; border-radius:14px; overflow:hidden; background:#fff; border:1px solid #e9e9f2; box-shadow:0 20px 44px -26px rgba(22,22,42,.45);">
+    <sc-if value="{{ isPlanningHtml }}" hint-placeholder-val="{{ false }}"><dc-import name="PlanningScreen" modal="{{ planModal }}" base="{{ planBase }}" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import></sc-if>
+    <sc-if value="{{ isRetardsHtml }}" hint-placeholder-val="{{ false }}"><dc-import name="TempsScreen" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import></sc-if>
+    <sc-if value="{{ isContratHtml }}" hint-placeholder-val="{{ false }}"><dc-import name="ContratScreen" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import></sc-if>
+    <sc-if value="{{ isDocsHtml }}" hint-placeholder-val="{{ false }}"><dc-import name="DocumentsScreen" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import></sc-if>
+    <sc-if value="{{ isCcnHtml }}" hint-placeholder-val="{{ false }}"><dc-import name="CCNScreen" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import></sc-if>
+    <sc-if value="{{ isDemandesHtml }}" hint-placeholder-val="{{ false }}"><dc-import name="DemandesScreen" view="{{ demandesView }}" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import></sc-if>
   </div>
   </sc-if>
 
@@ -197,27 +191,24 @@ class Component extends DCLogic {
     // escamote aussi le conteneur de la page, sinon il resterait un trou.
     const petitEcran = typeof window !== 'undefined' && !!window.matchMedia
       && window.matchMedia('(max-width: 640px)').matches;
-    // Un écran sans capture propre peut emprunter celle de sa fonctionnalité.
-    // « demandes » illustre l'onglet Suivi des temps de l'accueil : sans cela
-    // l'onglet serait le seul dépourvu d'illustration sur téléphone.
-    // « ccn » n'emprunte rien : aucune capture ne montre les règles de
-    // convention collective, et en afficher une autre induirait en erreur.
-    const captureEmpruntee = { demandes: shots.temps };
-    const captureMobile = shots[s] || captureEmpruntee[s] || null;
-    const aUneCapture = !!captureMobile;
-
+    // Sur mobile on sert la maquette HTML, pas la capture JPEG : elle porte les
+    // noms fictifs du dépôt, là où les JPEG figent des noms qu'on ne peut pas
+    // modifier, et chaque écran y montre son vrai contenu plutôt qu'une capture
+    // empruntée. Le cadre laptop est abandonné, sa coque coûtant de la largeur
+    // sans rien apprendre à cette taille.
     const isBare = this.props.frame === 'bare';
     const laptopDemande = isDesktop && this.props.frame === 'laptop';
     const isLaptop = laptopDemande && !petitEcran;
-    const isImageMobile = laptopDemande && petitEcran && aUneCapture;
-    const videMobile = laptopDemande && petitEcran && !aUneCapture;
-    const htmlEnv = isLaptop || isBare;
+    const isEcranMobile = laptopDemande && petitEcran;
+    const htmlEnv = isLaptop || isBare || isEcranMobile;
 
-    // Recadrage de la capture sur mobile : on vise la zone la plus parlante de
-    // chaque écran, en gardant le haut à gauche là où l'interface commence.
-    const posMobile = {
-      planning: 'left top', temps: 'left top', contrats: 'left top',
-      paie: 'center top', presences: 'left top', demandes: 'left top'
+    // Proportion de conception de chaque maquette. Le conteneur mobile l'adopte,
+    // pour que l'écran s'affiche en entier : sans cela le composant remplit la
+    // boîte et rogne le bas, la boîte des pages étant presque carrée.
+    const formats = {
+      planning: 1360 / 820, paie: 1360 / 820, temps: 1200 / 840,
+      contrats: 1440 / 900, presences: 1440 / 940, ccn: 1180 / 770,
+      demandes: 1400 / 860
     };
     if (!this._phoneRef) {
       this._phoneRef = (el) => {
@@ -239,17 +230,16 @@ class Component extends DCLogic {
       isDesktop,
       isLaptop,
       phoneRef,
-      // isImageMobile doit être exclu : sans cela, isLaptop passant à faux sous
-      // 640px rendait cette condition vraie et la même capture s'affichait deux
+      // isEcranMobile doit être exclu : sans cela, isLaptop passant à faux sous
+      // 640px rendrait cette condition vraie et la maquette s'afficherait deux
       // fois, une fois dans la carte mobile et une fois dans le cadre navigateur.
-      isBrowserFrame: isDesktop && !isLaptop && !isBare && !isImageMobile && !videMobile,
+      isBrowserFrame: isDesktop && !isLaptop && !isBare && !isEcranMobile,
       isPortail: s === 'portail',
-      isImageMobile,
-      shotMobile: captureMobile ? captureMobile.src : '',
-      shotPosMobile: posMobile[s] || 'left top',
+      isEcranMobile,
+      formatMobile: String(formats[s] || 1360 / 820),
       isDemandesHtml: htmlEnv && s === 'demandes',
       demandesView: this.props.view || 'rectif',
-      rootClasse: videMobile ? 'aps-root aps-vide' : (isImageMobile ? 'aps-root aps-image' : 'aps-root'),
+      rootClasse: isEcranMobile ? 'aps-root aps-image' : 'aps-root',
       isBare,
       isPlanningHtml: htmlEnv && (s === 'planning' || s === 'paie'),
       isRetardsHtml: htmlEnv && s === 'temps',
