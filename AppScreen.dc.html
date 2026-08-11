@@ -29,25 +29,16 @@
 
   .aps-root * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
 
-  /* Cadrage mobile des maquettes produit.
-     Sous 640px, la maquette entière tombe à l'échelle 0,25 : un libellé déclaré
-     à 13px se rend à 4px, illisible. On montre alors une zone parlante agrandie
-     plutôt que l'écran entier. Le recadrage porte sur le CONTENU de l'écran du
-     laptop, pas sur le conteneur : la coque reste intacte.
-     Les trois valeurs viennent de la table cropByScreen, posées en propriétés
-     personnalisées sur .aps-root. Sans elles la règle est neutre (k=1, décalage
-     nul), ce qui laisse le cadre téléphone et la vue navigateur inchangés. */
+  /* Écrans sans capture JPEG (ccn, demandes) : rien à montrer sous 640px.
+     On escamote aussi le conteneur de la page — qui impose sa hauteur et
+     laisserait un trou — via :has(), sans avoir à toucher aux sept pages. */
   @media (max-width: 640px) {
-    .aps-screen > * {
-      width: calc(100% * var(--crop-k, 1)) !important;
-      height: calc(100% * var(--crop-k, 1)) !important;
-      transform: translate(var(--crop-x, 0px), var(--crop-y, 0px));
-      transform-origin: top left;
-    }
+    .aps-vide { display: none !important; }
+    div:has(> .aps-vide) { display: none !important; }
   }
 </style>
 </helmet>
-<div class="aps-root" style="{{ rootStyle }}">
+<div class="{{ rootClasse }}" style="width:100%; height:100%; min-height:360px; background:transparent; border-radius:14px; overflow:hidden; position:relative; container-type:size;">
 
   <!-- DESKTOP : capture produit réelle dans une fenêtre navigateur -->
   <sc-if value="{{ isBrowserFrame }}" hint-placeholder-val="{{ true }}">
@@ -62,6 +53,19 @@
   </div>
   </sc-if>
 
+  <!-- MOBILE : capture d'écran réelle, recadrée comme une image.
+       Sous 640px la maquette HTML est inexploitable : conçue pour 1360px, elle
+       tombe à l'échelle 0,25 dans un conteneur de 331px, soit 4px de texte. La
+       rogner assez pour être lisible ne montre plus qu'un quart de l'interface,
+       tranchée en plein tableau. On sert donc la capture JPEG, recadrée par
+       object-position : un cadrage d'image se lit comme un choix graphique,
+       pas comme une interface coupée. -->
+  <sc-if value="{{ isImageMobile }}" hint-placeholder-val="{{ false }}">
+  <div style="width:100%; height:100%; border-radius:14px; overflow:hidden; background:#fff; border:1px solid #e9e9f2; box-shadow:0 20px 44px -26px rgba(22,22,42,.45);">
+    <img src="{{ shotMobile }}" alt="Ciné Planner" style="width:100%; height:100%; object-fit:cover; object-position:{{ shotPosMobile }}; display:block;">
+  </div>
+  </sc-if>
+
   <!-- LAPTOP PC (ratio fixe, contain — jamais déformé ni rogné) -->
   <sc-if value="{{ isLaptop }}" hint-placeholder-val="{{ false }}">
   <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
@@ -69,7 +73,7 @@
     <!-- écran -->
     <div style="width:90%; flex:1; min-height:0; background:linear-gradient(155deg,#20222e,#0a0b11); border-radius:18px 18px 5px 5px; padding:12px 12px 14px; box-shadow:0 30px 55px -26px rgba(22,22,42,.6), inset 0 0 0 1px rgba(255,255,255,.07); position:relative;">
       <div style="position:absolute; top:6px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:50%; background:#3a3d4d; box-shadow:inset 0 0 0 1px rgba(255,255,255,.15);"></div>
-      <div class="aps-screen" style="height:100%; border-radius:5px; overflow:hidden; background:#fff; box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);">
+      <div style="height:100%; border-radius:5px; overflow:hidden; background:#fff; box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);">
         <sc-if value="{{ isPlanningHtml }}" hint-placeholder-val="{{ false }}">
           <dc-import name="PlanningScreen" modal="{{ planModal }}" base="{{ planBase }}" hint-size="100%,100%" style="width:100%;height:100%;"></dc-import>
         </sc-if>
@@ -165,9 +169,34 @@ class Component extends DCLogic {
     };
     const shot = shots[s] || shots.planning;
     const isDesktop = s !== 'portail';
+    // Sous 640px on ne montre plus la maquette HTML mais la capture JPEG, quand
+    // elle existe. Les écrans sans capture — ccn, demandes — n'affichent rien :
+    // mieux vaut un vide qu'une interface tranchée. La règle .aps-vide du helmet
+    // escamote aussi le conteneur de la page, sinon il resterait un trou.
+    const petitEcran = typeof window !== 'undefined' && !!window.matchMedia
+      && window.matchMedia('(max-width: 640px)').matches;
+    // Un écran sans capture propre peut emprunter celle de sa fonctionnalité.
+    // « demandes » illustre l'onglet Suivi des temps de l'accueil : sans cela
+    // l'onglet serait le seul dépourvu d'illustration sur téléphone.
+    // « ccn » n'emprunte rien : aucune capture ne montre les règles de
+    // convention collective, et en afficher une autre induirait en erreur.
+    const captureEmpruntee = { demandes: shots.temps };
+    const captureMobile = shots[s] || captureEmpruntee[s] || null;
+    const aUneCapture = !!captureMobile;
+
     const isBare = this.props.frame === 'bare';
-    const isLaptop = isDesktop && this.props.frame === 'laptop';
+    const laptopDemande = isDesktop && this.props.frame === 'laptop';
+    const isLaptop = laptopDemande && !petitEcran;
+    const isImageMobile = laptopDemande && petitEcran && aUneCapture;
+    const videMobile = laptopDemande && petitEcran && !aUneCapture;
     const htmlEnv = isLaptop || isBare;
+
+    // Recadrage de la capture sur mobile : on vise la zone la plus parlante de
+    // chaque écran, en gardant le haut à gauche là où l'interface commence.
+    const posMobile = {
+      planning: 'left top', temps: 'left top', contrats: 'left top',
+      paie: 'center top', presences: 'left top', demandes: 'left top'
+    };
     if (!this._phoneRef) {
       this._phoneRef = (el) => {
         if (!el) return;
@@ -184,49 +213,18 @@ class Component extends DCLogic {
       };
     }
     const phoneRef = this._phoneRef;
-
-    // Cadrage mobile, un jeu de valeurs par écran (voir la règle .aps-screen
-    // dans le helmet). k agrandit le contenu de l'écran du laptop, x et y
-    // amènent la zone parlante dans la fenêtre visible ; le reste est rogné.
-    // Un écran absent de cette table n'est pas recadré.
-    const cropByScreen = {
-      // planning : les lignes salariés avec leur écart d'heures contractuelles,
-      // le seul signal de conformité porté par cette maquette. La fenêtre fait
-      // 271x183 pour un contenu agrandi à 923x623 ; les lignes sont espacées de
-      // 57px. Le décalage vertical amène le trio 0 h / −25 h / +2 h, qui montre
-      // à la fois un écart neutre, un fort négatif et un positif.
-      planning: { k: 3.4, x: 0, y: -300 },
-      // temps : deux cartes de semaine avec leur statut et la ligne
-      // « N salariés n'ont pas encore attesté », le signal utile de cet écran.
-      temps: { k: 3.4, x: -165, y: -140 },
-      // contrats : l'encart « ⚠ Éléments manquants » et la liste des champs à
-      // compléter (employé, date de début, heures, variables).
-      contrats: { k: 3.4, x: 0, y: -55 },
-      // paie : le bloc « Récap et export ». Le bouton de téléchargement est à
-      // 717px, hors d'atteinte d'une fenêtre de 268px : on garde le récapitulatif.
-      paie: { k: 3.4, x: -60, y: -140 },
-      // presences : la fiche contrat de l'employé, avec son type et son statut.
-      presences: { k: 3.4, x: 0, y: -45 },
-      // ccn : le panneau « Règles de Convention Collective » et son chapô.
-      ccn: { k: 3.4, x: -190, y: -55 },
-      // demandes : les deux catégories de demandes, rectification d'horaire et
-      // absences, avec le début de la première demande traitée. Facteur plus
-      // élevé que les autres écrans : sa fenêtre ne fait que 222x145, l'emplacement
-      // des onglets de l'accueil étant plus petit que les héros de page.
-      demandes: { k: 4.2, x: 0, y: -44 }
-    };
-    const crop = cropByScreen[s];
-    const rootStyle = 'width:100%; height:100%; min-height:360px; background:transparent;'
-      + ' border-radius:14px; overflow:hidden; position:relative; container-type:size;'
-      + (crop ? ' --crop-k:' + crop.k + '; --crop-x:' + crop.x + 'px; --crop-y:' + crop.y + 'px;' : '');
-
     return {
-      rootStyle,
       isDesktop,
       isLaptop,
       phoneRef,
       isBrowserFrame: isDesktop && !isLaptop && !isBare,
       isPortail: s === 'portail',
+      isImageMobile,
+      shotMobile: captureMobile ? captureMobile.src : '',
+      shotPosMobile: posMobile[s] || 'left top',
+      isDemandesHtml: htmlEnv && s === 'demandes',
+      demandesView: this.props.view || 'rectif',
+      rootClasse: videMobile ? 'aps-root aps-vide' : 'aps-root',
       isBare,
       isPlanningHtml: htmlEnv && (s === 'planning' || s === 'paie'),
       isRetardsHtml: htmlEnv && s === 'temps',
@@ -235,12 +233,7 @@ class Component extends DCLogic {
       isCcnHtml: htmlEnv && s === 'ccn',
       planModal: this.props.modal,
       planBase: this.props.base,
-      // « demandes » : tableau de bord des demandes de congés et de rectification
-      // d'horaires. La vue par défaut est celle des rectifications ; le composant
-      // porte les deux onglets.
-      isDemandesHtml: htmlEnv && s === 'demandes',
-      demandesView: this.props.view || 'rectif',
-      notPlanningHtml: !(isLaptop && (s === 'planning' || s === 'temps' || s === 'contrats' || s === 'paie' || s === 'presences' || s === 'ccn' || s === 'demandes')),
+      notPlanningHtml: !(isLaptop && (s === 'planning' || s === 'temps' || s === 'contrats' || s === 'paie' || s === 'presences' || s === 'ccn')),
       shot: shot.src,
       shotPos: shot.pos,
       urlPath: shot.url,
