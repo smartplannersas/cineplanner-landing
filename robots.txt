@@ -1,9 +1,12 @@
 User-agent: *
 Allow: /
 
-# Les composants .dc.html sont des fragments montés par support.js : pas de <title>,
-# contenu dupliqué des pages qui les importent. Ils ne doivent pas être indexés.
-Disallow: /*.dc.html$
+# Ne pas interdire /*.dc.html : ces fragments sont chargés en XHR par support.js
+# pour monter la navigation et les maquettes. Un Disallow empêche Googlebot de les
+# *charger*, pas seulement de les indexer — la navigation ne se rend alors pas et
+# le maillage interne disparaît de toutes les pages qui les importent.
+# Le noindex par <meta> dans leur <helmet> n'est pas une alternative : support.js
+# recopie ce bloc dans le <head> de la page hôte, ce qui désindexerait la page.
 
 # Moteurs de réponse génératifs : autorisés explicitement, pour que Ciné Planner
 # puisse être cité comme source sur les questions de RH et de convention collective
