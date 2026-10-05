@@ -234,8 +234,8 @@
                 <textarea class="tf-input" value="{{ message }}" onInput="{{ onMessage }}" placeholder="Ex. planning multi-sites + export paie, mise en conformité CCN…"></textarea>
               </div>
               <!-- Champ piège anti-spam : invisible et hors du parcours clavier. Un humain ne le
-                   remplit jamais ; un robot le remplit presque toujours. S'il est rempli, on
-                   n'envoie rien mais on affiche la confirmation, pour ne pas renseigner le robot. -->
+                   remplit jamais ; un robot le remplit presque toujours. S'il est rempli, le serveur
+                   écarte la demande mais la confirmation s'affiche, pour ne pas renseigner le robot. -->
               <input name="societe_web" tabindex="-1" autocomplete="off" aria-hidden="true" value="{{ honeypot }}" onInput="{{ onHoneypot }}" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
               <sc-if value="{{ showError }}" hint-placeholder-val="{{ false }}">
                 <div style="font:500 13px/1.4 'Inter'; color:#d4372a; background:#fdecea; border-radius:10px; padding:11px 13px;">Merci de renseigner votre prénom, nom, cinéma et un email valide.</div>
@@ -420,23 +420,18 @@ class Component extends DCLogic {
       onHoneypot:this.set('honeypot'),
       submit:()=>{
         if(!valid){ this.setState({showError:true}); return; }
-        // Champ pi\u00e8ge rempli : c'est un robot. On n'envoie rien, mais on affiche la
-        // confirmation pour ne pas lui indiquer qu'il a \u00e9t\u00e9 d\u00e9tect\u00e9.
-        if(s.honeypot){ this.setState({submitted:true}); return; }
+        // L'application Ciné Planner reçoit la demande : elle l'enregistre dans son
+        // back-office (« Demandes d'essai ») et prévient l'équipe. Elle n'accepte que
+        // les envois venant de www.cineplanner.fr et cineplanner.fr (CORS).
+        const ENDPOINT = 'https://app.cineplanner.fr/trial_requests';
 
-        // FormSubmit : ni compte ni cl\u00e9 d'API. L'adresse de destination est dans l'URL.
-        // Le tout premier envoi d\u00e9clenche un mail d'activation \u00e0 confirmer une seule
-        // fois ; ensuite chaque demande arrive directement dans la bo\u00eete contact@.
-        const ENDPOINT = 'https://formsubmit.co/ajax/191c3a86945ea237ab43abbde4eebf0f';
-
+        // societe_web est le champ piège. Il part avec le reste : s'il est rempli,
+        // c'est le serveur qui écarte la demande, en répondant quand même success
+        // pour ne pas indiquer au robot qu'il a été détecté.
         const payload = {
-          _subject: 'Demande d\u2019essai \u2014 ' + s.cinema,
-          _replyto: s.email,
-          _template: 'table',
-          _captcha: 'false',
           prenom:s.firstName, nom:s.lastName, cinema:s.cinema, email:s.email,
           telephone:s.phone, etablissements:s.sites, besoin:s.message,
-          source:'Landing essai gratuit', date:new Date().toISOString()
+          source:'Landing essai gratuit', societe_web:s.honeypot
         };
 
         this.setState({ sending:true, sendError:false });
@@ -448,8 +443,7 @@ class Component extends DCLogic {
         })
           .then(r => r.json().then(d => ({ ok:r.ok, d })))
           .then(({ ok, d }) => {
-            // FormSubmit renvoie success sous forme de chaîne "true", pas de booléen.
-            if(!ok || !d || String(d.success) !== 'true'){ throw new Error('envoi refuse'); }
+            if(!ok || !d || d.success !== true){ throw new Error('envoi refuse'); }
             this.setState({ submitted:true, sending:false });
           })
           .catch(() => {
