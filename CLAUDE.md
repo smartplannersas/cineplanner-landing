@@ -94,31 +94,34 @@ Les **composants** gardent l'extension `.dc.html` (`SiteNav.dc.html`, `PlanningS
 5. Ajouter l'entrée correspondante dans `sitemap.xml`.
 
 ## Formulaire d'essai gratuit
-`essai-gratuit.html` poste en JSON vers FormSubmit
-(`https://formsubmit.co/ajax/191c3a86945ea237ab43abbde4eebf0f`), qui relaie vers
-`contact@cineplanner.fr`.
+`essai-gratuit.html` poste en JSON vers l'application Ciné Planner :
+`POST https://app.cineplanner.fr/trial_requests` (dépôt `smartplannersas/cineplanner`,
+`app/controllers/trial_requests_controller.rb`). L'application enregistre la demande
+dans son back-office (« Demandes d'essai »), notifie les super admins et envoie un mail
+à `contact@cineplanner.fr`. FormSubmit n'est plus utilisé.
 
-**L'activation FormSubmit est liée à l'URL de la page qui poste, pas seulement à
-l'endpoint.** Tant qu'elle n'est pas confirmée pour cette URL précise, chaque envoi
-reçoit `{"success":"false","message":"This form needs Activation…"}` et la page
-bascule sur son repli mailto. Le formulaire a passé plusieurs jours dans cet état :
-le lien d'activation cliqué portait sur `https://www.cineplanner.fr/` et non sur
-`https://www.cineplanner.fr/essai-gratuit`. Après le clic, **vérifier que la page de
-confirmation affiche l'URL complète de la page du formulaire**, pas la racine.
+Champs envoyés : `prenom`, `nom`, `cinema`, `email`, `telephone`, `etablissements`,
+`besoin`, `source`, `societe_web`. L'application répond `{"success":true}` (un booléen).
 
-Conséquence : si la page change d'adresse, ou si ce formulaire est repris sur une
-autre page, il faut réactiver pour la nouvelle URL.
-
-Piège de diagnostic : appelé sans en-tête `Referer`, FormSubmit répond
-« Make sure you open this page through a web server ». Ce message ne parle pas de
-l'activation et n'a rien à voir avec des fichiers HTML locaux — c'est simplement sa
-réponse à une requête sans `Referer`. Un navigateur en envoie toujours un ; ce cas ne
-se rencontre qu'en test depuis la ligne de commande.
+Ce que l'application refuse, et que la page traite comme un échec d'envoi :
+- **403** si l'en-tête `Origin` n'est pas `https://www.cineplanner.fr` ou
+  `https://cineplanner.fr`. Le CORS n'est ouvert que pour ces deux origines : le
+  formulaire ne peut donc pas aboutir depuis un serveur local ni depuis un autre domaine.
+  Si le site change de domaine, il faut l'ajouter côté application
+  (`config/initializers/cors.rb`).
+- **422** si prénom, nom, cinéma ou email valide manque.
+- **429** au-delà de 5 envois par heure depuis la même adresse IP.
 
 Le repli est volontaire : en cas d'échec, le formulaire reste rempli et propose un
-`mailto:contact@cineplanner.fr` pré-rempli avec toutes les réponses. Le champ
-`societe_web` est un leurre anti-robot : s'il est rempli, la confirmation s'affiche
-mais rien n'est envoyé.
+`mailto:contact@cineplanner.fr` pré-rempli avec toutes les réponses.
+
+Le champ `societe_web` est un leurre anti-robot. Il est envoyé avec le reste : s'il est
+rempli, l'application n'enregistre rien mais répond quand même `{"success":true}`, et la
+confirmation s'affiche.
+
+Piège de test : chaque envoi réussi crée une vraie demande en production et un vrai
+mail à l'équipe. Pour tester sans cela, intercepter la requête dans le navigateur
+(outils de développement ou Playwright) plutôt que d'envoyer le formulaire.
 
 ## Contenu sensible
 Les maquettes produit contiennent des données **fictives**. Ne jamais y injecter de vraies
