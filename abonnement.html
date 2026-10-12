@@ -308,20 +308,21 @@
 class Component extends DCLogic {
   state = { openFaq: 0, ecran: '1-3', periode: 'mensuel' };
   renderVals() {
-    // Grille et liens de paiement vérifiés le 4 août 2026 : les 8 pages Stripe ont été ouvertes
-    // une à une et le montant réellement débité correspond au montant affiché ci-dessous.
+    // Grille et liens de paiement vérifiés le 12 octobre 2026 : les pages Stripe ont été ouvertes une à une
+    // et le montant affiché correspond à celui de cette page. Les liens RH mensuels (99 € / 139 €)
+    // sont inchangés.
     const LINKS = {
       essentielle: {
-        '1-3': { mensuel: { price: '59 €', url: 'https://buy.stripe.com/4gMdRaa3C8P8f3S6Pn18c0d' },
-                 annuel:  { price: '637,00 €', url: 'https://buy.stripe.com/5kQfZi6Rqc1k4pe0qZ18c0h' } },
-        '4+':  { mensuel: { price: '93 €', url: 'https://buy.stripe.com/3cI8wQ1x62qK2h65Lj18c0e' },
-                 annuel:  { price: '1 004,00 €', url: 'https://buy.stripe.com/8x28wQ2BaghA6xma1z18c06' } }
+        '1-3': { mensuel: { price: '49 €', url: 'https://buy.stripe.com/14AcN6b7Gd5o6xmgpX18c0j' },
+                 annuel:  { price: '529,20 €', url: 'https://buy.stripe.com/3cI28s4Ji7L4aNC7Tr18c0l' } },
+        '4+':  { mensuel: { price: '89 €', url: 'https://buy.stripe.com/7sYbJ2b7G7L46xmb5D18c0k' },
+                 annuel:  { price: '961,20 €', url: 'https://buy.stripe.com/4gMfZi6Rqc1kdZO8Xv18c0m' } }
       },
       rh: {
         '1-3': { mensuel: { price: '99 €', url: 'https://buy.stripe.com/aFadRafnW2qK2h6gpX18c0f' },
-                 annuel:  { price: '1 069,00 €', url: 'https://buy.stripe.com/dRm4gA0t29Tc7Bqc9H18c0b' } },
+                 annuel:  { price: '1 069,20 €', url: 'https://buy.stripe.com/cNi6oIdfOaXgcVK2z718c0n' } },
         '4+':  { mensuel: { price: '139 €', url: 'https://buy.stripe.com/cNi5kEb7Ge9sbRGgpX18c0g' },
-                 annuel:  { price: '1 501,00 €', url: 'https://buy.stripe.com/00wdRa8Zy1mG3laehP18c0a' } }
+                 annuel:  { price: '1 501,20 €', url: 'https://buy.stripe.com/7sY8wQ0t2d5o3lab5D18c0o' } }
       }
     };
     const e = this.state.ecran, p = this.state.periode;
