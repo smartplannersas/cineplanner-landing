@@ -34,11 +34,17 @@ projection de l'établissement, pas du nombre de salariés ni du nombre de ciné
 
 | Formule | 1 à 3 écrans | 4 écrans et plus |
 |---|---|---|
-| Essentielle | 59 € / mois | 93 € / mois |
+| Essentielle | 49 € / mois | 89 € / mois |
 | RH | 99 € / mois | 139 € / mois |
 
-En engagement annuel, la remise est de 10 % : 637 € et 1 004 € par an pour Essentielle,
-1 069 € et 1 501 € par an pour RH, facturés en une fois.
+En facturation annuelle, la remise est de 10 % : l'Essentielle revient à 44,10 € par mois
+(529,20 € par an) ou 80,10 € par mois (961,20 € par an) ; la RH à 89,10 € par mois
+(1 069,20 € par an) ou 125,10 € par mois (1 501,20 € par an), facturés en une fois.
+L'engagement est annuel dans les deux cas : le choix mensuel/annuel porte sur la fréquence
+de facturation, pas sur la durée.
+
+Plusieurs établissements ? Une offre adaptée au réseau est établie sur demande
+(https://www.cineplanner.fr/tarifs).
 
 Une formule Sur Mesure existe pour les réseaux ayant des besoins d'intégration spécifiques
 (API, migration de données, personnalisation par site) : sur devis.

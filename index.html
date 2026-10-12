@@ -268,7 +268,7 @@
     {
       "@type": "Offer",
       "name": "Essentielle — 1 à 3 écrans",
-      "price": "59",
+      "price": "49",
       "priceCurrency": "EUR",
       "description": "Par établissement et par mois, engagement annuel.",
       "url": "https://www.cineplanner.fr/tarifs"
@@ -276,7 +276,7 @@
     {
       "@type": "Offer",
       "name": "Essentielle — 4 écrans et plus",
-      "price": "93",
+      "price": "89",
       "priceCurrency": "EUR",
       "description": "Par établissement et par mois, engagement annuel.",
       "url": "https://www.cineplanner.fr/tarifs"
@@ -641,13 +641,13 @@
       <!-- Essentiel -->
       <div style="background:#fff; border:1px solid #e9e9f2; border-radius:22px; padding:36px; display:flex; flex-direction:column;">
         <div style="font:800 20px/1 'Inter'; color:#16162a;">Essentielle</div>
-        <div style="font:400 15px/1.5 'Inter'; color:#7a7a92; margin-top:8px;">La RH conforme, du planning à l'export paie.</div>
+        <div style="font:400 15px/1.5 'Inter'; color:#7a7a92; margin-top:8px;">Planning, conformité et paie.</div>
         <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#16162a;">{{ essentielPrice }}</span><span style="font:500 15px/1 'Inter'; color:#7a7a92;">{{ priceUnit }}</span></div>
         <div style="font:400 13px/1.5 'Inter'; color:#8a8aa4; margin-top:8px;">{{ essentielNote }}</div>
         <a href="/essai-gratuit" style="margin-top:24px; text-align:center; border:1px solid #d8d8e6; color:#16162a; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Démarrer l'essai gratuit</a>
         <div style="height:1px; background:#eef0f7; margin:28px 0;"></div>
         <div style="display:flex; flex-direction:column; gap:13px;">
-          <sc-for list="{{ essentielFeatures }}" as="f" hint-placeholder-count="6">
+          <sc-for list="{{ essentielFeatures }}" as="f" hint-placeholder-count="8">
             <div style="display:flex; align-items:flex-start; gap:10px;"><span style="flex:none; color:#22a06b; font:800 15px/1.4 'Inter';">✓</span><span style="font:500 15px/1.45 'Inter'; color:#28283e;">{{ f }}</span></div>
           </sc-for>
         </div>
@@ -655,16 +655,16 @@
 
       <!-- Groupe (ancre) -->
       <div style="position:relative; background:linear-gradient(160deg,#241f6b 0%,#16152f 60%); border-radius:22px; padding:36px; display:flex; flex-direction:column; box-shadow:0 30px 60px -30px rgba(36,31,107,.7);">
-        <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; font:700 12px/1 'Inter'; letter-spacing:.06em; padding:8px 16px; border-radius:999px;">LE PLUS COMPLET</div>
+        <div style="position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:var(--accent); color:#fff; font:700 12px/1 'Inter'; letter-spacing:.06em; padding:8px 16px; border-radius:999px;">RECOMMANDÉE</div>
         <div style="font:800 20px/1 'Inter'; color:#fff; display:flex; align-items:center; gap:8px;">RH</div>
-        <div style="font:400 15px/1.5 'Inter'; color:#b6b6c8; margin-top:8px;">Contrats, présence signée et vue consolidée multi-établissements.</div>
+        <div style="font:400 15px/1.5 'Inter'; color:#b6b6c8; margin-top:8px;">Toute votre gestion RH au même endroit.</div>
         <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 44px/1 'Inter'; color:#fff;">{{ groupePrice }}</span><span style="font:500 15px/1 'Inter'; color:#b6b6c8;">{{ priceUnit }}</span></div>
         <div style="font:400 13px/1.5 'Inter'; color:#b6b6c8; margin-top:8px;">{{ groupeNote }}</div>
         <a href="/essai-gratuit" style="margin-top:24px; text-align:center; background:var(--accent); color:#fff; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Démarrer l'essai gratuit</a>
         <div style="height:1px; background:#2c2c48; margin:28px 0;"></div>
         <div style="font:600 13px/1 'Inter'; color:#8a8aa4; margin-bottom:14px;">Tout l'Essentielle, plus :</div>
         <div style="display:flex; flex-direction:column; gap:13px;">
-          <sc-for list="{{ groupeFeatures }}" as="f" hint-placeholder-count="6">
+          <sc-for list="{{ groupeFeatures }}" as="f" hint-placeholder-count="9">
             <div style="display:flex; align-items:flex-start; gap:10px;"><span style="flex:none; color:#8b81f0; font:800 15px/1.4 'Inter';">✓</span><span style="font:500 15px/1.45 'Inter'; color:#e6e6f0;">{{ f }}</span></div>
           </sc-for>
         </div>
@@ -673,19 +673,26 @@
       <!-- Sur Mesure -->
       <div style="background:#fff; border:1px solid #e9e9f2; border-radius:22px; padding:36px; display:flex; flex-direction:column;">
         <div style="font:800 20px/1 'Inter'; color:#16162a;">Sur Mesure</div>
-        <div style="font:400 15px/1.5 'Inter'; color:#7a7a92; margin-top:8px;">Pour les grands réseaux aux besoins d'intégration spécifiques.</div>
+        <div style="font:400 15px/1.5 'Inter'; color:#7a7a92; margin-top:8px;">Pour les réseaux et les besoins spécifiques.</div>
         <div style="margin-top:24px; display:flex; align-items:baseline; gap:6px;"><span style="font:800 40px/1 'Inter'; color:#16162a;">Sur devis</span></div>
         <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener" style="margin-top:24px; text-align:center; border:1px solid #d8d8e6; color:#16162a; font:700 15px/1 'Inter'; padding:14px; border-radius:12px;">Parler à un expert</a>
         <div style="height:1px; background:#eef0f7; margin:28px 0;"></div>
         <div style="font:600 13px/1 'Inter'; color:#8a8aa4; margin-bottom:14px;">Tout la RH, plus :</div>
         <div style="display:flex; flex-direction:column; gap:13px;">
-          <sc-for list="{{ surMesureFeatures }}" as="f" hint-placeholder-count="4">
+          <sc-for list="{{ surMesureFeatures }}" as="f" hint-placeholder-count="6">
             <div style="display:flex; align-items:flex-start; gap:10px;"><span style="flex:none; color:#22a06b; font:800 15px/1.4 'Inter';">✓</span><span style="font:500 15px/1.45 'Inter'; color:#28283e;">{{ f }}</span></div>
           </sc-for>
         </div>
       </div>
     </div>
   </div>
+
+    <div style="max-width:1160px; margin:26px auto 0; padding:0 48px;">
+      <div style="background:#f5f6fc; border:1px solid #e9e9f2; border-radius:16px; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap;">
+        <div style="font:500 15px/1.5 'Inter'; color:#28283e;">Vous gérez plusieurs établissements ? Contactez-nous pour une offre adaptée à votre réseau.</div>
+        <a href="https://calendly.com/thibaud-cineplanner/30min" target="_blank" rel="noopener" style="font:700 14px/1 'Inter'; color:var(--accent); white-space:nowrap;">Parler à un expert →</a>
+      </div>
+    </div>
 
   <!-- MATRICE DE COMPARAISON -->
   <div class="cpl-compare" style="padding:0 48px 84px;">
@@ -709,7 +716,7 @@
         </div>
       </sc-for>
     </div>
-    <p style="font:400 13px/1.6 'Inter'; color:#8a8aa4; margin:16px 0 0; max-width:760px;">La signature électronique et le stockage documentaire reposent sur des prestataires spécialisés ; leur activation est configurée lors de l'onboarding.</p>
+    <p style="font:400 13px/1.6 'Inter'; color:#8a8aa4; margin:16px 0 0; max-width:760px;">La signature électronique et le stockage documentaire reposent sur des prestataires spécialisés ; leur activation et leur volume sont configurés lors de l'onboarding.</p>
   </div>
 
   <!-- COMPARATIF, VERSION MOBILE
@@ -740,7 +747,7 @@
         </div>
       </sc-for>
     </div>
-    <p style="font:400 13px/1.6 'Inter'; color:#8a8aa4; margin:14px 0 0;">La signature électronique et le stockage documentaire reposent sur des prestataires spécialisés ; leur activation est configurée lors de l'onboarding.</p>
+    <p style="font:400 13px/1.6 'Inter'; color:#8a8aa4; margin:14px 0 0;">La signature électronique et le stockage documentaire reposent sur des prestataires spécialisés ; leur activation et leur volume sont configurés lors de l'onboarding.</p>
   </div>
 
   <!-- FAQ -->
@@ -996,12 +1003,12 @@ class Component extends DCLogic {
     // Prix par établissement et par mois dans les deux périodicités, pour rester comparables.
     // L'annuel applique −10 % ; TOTAL_ANNUEL porte le montant réellement facturé en une fois.
     const GRILLE = {
-      essentielle: { mensuel: { '1-3': '59', '4+': '93' }, annuel: { '1-3': '53', '4+': '84' } },
-      rh:          { mensuel: { '1-3': '99', '4+': '139' }, annuel: { '1-3': '89', '4+': '125' } }
+      essentielle: { mensuel: { '1-3': '49', '4+': '89' }, annuel: { '1-3': '44,10', '4+': '80,10' } },
+      rh:          { mensuel: { '1-3': '99', '4+': '139' }, annuel: { '1-3': '89,10', '4+': '125,10' } }
     };
     const TOTAL_ANNUEL = {
-      essentielle: { '1-3': '637', '4+': '1 004' },
-      rh:          { '1-3': '1 069', '4+': '1 501' }
+      essentielle: { '1-3': '529,20', '4+': '961,20' },
+      rh:          { '1-3': '1 069,20', '4+': '1 501,20' }
     };
     const per = annuel ? 'annuel' : 'mensuel';
     const taille = small ? '1-3' : '4+';
@@ -1027,6 +1034,7 @@ class Component extends DCLogic {
       ['Contresignature en masse des feuilles de présence', 0, 1, 1],
       ['Piste d’audit légale immuable (art. L3171-2/L3171-3)', 0, 1, 1],
       ['Alerte automatique shift sans contrat signé', 0, 1, 1],
+      ['Gestion documentaire RH (contrats, avenants, pièces jointes)', 0, 1, 1],
       ['Alerte période de paie manquante', 0, 1, 1],
       ['Support prioritaire', 0, 1, 1],
       ['Stockage de documents chez le prestataire de votre choix', 0, 0, 1],
@@ -1078,10 +1086,12 @@ class Component extends DCLogic {
     }, this);
 
     const faqRaw = [
-      ['Combien coûte un logiciel de planning pour un cinéma ?', "Ciné Planner démarre à 59 € par établissement et par mois pour un cinéma de 1 à 3 écrans, et 93 € pour un multiplex de 4 écrans et plus. Le tarif est par établissement, quel que soit le nombre de salariés."],
+      ['Quelle est la différence entre la formule Essentielle et la formule RH ?', "L'Essentielle couvre le planning, la conformité et la paie : gestion des plannings et des équipes, alertes convention collective cinéma, calcul des heures et majorations, modèles de planning, espace salarié, export des éléments variables de paie. La formule RH ajoute toute la gestion RH : génération des contrats et avenants, signature électronique, feuilles de présence signées, congés et compteurs, annualisation, gestion documentaire RH et vue consolidée multi-établissements."],
+      ['Le choix mensuel / annuel change-t-il la durée d\'engagement ?', "Non. L'engagement est annuel dans les deux cas ; le sélecteur Mensuel / Annuel porte uniquement sur la fréquence de facturation. En annuel, la remise de 10 % s'applique et l'année est réglée en une fois (44,10 € par mois pour l'Essentielle 1 à 3 écrans, soit 529,20 € par an). En mensuel, vous payez chaque mois, sans remise."],
+      ['Combien coûte un logiciel de planning pour un cinéma ?', "Ciné Planner démarre à 49 € par établissement et par mois pour un cinéma de 1 à 3 écrans, et 89 € pour un multiplex de 4 écrans et plus. Le tarif est par établissement, quel que soit le nombre de salariés. En facturation annuelle, la remise de 10 % ramène l'Essentielle à 44,10 € par mois, soit 529,20 € par an."],
       ['Quelle est la différence entre un logiciel de planning et un logiciel RH pour cinéma (convention collective, primes de panier) ?', "Un logiciel de planning se limite à placer des shifts. Ciné Planner couvre toute la chaîne RH du cinéma : planning conforme, contrats, feuilles de présence signées, compteurs de congés et export paie. C'est ce qui évite les erreurs de paie et sécurise vos obligations d'employeur."],
       ['Ciné Planner respecte-t-il la convention collective de l\u2019exploitation cinématographique ?', "Oui. Les règles de la CCN de l'exploitation cinématographique (IDCC 1307) sont intégrées nativement : heures de nuit, durée maximale de shift, repos, heures hebdomadaires, primes de panier repas et panier soir. Toute infraction est signalée avant validation du planning."],
-      ['Le logiciel gère-t-il plusieurs cinémas ou un réseau d\u2019établissements ?', "Oui. Toutes les formules permettent de planifier plusieurs établissements, chaque site gardant l'autonomie sur son planning. La vue consolidée sur l'ensemble des établissements démarre à la formule RH. Les réseaux passent en Sur Mesure pour la personnalisation par site."],
+      ['Le logiciel gère-t-il plusieurs cinémas ou un réseau d\u2019établissements ?', "Oui. Toutes les formules permettent de planifier plusieurs établissements, chaque site gardant l'autonomie sur son planning. La vue consolidée sur l'ensemble des établissements démarre à la formule RH. Pour un réseau de plusieurs établissements, nous établissons une offre adaptée : contactez-nous."],
       ['Comment fonctionne l\u2019export paie vers mon cabinet comptable ?', "Vos plannings validés deviennent des éléments de paie : export au jour, au mois ou sur une période personnalisée, avec heures supplémentaires, complémentaires, majorations et primes de panier déjà calculées. Vous transmettez le fichier à votre cabinet, sans une seule ressaisie."],
       ['Mes salariés peuvent-ils consulter leur planning de cinéma en ligne ?', "Oui, via l'Espace équipe : chaque salarié consulte son planning à jour depuis son téléphone ou son ordinateur, pose ses congés, demande une rectification d'horaire et signe ses feuilles de présence."],
       ['Combien de temps faut-il pour déployer Ciné Planner dans mon cinéma ?', "Votre compte d'essai est prêt sous 24 h ouvrées : un expert le paramètre à vos établissements et à la convention collective, puis vous accompagne sur vos premiers plannings et votre premier export paie."]
@@ -1224,26 +1234,33 @@ class Component extends DCLogic {
       mensuelBtnStyle: annuel ? segIdle : segActive,
       annuelBtnStyle: annuel ? segActive : segIdle,
       essentielFeatures: [
-        'Planning multi-établissements, avec autonomie par site',
+        'Gestion des plannings et des équipes',
         'Alertes convention collective cinéma (IDCC 1307)',
-        'Export paie automatisé, dont primes de paniers',
-        'Espace équipe : consultation du planning par les salariés'
+        'Calcul des heures et majorations',
+        'Modèles de planning et automatisations',
+        'Espace salarié et notifications',
+        'Export des éléments variables de paie',
+        'Accompagnement au démarrage',
+        'Support standard'
       ],
       groupeFeatures: [
-        'Vue consolidée sur l’ensemble des établissements',
-        'Module contrats : CDD, CDI, avenants avec variables dynamiques',
-        'Signature électronique des contrats',
-        'Feuilles de présence signées des salariés',
-        'Demandes de congés et de rectification d’horaires par les salariés',
-        'Compteur de congés restants',
-        'Onboarding et formation des équipes',
+        'Génération des contrats et avenants',
+        'Signature électronique',
+        'Feuilles de présence signées',
+        'Gestion des congés et compteurs',
+        'Annualisation',
+        'Gestion documentaire RH',
+        'Vue consolidée multi-établissements',
+        'Fonctionnalités RH et paie avancées',
         'Support prioritaire'
       ],
       surMesureFeatures: [
-        'API & intégrations sur mesure : connexion à votre outil de paie (Silae, Sage, Cegid…) et à vos logiciels métier',
-        'Import & migration de vos données cinéma',
-        'Développements de fonctionnalités dédiés',
-        'Accompagnement et paramétrage dédiés'
+        'API et intégrations',
+        'Connexion aux logiciels de paie',
+        'Migration de données',
+        'Paramétrages spécifiques',
+        'Développements dédiés',
+        'Accompagnement personnalisé'
       ]
     };
   }
